@@ -16,54 +16,57 @@ catch(Exception $e)
 }
 
 $reponse = $bdd->query('SELECT id, identifiant FROM cooks');
-// $reponse->closeCursor();
 
 if(isset($_GET['chercher_chef']))
 {
   if(!empty($_POST['identifiant']))
   {
-    $req = $bdd->prepare('SELECT id, identifiant FROM cooks WHERE identifiant = :identifiant');
-    $req->execute(array('identifiant' => $_POST['identifiant']));
-    $resultat = $req->fetch();
+    $reponse2 = $bdd->prepare('SELECT id, identifiant FROM cooks WHERE identifiant = :identifiant');
+    $reponse2->execute(array('identifiant' => $_POST['identifiant']));
+    $resultat2 = $reponse2->fetch();
 
-    $reponse3 = $bdd->query(
-      'SELECT AVG(v.note) vote_note
-      FROM votes v
-      INNER JOIN cooks c
-      ON c.id = v.id_cook
-      WHERE v.id_cook = '.$resultat['id'].'');
-    $donnees3 = $reponse3->fetch();
+    if (!$resultat2)
+  	{
+  		echo '<p class="colorMain">Cet identifiant n\'existe pas !</p>';
+  	}else{
+      $reponse3 = $bdd->query(
+        'SELECT AVG(v.note) note_moyenne, SUM(v.note) note_total
+        FROM votes v
+        INNER JOIN cooks c
+        ON c.id = v.id_cook
+        WHERE v.id_cook = '.$resultat2['id'].'');
+      $resultat3 = $reponse3->fetch();
 
-  ?>
-  <tr class="colorMain">
-    <td><?php echo $resultat['identifiant']; ?></td>
-    <td><?php echo $donnees3['vote_note']; ?></td>
-    <td><?php echo $resultat['reputation']; ?></td>
-  </tr>
+    ?>
+    <tr class="colorMain">
+      <td><?php echo $resultat2['identifiant']; ?></td>
+      <td><?php echo $resultat3['note_moyenne']; ?></td>
+      <td><?php echo $resultat3['note_total']; ?></td>
+    </tr>
     <?php
     }
+  }
 }
 
-while ($donnees = $reponse->fetch())
+
+while ($resultat = $reponse->fetch())
 {
-  $reponse2 = $bdd->query(
-    'SELECT AVG(v.note) vote_note
+  $reponse4 = $bdd->query(
+    'SELECT AVG(v.note) note_moyenne, SUM(v.note) note_total
     FROM votes v
     INNER JOIN cooks c
     ON c.id = v.id_cook
-    WHERE v.id_cook = '.$donnees['id'].'');
-  $donnees2 = $reponse2->fetch();
+    WHERE v.id_cook = '.$resultat['id'].'');
+  $resultat4 = $reponse4->fetch();
 
 ?>
 <tr>
-  <td><?php echo $donnees['identifiant']; ?></td>
-  <td><?php echo $donnees2['vote_note']; ?></td>
-  <td><?php echo $donnees['reputation']; ?></td>
+  <td><?php echo $resultat['identifiant']; ?></td>
+  <td><?php echo $resultat4['note_moyenne']; ?></td>
+  <td><?php echo $resultat4['note_total']; ?></td>
 </tr>
 <?php
 }
-  $reponse2->closeCursor();
-  $reponse->closeCursor();
 ?>
 </table>
 <center>
