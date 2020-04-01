@@ -1,3 +1,7 @@
+<?php
+require 'class/cook.php';
+$cook = new Cook($_SESSION['id']);
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,38 +18,17 @@
   <div id="slider">
     <img src="images/plateaux_de_legumes_1920px.jpg" alt="Plateaux de légumes"/>
     <div id="description_slider">
-      <h1><?php if(isset($_SESSION['identifiant'])) echo $_SESSION['identifiant']; else echo 'Mon compte'; ?></h1>
+      <h1><?php echo $cook->identifiant();?></h1>
       <p class="colorWhite">
-        <?php
-        if(isset($_SESSION['identifiant']))
-        {
-          include 'models/moyenneCook.php';
-        }
-        else
-        {
-          echo 'Marquez l\'histoire de la gastronomie avec vos délicieuses recettes !';
-        }
-        ?>
+      <?php include 'models/moyenneCook.php';?>
     </div>
   </div>
-  <?php
-  if(isset($_SESSION['id']))
-  {
-  ?>
     <section>
+      <h2>Vos recettes</h2>
       <?php include 'models/listeRecipes.php';?>
       <h2 id="recette">Proposer une recette</h2>
       <p>Marquez l'histoire de la gastronomie avec vos délicieuses recettes !</p>
       <?php include 'models/addRecipe.php';?>
     </section>
-  <?php
-  }else{
-  ?>
-  <section>
-  <?php include 'includes/addRecipe.php'; ?>
-  </section>
-  <?php include 'includes/footer.php';
-  }
-  ?>
 </body>
 </html>

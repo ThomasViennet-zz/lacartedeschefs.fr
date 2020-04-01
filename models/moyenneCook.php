@@ -10,7 +10,7 @@ catch(Exception $e)
 }
 
 $req = $bdd->prepare('SELECT AVG(note) AS cook_moyenne FROM votes WHERE id_cook = :id_cook');
-$req->execute(array('id_cook' => $_SESSION['id']));
+$req->execute(array('id_cook' => $cook->id()));
 $resultat = $req->fetch();
 $req->closeCursor();
 
