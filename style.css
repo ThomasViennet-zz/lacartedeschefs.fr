@@ -1,0 +1,277 @@
+header
+{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  z-index: 1;
+  height: 80px;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+nav
+{
+  margin: auto;
+}
+nav ul
+{
+  display: flex;
+  list-style: none;
+
+}
+
+nav a
+{
+  color: black;
+  text-decoration: none;
+}
+
+nav li
+{
+  padding-right: 10px;
+  padding-left: 10px;
+  color: white;
+  font-size: 1.5em;
+
+}
+
+nav li:hover
+{
+  background-color: white;
+  color: black;
+}
+
+section
+{
+  margin: auto;
+  width: 50%;
+  padding: 30px;
+}
+
+section p
+{
+  text-align: justify;
+}
+
+
+h1
+{
+  font-size: 4em;
+  color: #e4c600;
+}
+
+h2
+{
+  font-size: 2em;
+  color: #e4c600;
+}
+
+h3
+{
+  font-size: 1.5em;
+  color: #e4c600;
+}
+
+input
+{
+  width:90%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
+textarea
+{
+  width: 90%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  background-color:
+}
+
+th {
+  text-align: center;
+  color: white;
+  background-color: #e4c600;
+  padding: 8px;
+}
+
+td {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {background-color: #f2f2f2;}
+
+footer
+{
+  width: 100%;
+  height: auto;
+  color: black;
+  text-align: center;
+  box-shadow: 0px -3px 7px -7px rgba(0,0,0,0.75);
+}
+
+#logo
+{
+  position:fixed;
+  margin-left: 30px;
+  margin-top: 30px;
+}
+
+#slider
+{
+  width: 100%;
+  height: 693px;
+}
+
+#description_slider
+{
+  position: relative;
+  top: 50%; left: 50%; /* à 50%/50% du parent référent */
+  transform: translate(-50%, -50%); /* décalage de 50% de sa propre taille */
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 50%;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+#slider p
+{
+  font-size: 1.5em;
+}
+
+#slider img
+{
+  width: 100%;
+  position: absolute;
+  height: 693px;
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+}
+
+#chefs
+{
+  margin: auto;
+  width: 100%;
+  height: 693px;
+  background-image: url("images/plateaux_de_legumes_1920px.jpg");
+}
+
+#conteneur
+{
+  display: flex;
+}
+
+.profilePicture
+{
+  width:80px!important;
+  height: 80px!important;
+}
+.element
+{
+  width: 100%;
+}
+
+.colorMain
+{
+  color: #e4c600;
+}
+.colorBlue
+{
+  color: #3491b2;
+}
+
+.colorWhite
+{
+  color: white;
+}
+
+.button
+{
+  display: inline-block;
+  width: auto;
+  background-color: #3491b2;
+  border-radius: 3px;
+  border-bottom: 3px solid #3B89B3;
+  color: white;
+  font-size: 1em;
+  text-decoration: none;
+}
+
+.button:hover
+{
+  display: inline-block;
+  width: auto;
+  background-color: white;
+  border-radius: 3px;
+  border-bottom: 3px solid #3491b2 ;
+  color: #3B89B3;
+  font-size: 1em;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 1027px)
+{
+
+  header
+  {
+    display: none;
+  }
+
+  h1
+  {
+    font-size: 2.5em;
+    color: #e4c600;
+  }
+
+  section
+  {
+    width: 80%;
+  }
+
+  #slider
+  {
+    margin: auto;
+    width: 100%;
+    height: 311px;
+  }
+
+  #description_slider
+  {
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+
+}
+
+@media screen and (max-width: 767px)
+{
+  #slider
+  {
+    margin: auto;
+    width: 100%;
+    height: 270px;
+  }
+  h1
+  {
+    font-size: 2em;
+  }
+  #slider p
+  {
+    font-size: 1em;
+  }
+  #conteneur
+  {
+    display: flex;
+    flex-direction: column;
+  }
+}
