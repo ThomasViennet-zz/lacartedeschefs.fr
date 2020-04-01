@@ -21,14 +21,14 @@ $cook = new Cook($recipe->idCook());
     <div id="description_slider">
       <h1><?php echo $recipe->title();?></h1>
       <p class="colorWhite"><?php echo $recipe->description();?></p>
-      <?php include 'models/moyenneVoteRecette.php';?>
+      <?php echo $recipe->moyenne();?>
     </div>
   </div>
 
   <section>
     <img src="/uploads/avatars/300x300_<?php echo $cook->picture();?>" class="profilePicture"/><br>
     <p><?php echo $cook->identifiant();?></p>
-      <?php include 'models/moyenneCook.php';?>
+      <?php echo $cook->moyenne();?>
     <h2>Noter</h2>
     <?php include 'models/addVote.php';?>
     <?php echo $recipe->steps();?>

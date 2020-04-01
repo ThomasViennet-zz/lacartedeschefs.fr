@@ -20,7 +20,7 @@ $cook = new Cook($_SESSION['id']);
     <div id="description_slider">
       <h1><?php echo $cook->identifiant();?></h1>
       <p class="colorWhite">
-      <?php include 'models/moyenneCook.php';?>
+      <?php echo $cook->moyenne();?>
     </div>
   </div>
     <section>

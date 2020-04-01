@@ -17,15 +17,21 @@ class Cook
     {
       die('Erreur : '.$e->getMessage());
     }
-    $req = $bdd->prepare('SELECT profile_picture, identifiant FROM cooks WHERE id = :id');
+    $req = $bdd->prepare(
+      'SELECT c.profile_picture cook_picture, c.identifiant cook_identifiant, AVG(v.note) note_moyenne, SUM(v.note) note_total
+      FROM cooks c
+      INNER JOIN votes v
+      ON c.id = v.id_cook
+      WHERE c.id = :id');
+
     $req->execute(array('id' => $id));
     $resultat = $req->fetch();
-
     $req->closeCursor();
 
     $this->setId($id);
-    $this->setIdentifiant($resultat['identifiant']);
-    $this->setPicture($resultat['profile_picture']);
+    $this->setIdentifiant($resultat['cook_identifiant']);
+    $this->setPicture($resultat['cook_picture']);
+    $this->setMoyenne($resultat['note_moyenne']);
   }
   public function id()
   {
