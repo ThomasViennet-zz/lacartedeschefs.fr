@@ -1,8 +1,7 @@
+<img src="images/Logo_la_carte_des_chefs_80x80.png" alt="Logo La carte des chefs" id="logo"/>
 <nav>
   <ul>
-    <a href="?action=accueil"><li>Accueil</li></a>
-    <a href="?action=accueil#chef"><li>Les chefs</li></a>
-    <a href="?action=accueil#recette"><li>Proposer recette</li></a>
-    <a href="?action=account#recette"><li class="colorMain">Mon compte</li></a>
+    <a href="?action=accueil"><li><?php include 'images/home.svg';?></li></a>
+    <a href="?action=cook"><li><?php include 'images/account.svg';?></li></a>
   </ul>
 </nav>

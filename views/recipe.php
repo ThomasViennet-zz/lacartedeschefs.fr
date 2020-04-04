@@ -1,7 +1,7 @@
 <?php
 require 'class/recipe.php';
 require 'class/cook.php';
-$recipe = new Recipe($_GET['id']);
+$recipe = new Recipe($_GET['id_recipe']);
 $cook = new Cook($recipe->idCook());
 ?>
 <!DOCTYPE html>
@@ -14,24 +14,27 @@ $cook = new Cook($recipe->idCook());
 </head>
 
 <body id="Abonner">
-  <?php include 'includes/header.php'; ?>
+  <?php include 'includes/nav.php';?>
 
-  <div id="slider">
-    <img src="/uploads/recipes/<?php echo $recipe->picture();?>" alt="<?php echo $recipe->title();?>"/>
-    <div id="description_slider">
+  <header>
+    <img src="/uploads/recipes/<?php echo $recipe->picture();?>" alt="<?php echo $recipe->title();?>" width="100%" height="100%" class="headerBackground"/>
+    <div id="headerDescription">
       <h1><?php echo $recipe->title();?></h1>
       <p class="colorWhite"><?php echo $recipe->description();?></p>
-      <?php echo $recipe->moyenne();?>
+      <div id="cook">
+        <a href="?action=cook"><img src="/uploads/avatars/300x300_<?php echo $cook->picture();?>" class="profilPicture" width="80px"/></a><br>
+        <?php echo $cook->moyenne();?><br>
+        <span class="colorMain"><?php echo $cook->identifiant();?></span>
+      </div>
     </div>
-  </div>
+  </header>
 
-  <section>
-    <img src="/uploads/avatars/300x300_<?php echo $cook->picture();?>" class="profilePicture"/><br>
-    <p><?php echo $cook->identifiant();?></p>
-      <?php echo $cook->moyenne();?>
-    <h2>Noter</h2>
-    <?php include 'models/addVote.php';?>
+  <section id="steps">
     <?php echo $recipe->steps();?>
+  </section>
+  <section>
+    <h2>Noter</h2>
+    <?php include 'includes/addVote.php';?>
   </section>
   <section>
     <h2>Proposer une recette</h2>

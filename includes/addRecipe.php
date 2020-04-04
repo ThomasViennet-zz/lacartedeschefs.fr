@@ -1,30 +1,20 @@
-  <?php
-  if(isset($_SESSION['id']))
-  {
-  include 'models/addRecipe.php';
-  }else {
-  ?>
-  <div id="conteneur">
-    <div class="element">
-      <h3>Devenir chef</h3>
-      <form method="post" action="?inscription#recette" enctype="multipart/form-data">
-        <input type="email" name="email" placeholder="Votre adresse email *"><br>
-        <input type="text" name="identifiant" placeholder="Choisissez un identifiant *"><br>
-        <input type="password" name="password" placeholder="Votre mot de passe *"><br>
-        <input type="password" name="passwordConfirm" placeholder="Confirmer le mot de passe *"><br>
-        <input type="file" name="profile_picture" /><br>
-        <input type="submit" name="submit" value="Valider" class="button">
-      </form>
-      <?php if(isset($_GET['inscription'])) include 'models/registerCook.php';?>
-    </div>
-    <div class="element">
-      <h3>Se connecter</h3>
-      <form method="post" action="?connexion#recette">
-        <input type="email" name="email" placeholder="Email *"><br>
-        <input type="password" name="password" placeholder="Mot de passe *"><br>
-        <input type="submit" name="submit" value="Valider" class="button">
-      </form>
+<?php
+if(isset($_SESSION['id']))
+{
+  echo'
+  <form method="post" action="models/addRecipe.php" enctype="multipart/form-data">
+    <input type="text" value="'.$_SESSION['identifiant'].'" disabled/> <a href="models/deconnexion.php"><br>
+    Ce n\'est pas vous ?</a><br>
+    <input type="text" name="title" placeholder="Titre de votre recette *"/>
+    <input type="text" name="ingredients" placeholder="Ingrédients de votre recette *"/>
+    <input type="text" name="description" placeholder="Description courte de votre recette *"/>
+    <textarea name="steps" placeholder="Décrivez votre recette ..." rows="5">
 
-      <?php if(isset($_GET['connexion'])) include 'models/connexion.php'; }?>
-    </div>
-  </div>
+    </textarea><br>
+    Photo du plat * (800 pixels par 800pixels) <input type="file" name="recipe_picture" /><br>
+    <input type="submit" name="submit" value="Envoyer" class="button">
+  </form>
+  ';
+}else {
+  echo '<a href="?action=cook">Créez un compte pour proposer une recette.</a>';
+}

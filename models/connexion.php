@@ -1,18 +1,8 @@
 <?php
 if(isset($_POST['email']) && isset($_POST['password']))
 {
+	require '../base.php';
 
-	try
-	{
-		require 'secret.php';;
-		$bdd = new PDO('mysql:host=localhost;dbname='. $dbName .';charset=utf8', '' . $dbLogin . '', '' . $dbPassword . '');
-	}
-	catch(Exception $e)
-	{
-		die('Erreur : '.$e->getMessage());
-	}
-
-	//  Récupération de l'utilisateur et de son pass hashé
 	$req = $bdd->prepare('SELECT id, password, email, identifiant FROM cooks WHERE email = :email');
 	$req->execute(array('email' => $_POST['email']));
 	$resultat = $req->fetch();
@@ -21,7 +11,6 @@ if(isset($_POST['email']) && isset($_POST['password']))
 	$email = $resultat['email'];
 	$identifiant = $resultat['identifiant'];
 
-	// Comparaison du pass envoyé via le formulaire avec la base
 	$isPasswordCorrect = password_verify($_POST['password'], $resultat['password']);
 
 	if (!$resultat)
@@ -41,12 +30,11 @@ if(isset($_POST['email']) && isset($_POST['password']))
 			$_SESSION['identifiant'] = $identifiant;
 			$_SESSION['moyenne'] = $resultat['note_moyenne'];;
 
-			echo 'Vous êtes connecté !';
-			?>
-			<meta http-equiv="refresh" content="1;" />
-			<?php
+			header('Location: ../?action=cook');
+
 		}else {
 				echo 'Mauvais email ou mot de passe !';
 		}
 	}
 }
+?>

@@ -3,21 +3,13 @@ if(!empty($_POST['identifiant']) AND !empty($_POST['email']) AND !empty($_POST['
 {
 	if($_POST['password'] == $_POST['passwordConfirm'])
 	{
-		try
-		{
-			require 'secret.php';;
-      $bdd = new PDO('mysql:host=localhost;dbname='. $dbName .';charset=utf8', '' . $dbLogin . '', '' . $dbPassword . '');
-		}
-		catch(Exception $e)
-		{
-			die('Erreur : '.$e->getMessage());
-		}
+		require '../base.php';
 
 		$req = $bdd->prepare('SELECT email, identifiant FROM cooks WHERE email = :email');
 		$req->execute(array('email' => $_POST['email']));
 		$resultat = $req->fetch();
 
-		if(!empty($resultat['identifiant']) AND !empty($resultat['identifiant']))
+		if(!empty($resultat['identifiant']) AND !empty($resultat['email']))
 		{
 			echo '<p class="colorMain">Vous avez déjà un compte.<p>';
 		}else {
@@ -64,12 +56,12 @@ if(!empty($_POST['identifiant']) AND !empty($_POST['email']) AND !empty($_POST['
 
 							echo 'Vous êtes inscrit !';
 
-							move_uploaded_file($_FILES['profile_picture']['tmp_name'], 'uploads/recipes/'.$name_profile_picture);
+							move_uploaded_file($_FILES['profile_picture']['tmp_name'], '../uploads/avatars/'.$name_profile_picture);
 
 							if($extension_upload == 'png')
-							$source = imagecreatefrompng("uploads/recipes/".$name_profile_picture."");
+							$source = imagecreatefrompng("../uploads/avatars/".$name_profile_picture."");
 							else {
-								$source = imagecreatefromjpeg("uploads/recipes/".$name_profile_picture."");
+								$source = imagecreatefromjpeg("../uploads/avatars/".$name_profile_picture."");
 							}
 							$destination = imagecreatetruecolor(300, 300);
 
@@ -80,10 +72,9 @@ if(!empty($_POST['identifiant']) AND !empty($_POST['email']) AND !empty($_POST['
 
 							imagecopyresampled($destination, $source, 0, 0, 0, 0, $largeur_destination, $hauteur_destination, $largeur_source, $hauteur_source);
 
-							imagejpeg($destination, "uploads/avatars/300x300_".$name_profile_picture."");
-							?>
-							<meta http-equiv="refresh" content="1;" />
-							<?php
+							imagejpeg($destination, "../uploads/avatars/300x300_".$name_profile_picture."");
+
+							header('Location: ../?action=cook');
 						}else {
 							echo '<p class="colorMain">Format de photo non autorisé.</p>';
 						}
@@ -99,3 +90,4 @@ if(!empty($_POST['identifiant']) AND !empty($_POST['email']) AND !empty($_POST['
 }else {
 	echo '<p class="colorMain">Veuilliez saisir toutes les informations obligatoires.</p>';
 }
+?>
