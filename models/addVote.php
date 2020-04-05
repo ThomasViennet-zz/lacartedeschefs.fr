@@ -6,7 +6,7 @@ if(!empty($_POST['vote'])) {
   require '../base.php';
 
   //Est-ce que l'utilisateur a déjà voté pour cette recette ?
-  $req = $bdd->query('SELECT id_cook FROM votes WHERE id_cook = '.$_SESSION['id']);
+  $req = $bdd->query('SELECT id_cook FROM votes WHERE id_recipe = '.$_GET['id_recipe']);
   $resultat = $req->fetch();
 
   if (!empty($resultat['id_cook'])) {

@@ -3,8 +3,8 @@ if(isset($_SESSION['id']))
 {
   echo'
   <form method="post" action="models/addRecipe.php" enctype="multipart/form-data">
-    <input type="text" value="'.$_SESSION['identifiant'].'" disabled/> <a href="models/deconnexion.php"><br>
-    Ce n\'est pas vous ?</a><br>
+    <input type="text" value="'.$_SESSION['identifiant'].'" disabled/><br>
+    <a href="models/deconnexion.php">Ce n\'est pas vous ?</a><br>
     <input type="text" name="title" placeholder="Titre de votre recette *"/>
     <input type="text" name="ingredients" placeholder="Ingrédients de votre recette *"/>
     <input type="text" name="description" placeholder="Description courte de votre recette *"/>

@@ -7,6 +7,7 @@ if(isset($_POST['email']) && isset($_POST['password']))
 	$req->execute(array('email' => $_POST['email']));
 	$resultat = $req->fetch();
 	$req->closeCursor();
+	
 	$id = $resultat['id'];
 	$email = $resultat['email'];
 	$identifiant = $resultat['identifiant'];

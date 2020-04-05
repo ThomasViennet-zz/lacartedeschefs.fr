@@ -68,10 +68,13 @@
     </ol>
   </section>
 <section id="abonnement">
-  <h2>Recevoir La carte des chefs</h2>
+  <h2>Recevoir <i>La carte des chefs</i></h2>
   <p class="colorMain"><?php echo $_GET['message'];?></p>
-  <form method="post" action="models/registerLaCarteDesChefs.php">
-    <label for="email">Votre adresse email</label><input type="email" id="email" name="email" placeholder="Votre adresse email" class="inputSlider"><br>
+  <form method="post" action="models/registerCook.php">
+    <label for="email">Votre adresse email</label><input type="email" id="email" name="email" placeholder="Votre adresse email"><br>
+    <label for="identifiant">Choisissez un identifiant</label><input type="identifiant" id="identifiant" name="identifiant" placeholder="Choisissez un identifiant"><br>
+    <label for="password">Choisissez un mot de passe</label><input type="password" id="password" name="password" placeholder="Choisissez un mot de passe"><br>
+    <label for="passwordConfirm">Confirmer le mot de passe</label><input type="password" id="passwordConfirm" name="passwordConfirm" placeholder="Confirmer le mot de passe"><br>
     <input type="submit" name="submit" value="Recevoir la carte des chefs !"class="buttonSlider">
   </form>
 </section>

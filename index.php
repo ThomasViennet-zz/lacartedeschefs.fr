@@ -25,6 +25,14 @@ session_start();
           }
       break;
 
+      case 'cookEdit':
+          if (!empty($_SESSION['id'])) {
+            include 'views/cookEdit.php';
+          }else {
+            include 'views/connexion.php';
+          }
+      break;
+
       default:
           include 'views/landingPage.php';
   }

@@ -17,9 +17,20 @@ $cook = new Cook($_SESSION['id']);
     <img src="images/plateaux_de_legumes_1920px.jpg" alt="Plateaux de légumes"/ height="100%" width="100%" class="headerBackground">
     <div id="headerDescription">
       <h1><?php echo $cook->identifiant();?></h1>
-      <img src="uploads/avatars/300x300_<?php echo $cook->picture();?>" width="80px" class="profilPicture"/><br>
       <?php echo $cook->moyenne();?>
+      <div id="cookAddPicture">
+        <?php
+        if (empty($cook->picture())) {
+          include 'images/account.svg';
+        }else {
+          echo '
+          <img src="uploads/avatars/'.$cook->picture().'" width="80px" class="profilPicture"/>';
+        }
+        ?>
+        <p><a href="models/deconnexion.php">Ce n\'est pas vous ?</a></p>
+      </div>
     </div>
+
   </header>
 
   <section>

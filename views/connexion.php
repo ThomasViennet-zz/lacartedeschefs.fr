@@ -19,13 +19,12 @@
 
   <section class="conteneur">
     <div class="element">
-      <h2>Devenir chef</h2>
+      <h2>Créer un compte</h2>
       <form method="post" action="models/registerCook.php" enctype="multipart/form-data">
         <label for="email">Email</label><input type="email" id="email" name="email" placeholder="Votre adresse email *"><br>
         <label for="identifiant">Identifiant</label><input type="text" id="identifiant" name="identifiant" placeholder="Choisissez un identifiant *"><br>
         <label for="password">Mot de passe</label><input type="password" id="password" name="password" placeholder="Votre mot de passe *"><br>
         <label for="passwordConfirm">Confirmer mot de passe</label><input type="password" id="passwordConfirm" name="passwordConfirm" placeholder="Confirmer le mot de passe *"><br>
-        <label for="profile_picture">Photo de profile</label><input type="file" id="profile_picture" name="profile_picture" /><br>
         <input type="submit" name="submit" value="Valider" class="button">
       </form>
     </div>

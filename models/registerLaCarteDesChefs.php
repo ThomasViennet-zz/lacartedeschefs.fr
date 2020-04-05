@@ -13,12 +13,20 @@ if(!empty($_POST['email']))
     header('Location: /?message='.$message.'#abonnement');
 	}else {
 
-    $req = $bdd->prepare('INSERT INTO lacartedeschefs (email, date, subscribe) VALUES(:email, NOW(), :subscribe)');
-		$req->execute(array('email' => $_POST['email'], 'subscribe' => 'Oui'))
-		or die('<p class="colorWhite">Une erreur s\'est produite</p>');
+		if($_POST['password'] == $_POST['passwordConfirm'])
+		{
+			$password_hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-		$message = 'Félicitations vous êtes abonnées !';
-    header('Location: /?message='.$message.'#abonnement');
+			$req = $bdd->prepare('INSERT INTO lacartedeschefs (email, password, date, subscribe) VALUES(:email, :password, NOW(), :subscribe)');
+			$req->execute(array('email' => $_POST['email'], 'password' => $password_hash, 'subscribe' => 'Oui'))
+			or die('<p class="colorWhite">Une erreur s\'est produite</p>');
+
+			$message = 'Félicitations vous êtes abonnées !';
+	    header('Location: /?message='.$message.'#abonnement');
+		}else {
+			$message = 'Les mots de passe ne correspondent pas.';
+	    header('Location: /?message='.$message.'#abonnement');
+		}
 	}
 }else {
 		$message = 'Vous n\'avez pas saisi votre adresse email.';

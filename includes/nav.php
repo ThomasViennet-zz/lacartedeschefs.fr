@@ -2,6 +2,18 @@
 <nav>
   <ul>
     <a href="?action=accueil"><li><?php include 'images/home.svg';?></li></a>
-    <a href="?action=cook"><li><?php include 'images/account.svg';?></li></a>
+    <?php
+    if (isset($_SESSION['id']) AND $_GET['action'] == 'cook') {
+      if ($_SESSION['id'] == $cook->id()) {
+        ?>
+        <a href="?action=cookEdit"><li><?php include 'images/accountEdit.svg'; ?></li></a>
+      <?php
+      }
+    }else {
+      ?>
+      <a href="?action=cook"><li><?php include 'images/account.svg'; ?></li></a>
+      <?php
+    }
+    ?>
   </ul>
 </nav>

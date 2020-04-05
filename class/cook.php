@@ -5,13 +5,14 @@ class Cook
   private $_identifiant;
   private $_picture;
   private $_moyenne;
+  private $_email;
 
   public function __construct($id)
   {
     require 'base.php';
 
     $reponse = $bdd->prepare(
-      'SELECT c.profile_picture cook_picture, c.identifiant cook_identifiant,
+      'SELECT c.profile_picture cook_picture, c.identifiant cook_identifiant, c.email cook_email,
       AVG(v.note) note_moyenne, SUM(v.note) note_total
       FROM cooks c
       INNER JOIN votes v
@@ -25,6 +26,7 @@ class Cook
     $this->setId($id);
     $this->setIdentifiant($resultat['cook_identifiant']);
     $this->setPicture($resultat['cook_picture']);
+    $this->setEmail($resultat['cook_email']);
 
     if(empty($resultat['note_moyenne']))
     {
@@ -107,6 +109,16 @@ class Cook
     }
 
     $reponse->closeCursor();
+  }
+
+  public function email()
+  {
+    return $this->_email;
+  }
+
+  public function setEmail($email)
+  {
+    $this->_email = $email;
   }
 
   public function id()

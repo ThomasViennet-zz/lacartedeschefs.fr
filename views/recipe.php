@@ -22,7 +22,7 @@ $cook = new Cook($recipe->idCook());
       <h1><?php echo $recipe->title();?></h1>
       <p class="colorWhite"><?php echo $recipe->description();?></p>
       <div id="cook">
-        <a href="?action=cook"><img src="/uploads/avatars/300x300_<?php echo $cook->picture();?>" class="profilPicture" width="80px"/></a><br>
+        <a href="?action=cook"><img src="/uploads/avatars/<?php echo $cook->picture();?>" class="profilPicture" width="80px"/></a><br>
         <?php echo $cook->moyenne();?><br>
         <span class="colorMain"><?php echo $cook->identifiant();?></span>
       </div>
