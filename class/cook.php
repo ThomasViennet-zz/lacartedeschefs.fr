@@ -99,7 +99,7 @@ class Cook
       echo '
       <div class="element">
         <a href="?action=recipe&id_recipe='.$donnees['id'].'">
-        <img src="uploads/recipes/400x400_'.$donnees['recipe_picture'].'"/></a>
+        <img src="uploads/recipes/400x400_'.$donnees['recipe_picture'].'" width="100%"/></a>
         <br>
         '.$note.'<br>
         '.$donnees['title'].'<br>

@@ -27,11 +27,11 @@ $cook = new Cook($_SESSION['id']);
   <div id="cookInfo">
       <h1><?php echo $cook->identifiant();?></h1>
       <?php echo $cook->moyenne();?>
-        <p><a href="models/deconnexion.php">Ce n\'est pas vous ?</a></p>
+        <p><a href="models/deconnexion.php">Ce n'est pas vous ?</a></p>
   </header>
 
   <section>
-    <h2>Vos recettes</h2>
+    <h2 style="text-align:center;">Vos recettes</h2>
     <div class="conteneur">
       <?php echo $cook->getRecipes($_SESSION['id']);?>
     </div>
