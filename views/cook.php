@@ -14,23 +14,20 @@ $cook = new Cook($_SESSION['id']);
 <body id="Abonner">
   <?php include 'includes/nav.php';?>
   <header>
-    <img src="images/plateaux_de_legumes_1920px.jpg" alt="Plateaux de légumes"/ height="100%" width="100%" class="headerBackground">
-    <div id="headerDescription">
+    <div id="cookPicture">
+    <?php
+    if (empty($cook->picture())) {
+      include 'images/account.svg';
+    }else {
+      echo '
+      <img src="uploads/avatars/80x80_'.$cook->picture().'" width="80px" height="80px" class="profilPicture"/>';
+    }
+    ?>
+  </div>
+  <div id="cookInfo">
       <h1><?php echo $cook->identifiant();?></h1>
       <?php echo $cook->moyenne();?>
-      <div id="cookAddPicture">
-        <?php
-        if (empty($cook->picture())) {
-          include 'images/account.svg';
-        }else {
-          echo '
-          <img src="uploads/avatars/'.$cook->picture().'" width="80px" class="profilPicture"/>';
-        }
-        ?>
         <p><a href="models/deconnexion.php">Ce n\'est pas vous ?</a></p>
-      </div>
-    </div>
-
   </header>
 
   <section>
@@ -40,10 +37,7 @@ $cook = new Cook($_SESSION['id']);
     </div>
   </section>
 
-  <section>
-    <h2 id="recette">Proposer une recette</h2>
-    <p>Marquez l'histoire de la gastronomie avec vos délicieuses recettes !</p>
-    <?php include 'includes/addRecipe.php';?>
-  </section>
+  <?php include 'includes/footer.php';?>
+
 </body>
 </html>

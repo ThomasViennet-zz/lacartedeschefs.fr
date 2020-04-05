@@ -16,13 +16,13 @@ $cook = new Cook($recipe->idCook());
 <body id="Abonner">
   <?php include 'includes/nav.php';?>
 
+<img src="/uploads/recipes/<?php echo $recipe->picture();?>" alt="<?php echo $recipe->title();?>" width="100%" height="100%" class="headerBackground"/>
+
   <header>
-    <img src="/uploads/recipes/<?php echo $recipe->picture();?>" alt="<?php echo $recipe->title();?>" width="100%" height="100%" class="headerBackground"/>
     <div id="headerDescription">
       <h1><?php echo $recipe->title();?></h1>
-      <p class="colorWhite"><?php echo $recipe->description();?></p>
       <div id="cook">
-        <a href="?action=cook"><img src="/uploads/avatars/<?php echo $cook->picture();?>" class="profilPicture" width="80px"/></a><br>
+        <a href="?action=cook"><img src="/uploads/avatars/80x80_<?php echo $cook->picture();?>" class="profilPicture" /></a><br>
         <?php echo $cook->moyenne();?><br>
         <span class="colorMain"><?php echo $cook->identifiant();?></span>
       </div>
@@ -32,15 +32,12 @@ $cook = new Cook($recipe->idCook());
   <section id="steps">
     <?php echo $recipe->steps();?>
   </section>
+
   <section>
     <h2>Noter</h2>
     <?php include 'includes/addVote.php';?>
   </section>
-  <section>
-    <h2>Proposer une recette</h2>
-    <p>Marquez l'histoire de la gastronomie avec vos délicieuses recettes !</p>
-    <?php include 'includes/addRecipe.php';?>
-  </section>
+
   <?php include 'includes/footer.php';?>
 </body>
 </html>

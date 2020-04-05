@@ -8,14 +8,12 @@
 </head>
 
 <body id="Abonner">
+
   <?php include 'includes/nav.php';?>
 
   <header>
-      <img src="images/plateaux_de_legumes_1920px.jpg" alt="Plateaux de légumes"/ height="100%" width="100%" class="headerBackground">
-      <div id="headerDescription">
-        <h1>La carte des chefs</h1>
-        <p><i>Nous révélons les passionnés de la gastronomie.</i></p>
-      </div>
+      <h1>La carte des chefs</h1>
+      <p><i>Nous révélons les passionnés de la gastronomie.</i></p>
   </header>
 
   <section>
@@ -23,7 +21,7 @@
 
     <p>
       Le monde regorge de talents de la gastronomie méconnus.<br>
-      Recevez par email le top 10 leurs plus délicieuses recettes.
+      Recevez par email le top 10 de leurs plus délicieuses recettes.
     </p>
 
     <p>
@@ -48,6 +46,7 @@
       <i>La carte des chefs</i>, c'est une invitation ouverte à tous, de marquer l'histoire de la gastronomie.
     </p>
   </section>
+
   <section>
     <h2>Comment se déroule la compétition ?</h2>
 
@@ -67,17 +66,20 @@
       <li>Les notes font évoluer les chefs dans <a href="?action=cooks">le classement des chefs</a></li>
     </ol>
   </section>
-<section id="abonnement">
-  <h2>Recevoir <i>La carte des chefs</i></h2>
-  <p class="colorMain"><?php echo $_GET['message'];?></p>
-  <form method="post" action="models/registerCook.php">
-    <label for="email">Votre adresse email</label><input type="email" id="email" name="email" placeholder="Votre adresse email"><br>
-    <label for="identifiant">Choisissez un identifiant</label><input type="identifiant" id="identifiant" name="identifiant" placeholder="Choisissez un identifiant"><br>
-    <label for="password">Choisissez un mot de passe</label><input type="password" id="password" name="password" placeholder="Choisissez un mot de passe"><br>
-    <label for="passwordConfirm">Confirmer le mot de passe</label><input type="password" id="passwordConfirm" name="passwordConfirm" placeholder="Confirmer le mot de passe"><br>
-    <input type="submit" name="submit" value="Recevoir la carte des chefs !"class="buttonSlider">
-  </form>
-</section>
+
+  <section id="abonnement">
+    <h2>Recevoir <i>La carte des chefs</i></h2>
+    <p class="colorMain"><?php echo $_GET['message'];?></p>
+    <form method="post" action="models/registerCook.php">
+      <label for="email">Votre adresse email</label><input type="email" id="email" name="email" placeholder="Votre adresse email"><br>
+      <label for="identifiant">Choisissez un identifiant</label><input type="identifiant" id="identifiant" name="identifiant" placeholder="Choisissez un identifiant"><br>
+      <label for="password">Choisissez un mot de passe</label><input type="password" id="password" name="password" placeholder="Choisissez un mot de passe"><br>
+      <label for="passwordConfirm">Confirmer le mot de passe</label><input type="password" id="passwordConfirm" name="passwordConfirm" placeholder="Confirmer le mot de passe"><br>
+      <input type="submit" name="submit" value="Recevoir la carte des chefs !"class="button">
+    </form>
+  </section>
+
   <?php include 'includes/footer.php';?>
+
 </body>
 </html>

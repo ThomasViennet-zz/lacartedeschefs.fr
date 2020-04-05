@@ -16,14 +16,14 @@ if(!empty($_POST['title']))
 
         require '../base.php';
 
-        $req = $bdd->prepare('INSERT INTO recipes (title, description, id_cook, recipe_picture, ingredients, steps) VALUES(:title, :description, :id_cook, :recipe_picture, :ingredients, :steps)');
+        $req = $bdd->prepare('INSERT INTO recipes (title, id_cook, recipe_picture, ingredients, steps, serve) VALUES(:title, :id_cook, :recipe_picture, :ingredients, :steps, :serve)');
         $req->execute(array(
           'title' => $_POST['title'],
-          'description' => $_POST['description'],
           'id_cook' => $_SESSION['id'],
           'recipe_picture' => $name_recipe_picture,
           'ingredients' => $_POST['ingredients'],
-          'steps'=> $_POST['steps']
+          'steps' => $_POST['steps'],
+          'serve' => $_POST['serve']
           )) or die('Une erreur s\'est produite');
 
         echo '<p class="colorMain">La recette a bien été ajouté !</p>';
@@ -31,20 +31,46 @@ if(!empty($_POST['title']))
         move_uploaded_file($_FILES['recipe_picture']['tmp_name'], '../uploads/recipes/'.$name_recipe_picture);
 
         if($extension_upload == 'png')
-        $source = imagecreatefrompng("../uploads/recipes/".$name_recipe_picture."");
+          $image = imagecreatefrompng("../uploads/recipes/".$name_recipe_picture."");
         else {
-          $source = imagecreatefromjpeg("../uploads/recipes/".$name_recipe_picture."");
+          $image = imagecreatefromjpeg("../uploads/recipes/".$name_recipe_picture."");
         }
-        $destination = imagecreatetruecolor(300, 300);
 
-        $largeur_source = imagesx($source);
-        $hauteur_source = imagesy($source);
-        $largeur_destination = imagesx($destination);
-        $hauteur_destination = imagesy($destination);
+        $filename = '../uploads/recipes/400x400_'.$name_recipe_picture;
 
-        imagecopyresampled($destination, $source, 0, 0, 0, 0, $largeur_destination, $hauteur_destination, $largeur_source, $hauteur_source);
+        $thumb_width = 400;
+        $thumb_height = 400;
 
-        imagejpeg($destination, "../uploads/recipes/300x300_".$name_recipe_picture."");
+        $width = imagesx($image);
+        $height = imagesy($image);
+
+        $original_aspect = $width / $height;
+        $thumb_aspect = $thumb_width / $thumb_height;
+
+        if ( $original_aspect >= $thumb_aspect )
+        {
+           // If image is wider than thumbnail (in aspect ratio sense)
+           $new_height = $thumb_height;
+           $new_width = $width / ($height / $thumb_height);
+        }
+        else
+        {
+           // If the thumbnail is wider than the image
+           $new_width = $thumb_width;
+           $new_height = $height / ($width / $thumb_width);
+        }
+
+        $thumb = imagecreatetruecolor( $thumb_width, $thumb_height );
+
+        // Resize and crop
+        imagecopyresampled($thumb,
+                           $image,
+                           0 - ($new_width - $thumb_width) / 2, // Center the image horizontally
+                           0 - ($new_height - $thumb_height) / 2, // Center the image vertically
+                           0, 0,
+                           $new_width, $new_height,
+                           $width, $height);
+        imagejpeg($thumb, $filename, 80);
 
         $req = $bdd->query('SELECT LAST_INSERT_ID() AS lastID FROM recipes');
         $resultat = $req->fetch();

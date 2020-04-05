@@ -10,17 +10,14 @@
 <body id="Abonner">
   <?php include 'includes/nav.php';?>
   <header>
-    <img src="images/plateaux_de_legumes_1920px.jpg" alt="Plateaux de légumes"/ height="100%" width="100%" class="headerBackground">
-    <div id="headerDescription">
-      <h1>Mon compte</h1>
-        <p><i>Marquez l'histoire de la gastronomie.</i></p>
-    </div>
+    <h1>Mon compte</h1>
+    <p><i>Marquez l'histoire de la gastronomie.</i></p>
   </header>
 
   <section class="conteneur">
-    <div class="element">
+    <div class="element" style="width:100%;">
       <h2>Créer un compte</h2>
-      <form method="post" action="models/registerCook.php" enctype="multipart/form-data">
+      <form method="post" action="models/registerCook.php">
         <label for="email">Email</label><input type="email" id="email" name="email" placeholder="Votre adresse email *"><br>
         <label for="identifiant">Identifiant</label><input type="text" id="identifiant" name="identifiant" placeholder="Choisissez un identifiant *"><br>
         <label for="password">Mot de passe</label><input type="password" id="password" name="password" placeholder="Votre mot de passe *"><br>
@@ -28,7 +25,7 @@
         <input type="submit" name="submit" value="Valider" class="button">
       </form>
     </div>
-    <div class="element">
+    <div class="element" style="width:100%;">
       <h2>Se connecter</h2>
       <form method="post" action="models/connexion.php">
         <label for="email">Email</label><input type="email" id="email" name="email" placeholder="Email *"><br>
@@ -37,5 +34,6 @@
       </form>
     </div>
   </section>
+  <?php include 'includes/footer.php';?>
 </body>
 </html>

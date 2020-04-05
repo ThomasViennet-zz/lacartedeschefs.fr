@@ -14,11 +14,7 @@ $cook = new Cook($_SESSION['id']);
 <body id="Abonner">
   <?php include 'includes/nav.php';?>
   <header>
-    <img src="images/plateaux_de_legumes_1920px.jpg" alt="Plateaux de légumes"/ height="100%" width="100%" class="headerBackground">
-    <div id="headerDescription">
       <h1>Modifier mon Compte</h1>
-    </div>
-
   </header>
 
   <section>
@@ -28,7 +24,7 @@ $cook = new Cook($_SESSION['id']);
       <label for="email">Email</label><input type="email" id="email" name="email" placeholder="<?php echo $cook->email();?> *"><br>
       <label for="identifiant">Identifiant</label><input type="text" id="identifiant" name="identifiant" placeholder="<?php echo $cook->identifiant();?>  *"><br>
       <label for="profile_picture">Photo</label><br>
-      <img src="uploads/avatars/<?php echo $cook->picture();?>" width="80px" class="profilPicture"/>
+      <img src="uploads/avatars/80x80_<?php echo $cook->picture();?>" width="80px" class="profilPicture"/>
       <input type="file" id="profile_picture" name="profile_picture" />
     <h2>Confirmation</h2>
 
@@ -36,5 +32,7 @@ $cook = new Cook($_SESSION['id']);
       <input type="submit" name="submit" value="Valider" class="button">
     </form>
   </section>
+
+  <?php include 'includes/footer.php';?>
 </body>
 </html>

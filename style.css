@@ -2,19 +2,20 @@ body
 {
   margin: 0px;
 }
+
 nav
 {
-  position: fixed;
-  height: 60px;
-  margin-top: -60px;
   background-color: white;
+  height: 50px;
   width: 100%;
-  box-shadow: 0px -3px 7px 0px rgba(0,0,0,0.75);
+  box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.5);
   z-index: 1;
+  position: fixed;
 }
 
 nav ul
 {
+  margin: 0px;
   display: flex;
   justify-content: space-around;
   list-style: none;
@@ -23,8 +24,11 @@ nav ul
 
 header
 {
-  margin-top: 60px;
-  height: 300px;
+  margin-top: 0px;
+  text-align: center;
+  background-color: black;
+  color: white;
+  padding: 15% 0px 10% 0px;
 }
 
 section
@@ -72,61 +76,26 @@ footer
   box-shadow: 0px -3px 7px -7px rgba(0,0,0,0.75);
 }
 
-header
-{
-  box-shadow: 0px 0px 10px 2px rgba(0,0,0,0.75);
-  height: 300px;
-  width: 100%;
-}
-
-#steps
-{
-  margin-top: 100px;
-}
 #logo
 {
   position: fixed;
-  margin-top: -60px;
   padding: 5px;
   z-index: 2;
 }
 
-#cook
+#cookPicture
 {
-  margin-top:  80px;
+
 }
 
-#headerDescription
+#cookInfo
 {
-  position: relative;
-  padding: 20px;
-  text-align: center;
-  color: white;
-  background-color: rgba(0, 0, 0, 0.5);
-  height: 260px;
-}
 
-#cookAddPicture
-{
-  
-}
-
-.headerBackground
-{
-  position: absolute;
-  height: 300px;
-  width: auto;
 }
 
 .profilPicture
 {
-  border-radius: 10px;
-}
-
-.publicationNoteCook
-{
-  position: absolute;
-  margin-top: -25px
+  border-radius: 100%;
 }
 
 .button
@@ -135,7 +104,7 @@ header
   width: 100%;
   background-color: #3491b2;
   border-radius: 3px;
-  /* border-bottom: 3px solid #3B89B3; */
+  border-bottom: 3px solid #3B89B3;
   color: white;
   font-size: 1em;
   text-decoration: none;
@@ -147,32 +116,7 @@ header
   width: auto;
   background-color: white;
   border-radius: 3px;
-  /* border-bottom: 3px solid #3491b2; */
-  color: #3B89B3;
-  font-size: 1em;
-  text-decoration: none;
-  width: 100%;
-}
-
-.buttonSlider
-{
-  display: inline-block;
-  width: 100%;
-  background-color: #3491b2;
-  border-radius: 3px;
-  /* border-bottom: 3px solid #3B89B3; */
-  color: white;
-  font-size: 1em;
-  text-decoration: none;
-}
-
-.buttonSlider:hover
-{
-  display: inline-block;
-  width: auto;
-  background-color: white;
-  border-radius: 3px;
-  /* border-bottom: 3px solid #3491b2; */
+  border-bottom: 3px solid #3491b2;
   color: #3B89B3;
   font-size: 1em;
   text-decoration: none;
@@ -182,14 +126,17 @@ header
 .conteneur
 {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
 }
+
 .element
 {
     padding: 10px;
     margin: auto;
-    width: 100%;
 }
+
 .colorMain
 {
   color: #e4c600;
@@ -197,21 +144,4 @@ header
 
 @media screen and (min-width: 600px)
 {
-  .conteneur
-  {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-  }
-  /* #description_slider
-  {
-    position: relative;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0.5);
-    width: 50%;
-    border-radius: 5px;
-    padding: 20px;
-  } */
 }

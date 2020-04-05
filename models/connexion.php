@@ -7,7 +7,7 @@ if(isset($_POST['email']) && isset($_POST['password']))
 	$req->execute(array('email' => $_POST['email']));
 	$resultat = $req->fetch();
 	$req->closeCursor();
-	
+
 	$id = $resultat['id'];
 	$email = $resultat['email'];
 	$identifiant = $resultat['identifiant'];
@@ -16,7 +16,10 @@ if(isset($_POST['email']) && isset($_POST['password']))
 
 	if (!$resultat)
 	{
-		echo 'Mauvais email ou mot de passe !';
+		echo '
+		Mauvais email ou mot de passe ! <br>
+		Si vous n\'êtes pas redirigé, <a href="../?action=cook"">cliquez ici</a>.';
+		header( "refresh:3;url=../?action=cook" );
 	}else{
 		if ($isPasswordCorrect)
 		{
@@ -34,7 +37,10 @@ if(isset($_POST['email']) && isset($_POST['password']))
 			header('Location: ../?action=cook');
 
 		}else {
-				echo 'Mauvais email ou mot de passe !';
+				echo '
+				Mauvais email ou mot de passe ! <br>
+				Si vous n\'êtes pas redirigé, <a href="../?action=cook"">cliquez ici</a>.';
+				header( "refresh:3;url=../?action=cook" );
 		}
 	}
 }

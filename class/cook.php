@@ -61,7 +61,7 @@ class Cook
   {
     require 'base.php';
 
-    $reponse = $bdd->query('SELECT id, title, recipe_picture, description FROM recipes WHERE id_cook = '.$idCook);
+    $reponse = $bdd->query('SELECT id, title, recipe_picture FROM recipes WHERE id_cook = '.$idCook);
 
     while ($donnees = $reponse->fetch())
     {
@@ -98,14 +98,13 @@ class Cook
 
       echo '
       <div class="element">
-        <a href="?action=recipe&id_recipe='.$donnees['id'].'"><img src="uploads/recipes/300x300_'.$donnees['recipe_picture'].'"/></a><br>
+        <a href="?action=recipe&id_recipe='.$donnees['id'].'">
+        <img src="uploads/recipes/400x400_'.$donnees['recipe_picture'].'"/></a>
+        <br>
         '.$note.'<br>
         '.$donnees['title'].'<br>
-        '.$donnees['description'].'
       </div>
-      '
-
-      ;
+      ';
     }
 
     $reponse->closeCursor();

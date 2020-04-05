@@ -5,7 +5,6 @@ class Recipe
   private $_idCook;
   private $_picture;
   private $_title;
-  private $_description;
   private $_ingredients;
   private $_steps;
 
@@ -14,7 +13,7 @@ class Recipe
     require 'base.php';
 
     $reponse = $bdd->prepare(
-      'SELECT r.title recipe_title, r.recipe_picture recipe_picture, r.description recipe_description, r.id_cook recipe_cook, r.steps recipe_steps, r.ingredients recipe_ingredients,
+      'SELECT r.title recipe_title, r.recipe_picture recipe_picture, r.id_cook recipe_cook, r.steps recipe_steps, r.ingredients recipe_ingredients,
       AVG(v.note) note_moyenne, SUM(v.note) note_total
       FROM recipes r
       INNER JOIN votes v
@@ -27,7 +26,6 @@ class Recipe
     $this->setId($id);
     $this->setTitle($resultat['recipe_title']);
     $this->setPicture($resultat['recipe_picture']);
-    $this->setDescription($resultat['recipe_description']);
     $this->setIdCook($resultat['recipe_cook']);
     $this->setIngredients($resultat['recipe_ingredients']);
     $this->setSteps($resultat['recipe_steps']);
@@ -110,16 +108,6 @@ class Recipe
   public function setTitle($title)
   {
     $this->_title = $title;
-  }
-
-  public function description()
-  {
-    return $this->_description;
-  }
-
-  public function setDescription($description)
-  {
-    $this->_description = $description;
   }
 
   public function idCook()

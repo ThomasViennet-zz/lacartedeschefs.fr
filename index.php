@@ -13,6 +13,15 @@ session_start();
           include 'views/recipe.php';
       break;
 
+      case 'recipeAdd':
+        if (!empty($_SESSION['id'])) {
+          include 'views/addRecipe.php';
+        }else {
+          include 'views/connexion.php';
+        }
+
+      break;
+
       case 'listCooks':
           include 'views/listCooks.php';
       break;
