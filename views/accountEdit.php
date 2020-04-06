@@ -7,7 +7,7 @@ $cook = new Cook($_SESSION['id']);
 <head>
   <meta charset="utf-8" />
   <link rel="stylesheet" href="style.css" />
-  <link rel="icon" type="image/png" href="images/Logo_la_carte_des_chefs_30px.png">
+  <link rel="icon" type="image/png" href="images/30x30_logo_la_carte_des_chefs.png">
   <title>Mon compte</title>
 </head>
 
