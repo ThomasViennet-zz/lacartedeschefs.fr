@@ -43,5 +43,10 @@ if(isset($_POST['email']) && isset($_POST['password']))
 				header( "refresh:3;url=../?action=cook" );
 		}
 	}
+}else {
+	echo '
+	Veuilliez saisir toutes les informations ! <br>
+	Si vous n\'êtes pas redirigé, <a href="../?action=cook"">cliquez ici</a>.';
+	header( "refresh:3;url=../?action=cook" );
 }
 ?>

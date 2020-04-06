@@ -10,22 +10,34 @@ if(!empty($_POST['vote'])) {
   $resultat = $req->fetch();
 
   if (!empty($resultat['id_cook'])) {
-    $message = 'Vous avez déjà voté.';
-    header('Location: ../?action=recipe&id_recipe='.$_GET['id_recipe'].'&message='.$message);
+
+    echo '
+		Vous avez déjà voté ! <br>
+		Si vous n\'êtes pas redirigé, <a href="../?action=cook"">cliquez ici</a>.';
+		header('refresh:3;url=../?action=recipe&id_recipe='.$_GET['id_recipe']);
+
   }else {
+    //Qui est le cook ?
+    $req = $bdd->query('SELECT id_cook FROM recipes WHERE id = '.$_GET['id_recipe']);
+    $resultat = $req->fetch();
+
     $req = $bdd->prepare('INSERT INTO votes (id_recipe, id_cook, id_customer, note) VALUES(:id_recipe, :id_cook, :id_customer, :note)');
     $req->execute(array(
       'id_recipe' => $_GET['id_recipe'],
-      'id_cook' => $_GET['id_cook'],
+      'id_cook' => $resultat['id_cook'],
       'id_customer' => $_SESSION['id'],
       'note' => $_POST['vote']
     )) or die('Une erreur s\'est produite');
 
-    $message = 'La vote a bien été ajouté !';
-    header('Location: ../?action=recipe&id_recipe='.$_GET['id_recipe'].'&message='.$message);
+    echo '
+		La vote a bien été ajouté ! <br>
+		Si vous n\'êtes pas redirigé, <a href="../?action=cook"">cliquez ici</a>.';
+		header('refresh:3;url=../?action=recipe&id_recipe='.$_GET['id_recipe']);
   }
 }else {
-  $message = 'Choississez une note.';
-  header('Location: ../?action=recipe&id_recipe='.$_GET['id_recipe'].'&message='.$message);
+  echo '
+  Choississez une note.<br>
+  Si vous n\'êtes pas redirigé, <a href="../?action=cook"">cliquez ici</a>.';
+  header('refresh:3;url=../?action=recipe&id_recipe='.$_GET['id_recipe']);
 }
 ?>

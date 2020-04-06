@@ -11,7 +11,7 @@
   <?php include 'includes/nav.php';?>
   <header>
     <h1>Mon compte</h1>
-    <p><i>Marquez l'histoire de la gastronomie.</i></p>
+    <p class="colorMain"><i>Marquez l'histoire de la gastronomie.</i></p>
   </header>
 
   <section>

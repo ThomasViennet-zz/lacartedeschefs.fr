@@ -1,5 +1,5 @@
 <?php
-if(!empty($_POST['identifiant']) AND !empty($_POST['email']) AND !empty($_POST['password']))
+if(!empty($_POST['identifiant']) AND !empty($_POST['email']) AND !empty($_POST['password']) AND !empty($_POST['passwordConfirm']))
 {
 	if($_POST['password'] == $_POST['passwordConfirm'])
 	{
@@ -53,6 +53,11 @@ if(!empty($_POST['identifiant']) AND !empty($_POST['email']) AND !empty($_POST['
 				header('Location: ../?action=cook');
 			}
 		}
+	}else {
+		echo '
+		Les mots de passe de correspondent pas.<br>
+		Si vous n\'êtes pas redirigé, <a href="../?action=cook"">cliquez ici</a>.';
+		header( "refresh:3;url=../?action=cook" );
 	}
 }else {
 	echo '

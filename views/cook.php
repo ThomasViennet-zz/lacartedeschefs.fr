@@ -32,6 +32,7 @@ $cook = new Cook($_SESSION['id']);
 
   <section>
     <h2 style="text-align:center;">Vos recettes</h2>
+    <p style="text-align:center;"><a href="?action=recipeAdd">Ajouter une recette</a></p>
     <div class="conteneur">
       <?php echo $cook->getRecipes($_SESSION['id']);?>
     </div>

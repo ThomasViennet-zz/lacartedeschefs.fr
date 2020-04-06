@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if(!empty($_POST['title']))
+if(!empty($_POST['title']) AND !empty($_POST['ingredients']) AND !empty($_POST['steps']) AND !empty($_POST['serve']))
 {
   if (isset($_FILES['recipe_picture']) AND $_FILES['recipe_picture']['error'] == 0)
   {
@@ -75,6 +75,11 @@ if(!empty($_POST['title']))
         $req = $bdd->query('SELECT LAST_INSERT_ID() AS lastID FROM recipes');
         $resultat = $req->fetch();
 
+        unset($_SESSION['post_recipe_title']);
+        unset($_SESSION['post_recipe_ingredients']);
+        unset($_SESSION['post_recipe_steps']);
+        unset($_SESSION['post_recipe_serve']);
+
         echo 'La recette a bien été ajouté !<br>
         Si vous n\'êtes pas redirigé, <a href="../?action=recipeAdd">cliquez ici</a>.';
         header('refresh:3;url=../?action=recipe&id_recipe='.$resultat['lastID']);
@@ -82,21 +87,42 @@ if(!empty($_POST['title']))
       }else {
         echo 'Format de photo non autorisé.<br>
         Si vous n\'êtes pas redirigé, <a href="../?action=recipeAdd">cliquez ici</a>.';
-        header('refresh:3;url=../?action=recipe');
+        header('refresh:3;url=../?action=recipeAdd');
+
+        $_SESSION['post_recipe_title'] = $_POST['title'];
+        $_SESSION['post_recipe_ingredients'] = $_POST['ingredients'];
+        $_SESSION['post_recipe_steps'] = $_POST['steps'];
+        $_SESSION['post_recipe_serve'] = $_POST['serve'];
       }
     }else {
       echo 'La photo est trop lourde.<br>
       Si vous n\'êtes pas redirigé, <a href="../?action=recipeAdd">cliquez ici</a>.';
-      header('refresh:3;url=../?action=recipe');
+      header('refresh:3;url=../?action=recipeAdd');
+
+      $_SESSION['post_recipe_title'] = $_POST['title'];
+      $_SESSION['post_recipe_ingredients'] = $_POST['ingredients'];
+      $_SESSION['post_recipe_steps'] = $_POST['steps'];
+      $_SESSION['post_recipe_serve'] = $_POST['serve'];
     }
   }else {
     echo 'Ajoutez une photo.<br>
     Si vous n\'êtes pas redirigé, <a href="../?action=recipeAdd">cliquez ici</a>.';
-    header('refresh:3;url=../?action=recipe');
+    header('refresh:3;url=../?action=recipeAdd');
+
+    $_SESSION['post_recipe_title'] = $_POST['title'];
+    $_SESSION['post_recipe_ingredients'] = $_POST['ingredients'];
+    $_SESSION['post_recipe_steps'] = $_POST['steps'];
+    $_SESSION['post_recipe_serve'] = $_POST['serve'];
   }
 }else {
   echo 'Renseignez toutes les informations.<br>
   Si vous n\'êtes pas redirigé, <a href="../?action=recipeAdd">cliquez ici</a>.';
-  header('refresh:3;url=../?action=recipe');
+
+  $_SESSION['post_recipe_title'] = $_POST['title'];
+  $_SESSION['post_recipe_ingredients'] = $_POST['ingredients'];
+  $_SESSION['post_recipe_steps'] = $_POST['steps'];
+  $_SESSION['post_recipe_serve'] = $_POST['serve'];
+
+  header('refresh:3;url=../?action=recipeAdd');
 }
 ?>

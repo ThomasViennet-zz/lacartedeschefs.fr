@@ -17,14 +17,7 @@ $cook = new Cook($recipe->idCook());
   <?php include 'includes/nav.php';?>
 
   <header id="recipe_header">
-    <div id="recipe_picture">
-      <img src="/uploads/recipes/400x400_<?php echo $recipe->picture();?>" alt="<?php echo $recipe->title();?>"/>
-    </div>
-    <div id="recipe_infos">
-      <h1><?php echo $recipe->title();?></h1>
-      <h2>Noter</h2>
-      <?php include 'includes/addVote.php';?>
-    </div>
+    <img src="/uploads/recipes/400x400_<?php echo $recipe->picture();?>" alt="<?php echo $recipe->title();?>"/>
   </header>
 
   <div id="recipe_cook">
@@ -32,6 +25,10 @@ $cook = new Cook($recipe->idCook());
     <h2><?php echo $cook->identifiant();?></h2>
     <?php echo $cook->moyenne();?><br>
   </div>
+
+  <section>
+    <h1 style="text-align:center;color:black;"><u><?php echo $recipe->title();?></u></h1>
+  </section>
 
   <section id="recipe_ingredients">
     <h2>Ingrédients</h2>
@@ -46,6 +43,11 @@ $cook = new Cook($recipe->idCook());
   <section id="recipe_serve">
     <h2>Servir</h2>
     <?php echo $recipe->serve();?>
+  </section>
+
+  <section>
+    <h2>Noter</h2>
+    <?php include 'includes/addVote.php'; ?>
   </section>
 
   <?php include 'includes/footer.php';?>
