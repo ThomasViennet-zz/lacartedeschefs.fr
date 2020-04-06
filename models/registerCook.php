@@ -12,8 +12,8 @@ if(!empty($_POST['identifiant']) AND !empty($_POST['email']) AND !empty($_POST['
 		if(!empty($resultat['identifiant']) AND !empty($resultat['email']))
 		{
 			echo 'Vous avez déjà un compte.<br>
-			Si vous n\'êtes pas redirigé, <a href="../?action=cook"">cliquez ici</a>.';
-			header( "refresh:3;url=../?action=cook" );
+			Si vous n\'êtes pas redirigé, <a href="../?action=account"">cliquez ici</a>.';
+			header( "refresh:3;url=../?action=account" );
 		}else {
 
 			$req = $bdd->prepare('SELECT identifiant FROM cooks WHERE identifiant = :identifiant');
@@ -23,8 +23,8 @@ if(!empty($_POST['identifiant']) AND !empty($_POST['email']) AND !empty($_POST['
 			if(!empty($resultat))
 			{
 				echo 'Cet identifiant est déjà utilisé.<br>
-				Si vous n\'êtes pas redirigé, <a href="../?action=cook"">cliquez ici</a>.';
-				header( "refresh:3;url=../?action=cook" );
+				Si vous n\'êtes pas redirigé, <a href="../?action=account"">cliquez ici</a>.';
+				header( "refresh:3;url=../?action=account" );
 			}else {
 				$password_hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
@@ -50,19 +50,19 @@ if(!empty($_POST['identifiant']) AND !empty($_POST['email']) AND !empty($_POST['
 				$_SESSION['identifiant'] = $_POST['identifiant'];
 
 				echo 'Vous êtes inscrit !';
-				header('Location: ../?action=cook');
+				header('Location: ../?action=account');
 			}
 		}
 	}else {
 		echo '
 		Les mots de passe de correspondent pas.<br>
-		Si vous n\'êtes pas redirigé, <a href="../?action=cook"">cliquez ici</a>.';
-		header( "refresh:3;url=../?action=cook" );
+		Si vous n\'êtes pas redirigé, <a href="../?action=account"">cliquez ici</a>.';
+		header( "refresh:3;url=../?action=account" );
 	}
 }else {
 	echo '
 	Veuilliez saisir toutes les informations obligatoires.<br>
-	Si vous n\'êtes pas redirigé, <a href="../?action=cook"">cliquez ici</a>.';
-	header( "refresh:3;url=../?action=cook" );
+	Si vous n\'êtes pas redirigé, <a href="../?action=account"">cliquez ici</a>.';
+	header( "refresh:3;url=../?action=account" );
 }
 ?>

@@ -4,13 +4,13 @@
     <a href="?action=accueil"><li><img src="images/home.svg" alt="Accueil"></li></a>
     <a href="?action=recipeAdd"><li><img src="images/add.svg"></li></a>
     <?php
-    if (isset($_SESSION['id']) AND $_GET['action'] == 'cook') {
+    if (isset($_SESSION['id']) AND $_GET['action'] == 'account') {
       if ($_SESSION['id'] == $cook->id()) {
-        echo '<a href="?action=cookEdit"><li><img src="images/accountEdit.svg" alt="Éditer mon compte"></li></a>';
+        echo '<a href="?action=accountEdit"><li><img src="images/accountEdit.svg" alt="Éditer mon compte"></li></a>';
       }
     }else {
     echo '
-      <a href="?action=cook"><li><img src="images/account.svg" alt="Mon compte"></li></a>';
+      <a href="?action=account"><li><img src="images/account.svg" alt="Mon compte"></li></a>';
     }
     ?>
   </ul>

@@ -1,6 +1,7 @@
+
 <?php
 require 'class/cook.php';
-$cook = new Cook($cook_id);
+$cook = new Cook($_SESSION['id']);
 ?>
 <!DOCTYPE html>
 <html>
@@ -27,13 +28,14 @@ $cook = new Cook($cook_id);
   <div id="cookInfo">
       <h1><?php echo $cook->identifiant();?></h1>
       <?php echo $cook->moyenne();?>
+        <p><a href="models/deconnexion.php">Ce n'est pas vous ?</a></p>
   </header>
 
   <section>
     <h2 style="text-align:center;">Vos recettes</h2>
     <p style="text-align:center;"><a href="?action=recipeAdd">Ajouter une recette</a></p>
     <div class="conteneur">
-      <?php echo $cook->getRecipes($cook_id);?>
+      <?php echo $cook->getRecipes($_SESSION['id']);?>
     </div>
   </section>
 

@@ -117,12 +117,12 @@ if ($isPasswordCorrect) {
     }
   }
   echo '
-  Si vous n\'êtes pas redirigé, <a href="../?action=cookEdit">cliquez ici</a>.';
-  header("refresh:3;url=../?action=cookEdit");
+  Si vous n\'êtes pas redirigé, <a href="../?action=accountEdit">cliquez ici</a>.';
+  header("refresh:3;url=../?action=accountEdit");
 }else {
   echo 'Mauvais mot de passe !<br>
-  Si vous n\'êtes pas redirigé, <a href="../?action=cookEdit">cliquez ici</a>.';
-  header("refresh:3;url=../?action=cookEdit");
+  Si vous n\'êtes pas redirigé, <a href="../?action=accountEdit">cliquez ici</a>.';
+  header("refresh:3;url=../?action=accountEdit");
 }
 
 

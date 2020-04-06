@@ -18,8 +18,8 @@ if(isset($_POST['email']) && isset($_POST['password']))
 	{
 		echo '
 		Mauvais email ou mot de passe ! <br>
-		Si vous n\'êtes pas redirigé, <a href="../?action=cook"">cliquez ici</a>.';
-		header( "refresh:3;url=../?action=cook" );
+		Si vous n\'êtes pas redirigé, <a href="../?action=account"">cliquez ici</a>.';
+		header( "refresh:3;url=../?action=account" );
 	}else{
 		if ($isPasswordCorrect)
 		{
@@ -34,19 +34,19 @@ if(isset($_POST['email']) && isset($_POST['password']))
 			$_SESSION['identifiant'] = $identifiant;
 			$_SESSION['moyenne'] = $resultat['note_moyenne'];;
 
-			header('Location: ../?action=cook');
+			header('Location: ../?action=account');
 
 		}else {
 				echo '
 				Mauvais email ou mot de passe ! <br>
-				Si vous n\'êtes pas redirigé, <a href="../?action=cook"">cliquez ici</a>.';
-				header( "refresh:3;url=../?action=cook" );
+				Si vous n\'êtes pas redirigé, <a href="../?action=account"">cliquez ici</a>.';
+				header( "refresh:3;url=../?action=account" );
 		}
 	}
 }else {
 	echo '
 	Veuilliez saisir toutes les informations ! <br>
-	Si vous n\'êtes pas redirigé, <a href="../?action=cook"">cliquez ici</a>.';
-	header( "refresh:3;url=../?action=cook" );
+	Si vous n\'êtes pas redirigé, <a href="../?action=account"">cliquez ici</a>.';
+	header( "refresh:3;url=../?action=account" );
 }
 ?>

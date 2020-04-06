@@ -19,27 +19,33 @@ session_start();
         }else {
           include 'views/connexion.php';
         }
-
       break;
 
       case 'listCooks':
           include 'views/listCooks.php';
       break;
 
-      case 'cook':
+      case 'account':
           if (!empty($_SESSION['id'])) {
-            include 'views/cook.php';
+            include 'views/account.php';
           }else {
             include 'views/connexion.php';
           }
       break;
 
-      case 'cookEdit':
+      case 'accountEdit':
           if (!empty($_SESSION['id'])) {
-            include 'views/cookEdit.php';
+            include 'views/accountEdit.php';
           }else {
             include 'views/connexion.php';
           }
+      break;
+
+      case 'cook':
+        if ($_GET['cook_id']) {
+          $cook_id = $_GET['cook_id'];
+          include 'views/cook.php';
+        }
       break;
 
       default:

@@ -21,7 +21,7 @@ $cook = new Cook($recipe->idCook());
   </header>
 
   <div id="recipe_cook">
-    <a href="?action=cook"><img src="/uploads/avatars/80x80_<?php echo $cook->picture();?>" class="profilPicture" /></a><br>
+    <a href="?action=cook&cook_id=<?php echo $cook->id();?>"><img src="/uploads/avatars/80x80_<?php echo $cook->picture();?>" class="profilPicture" /></a><br>
     <h2><?php echo $cook->identifiant();?></h2>
     <?php echo $cook->moyenne();?><br>
   </div>

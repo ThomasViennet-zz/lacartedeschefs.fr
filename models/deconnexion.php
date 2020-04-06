@@ -11,6 +11,6 @@ setcookie('pass_hache', '');
 
 echo 'Vous êtes déconnecté';
 
-header('Location: ../?action=cook');
+header('Location: ../?action=account');
 exit();
 ?>
