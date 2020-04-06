@@ -16,26 +16,36 @@ $cook = new Cook($recipe->idCook());
 <body id="Abonner">
   <?php include 'includes/nav.php';?>
 
-<img src="/uploads/recipes/<?php echo $recipe->picture();?>" alt="<?php echo $recipe->title();?>" width="100%" height="100%" class="headerBackground"/>
-
-  <header>
-    <div id="headerDescription">
+  <header id="recipe_header">
+    <div id="recipe_picture">
+      <img src="/uploads/recipes/400x400_<?php echo $recipe->picture();?>" alt="<?php echo $recipe->title();?>"/>
+    </div>
+    <div id="recipe_infos">
       <h1><?php echo $recipe->title();?></h1>
-      <div id="cook">
-        <a href="?action=cook"><img src="/uploads/avatars/80x80_<?php echo $cook->picture();?>" class="profilPicture" /></a><br>
-        <?php echo $cook->moyenne();?><br>
-        <span class="colorMain"><?php echo $cook->identifiant();?></span>
-      </div>
+      <h2>Noter</h2>
+      <?php include 'includes/addVote.php';?>
     </div>
   </header>
 
-  <section id="steps">
+  <div id="recipe_cook">
+    <a href="?action=cook"><img src="/uploads/avatars/80x80_<?php echo $cook->picture();?>" class="profilPicture" /></a><br>
+    <h2><?php echo $cook->identifiant();?></h2>
+    <?php echo $cook->moyenne();?><br>
+  </div>
+
+  <section id="recipe_ingredients">
+    <h2>Ingrédients</h2>
+    <?php echo $recipe->ingredients();?>
+  </section>
+
+  <section id="recipe_steps">
+    <h2>Préparation</h2>
     <?php echo $recipe->steps();?>
   </section>
 
-  <section>
-    <h2>Noter</h2>
-    <?php include 'includes/addVote.php';?>
+  <section id="recipe_serve">
+    <h2>Servir</h2>
+    <?php echo $recipe->serve();?>
   </section>
 
   <?php include 'includes/footer.php';?>

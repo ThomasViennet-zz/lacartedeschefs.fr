@@ -26,8 +26,6 @@ if(!empty($_POST['title']))
           'serve' => $_POST['serve']
           )) or die('Une erreur s\'est produite');
 
-        echo '<p class="colorMain">La recette a bien été ajouté !</p>';
-
         move_uploaded_file($_FILES['recipe_picture']['tmp_name'], '../uploads/recipes/'.$name_recipe_picture);
 
         if($extension_upload == 'png')
@@ -35,7 +33,9 @@ if(!empty($_POST['title']))
         else {
           $image = imagecreatefromjpeg("../uploads/recipes/".$name_recipe_picture."");
         }
+        //1024x300
 
+        //400x400
         $filename = '../uploads/recipes/400x400_'.$name_recipe_picture;
 
         $thumb_width = 400;
@@ -75,17 +75,28 @@ if(!empty($_POST['title']))
         $req = $bdd->query('SELECT LAST_INSERT_ID() AS lastID FROM recipes');
         $resultat = $req->fetch();
 
-        header('Location: ../?action=recipe&id_recipe='.$resultat['lastID']);
+        echo 'La recette a bien été ajouté !<br>
+        Si vous n\'êtes pas redirigé, <a href="../?action=recipeAdd">cliquez ici</a>.';
+        header('refresh:3;url=../?action=recipe&id_recipe='.$resultat['lastID']);
+
       }else {
-        echo '<p class="colorMain">Format de photo non autorisé.</p>';
+        echo 'Format de photo non autorisé.<br>
+        Si vous n\'êtes pas redirigé, <a href="../?action=recipeAdd">cliquez ici</a>.';
+        header('refresh:3;url=../?action=recipe');
       }
     }else {
-      echo '<p class="colorMain">La photo est trop lourde.</p>';
+      echo 'La photo est trop lourde.<br>
+      Si vous n\'êtes pas redirigé, <a href="../?action=recipeAdd">cliquez ici</a>.';
+      header('refresh:3;url=../?action=recipe');
     }
   }else {
-    echo '<p class="colorMain">Ajoutez une photo.</p>';
+    echo 'Ajoutez une photo.<br>
+    Si vous n\'êtes pas redirigé, <a href="../?action=recipeAdd">cliquez ici</a>.';
+    header('refresh:3;url=../?action=recipe');
   }
 }else {
-  echo '<p class="colorMain">Renseignez toutes les informations.</p>';
+  echo 'Renseignez toutes les informations.<br>
+  Si vous n\'êtes pas redirigé, <a href="../?action=recipeAdd">cliquez ici</a>.';
+  header('refresh:3;url=../?action=recipe');
 }
 ?>

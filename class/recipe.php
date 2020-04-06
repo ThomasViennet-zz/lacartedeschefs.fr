@@ -7,13 +7,14 @@ class Recipe
   private $_title;
   private $_ingredients;
   private $_steps;
+  private $_serve;
 
   public function __construct($id)
   {
     require 'base.php';
 
     $reponse = $bdd->prepare(
-      'SELECT r.title recipe_title, r.recipe_picture recipe_picture, r.id_cook recipe_cook, r.steps recipe_steps, r.ingredients recipe_ingredients,
+      'SELECT r.title recipe_title, r.recipe_picture recipe_picture, r.id_cook recipe_cook, r.steps recipe_steps, r.ingredients recipe_ingredients, r.serve recipe_serve,
       AVG(v.note) note_moyenne, SUM(v.note) note_total
       FROM recipes r
       INNER JOIN votes v
@@ -30,6 +31,7 @@ class Recipe
     $this->setIngredients($resultat['recipe_ingredients']);
     $this->setSteps($resultat['recipe_steps']);
     $this->setTotal($resultat['note_total']);
+    $this->setServe($resultat['recipe_serve']);
 
     if(empty($resultat['note_moyenne']))
     {
@@ -58,6 +60,16 @@ class Recipe
         $this->setMoyenne($note);
       }
     }
+  }
+
+  public function serve()
+  {
+    return Nl2br(htmlspecialchars($this->_serve));
+  }
+
+  public function setServe($serve)
+  {
+    $this->_serve = $serve;
   }
 
   public function total()
@@ -92,7 +104,7 @@ class Recipe
 
   public function picture()
   {
-    return $this->_picture;
+    return htmlspecialchars($this->_picture);
   }
 
   public function setPicture($picture)
@@ -102,7 +114,7 @@ class Recipe
 
   public function title()
   {
-    return $this->_title;
+    return htmlspecialchars($this->_title);
   }
 
   public function setTitle($title)
@@ -122,7 +134,7 @@ class Recipe
 
   public function ingredients()
   {
-    return $this->_ingredients;
+    return Nl2br(htmlspecialchars($this->_ingredients));
   }
 
   public function setIngredients($ingredients)
@@ -132,7 +144,7 @@ class Recipe
 
   public function steps()
   {
-    return $this->_steps;
+    return Nl2br(htmlspecialchars($this->_steps));
   }
 
   public function setSteps($steps)

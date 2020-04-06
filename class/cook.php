@@ -99,10 +99,10 @@ class Cook
       echo '
       <div class="element">
         <a href="?action=recipe&id_recipe='.$donnees['id'].'">
-        <img src="uploads/recipes/400x400_'.$donnees['recipe_picture'].'" width="100%"/></a>
+        <img src="uploads/recipes/400x400_'.htmlspecialchars($donnees['recipe_picture']).'" width="100%"/></a>
         <br>
         '.$note.'<br>
-        '.$donnees['title'].'<br>
+        '.htmlspecialchars($donnees['title']).'<br>
       </div>
       ';
     }
@@ -112,7 +112,7 @@ class Cook
 
   public function email()
   {
-    return $this->_email;
+    return htmlspecialchars($this->_email);
   }
 
   public function setEmail($email)
@@ -132,7 +132,7 @@ class Cook
 
   public function identifiant()
   {
-    return $this->_identifiant;
+    return htmlspecialchars($this->_identifiant);
   }
 
   public function setIdentifiant($identifiant)
@@ -142,7 +142,7 @@ class Cook
 
   public function picture()
   {
-    return $this->_picture;
+    return htmlspecialchars($this->_picture);
   }
 
   public function setPicture($picture)
