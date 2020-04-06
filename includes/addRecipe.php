@@ -10,14 +10,16 @@ if(isset($_SESSION['id']))
   <h2>Préparation</h2>
 
     <label for="ingredients">Ingrédients (500 caractères maximum)</label>
-    <textarea name="ingredients" id="ingredients" placeholder="Les ingrédients de votre recette" rows="5"></textarea><br>
+    <div id="indicIngredients"></div>
+    <textarea onblur="calculeLongueur();" onfocus="calculeLongueur();" onkeydown="calculeLongueur();" onkeyup="calculeLongueur();" name="ingredients" id="ingredients" placeholder="Les ingrédients de votre recette" rows="5"></textarea><br>
 
     <label for="steps">Préparation (1000 caractères maximum)</label> <br>
-    <div id="indic"></div>
+    <div id="indicSteps"></div>
     <textarea onblur="calculeLongueur();" onfocus="calculeLongueur();" onkeydown="calculeLongueur();" onkeyup="calculeLongueur();" name="steps" id="steps" placeholder="Décrivez votre recette ..." rows="5"></textarea><br>
 
     <label for="serve">Servir (500 caractères maximum)</label> <br>
-    <textarea name="serve" id="serve" placeholder="Décrivez votre recette ..." rows="5"></textarea><br>
+    <div id="indicServe"></div>
+    <textarea onblur="calculeLongueur();" onfocus="calculeLongueur();" onkeydown="calculeLongueur();" onkeyup="calculeLongueur();" name="serve" id="serve" placeholder="Décrivez votre recette ..." rows="5"></textarea><br>
 
     Photo du plat * (800 pixels par 800pixels) <input type="file" name="recipe_picture" /><br>
     <input type="submit" name="submit" value="Envoyer" class="button">

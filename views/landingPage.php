@@ -13,7 +13,7 @@
 
   <header>
       <h1>La carte des chefs</h1>
-      <p><i>Nous révélons les passionnés de la gastronomie.</i></p>
+      <p class="colorMain"><i>Nous révélons les passionnés de la gastronomie.</i></p>
   </header>
 
   <section>

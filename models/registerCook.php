@@ -11,7 +11,9 @@ if(!empty($_POST['identifiant']) AND !empty($_POST['email']) AND !empty($_POST['
 
 		if(!empty($resultat['identifiant']) AND !empty($resultat['email']))
 		{
-			echo '<p class="colorMain">Vous avez déjà un compte.<p>';
+			echo 'Vous avez déjà un compte.<br>
+			Si vous n\'êtes pas redirigé, <a href="../?action=cook"">cliquez ici</a>.';
+			header( "refresh:3;url=../?action=cook" );
 		}else {
 
 			$req = $bdd->prepare('SELECT identifiant FROM cooks WHERE identifiant = :identifiant');
@@ -20,7 +22,9 @@ if(!empty($_POST['identifiant']) AND !empty($_POST['email']) AND !empty($_POST['
 
 			if(!empty($resultat))
 			{
-				echo '<p class="colorMain">Cet identifiant est déjà utilisé.<p>';
+				echo 'Cet identifiant est déjà utilisé.<br>
+				Si vous n\'êtes pas redirigé, <a href="../?action=cook"">cliquez ici</a>.';
+				header( "refresh:3;url=../?action=cook" );
 			}else {
 				$password_hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
@@ -46,12 +50,14 @@ if(!empty($_POST['identifiant']) AND !empty($_POST['email']) AND !empty($_POST['
 				$_SESSION['identifiant'] = $_POST['identifiant'];
 
 				echo 'Vous êtes inscrit !';
-
 				header('Location: ../?action=cook');
 			}
 		}
 	}
 }else {
-	echo '<p class="colorMain">Veuilliez saisir toutes les informations obligatoires.</p>';
+	echo '
+	Veuilliez saisir toutes les informations obligatoires.<br>
+	Si vous n\'êtes pas redirigé, <a href="../?action=cook"">cliquez ici</a>.';
+	header( "refresh:3;url=../?action=cook" );
 }
 ?>

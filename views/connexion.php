@@ -14,8 +14,8 @@
     <p><i>Marquez l'histoire de la gastronomie.</i></p>
   </header>
 
-  <section class="conteneur">
-    <div class="element" style="width:100%;">
+  <section>
+    <div>
       <h2>Créer un compte</h2>
       <form method="post" action="models/registerCook.php">
         <label for="email">Email</label><input type="email" id="email" name="email" placeholder="Votre adresse email *"><br>
@@ -25,7 +25,7 @@
         <input type="submit" name="submit" value="Valider" class="button">
       </form>
     </div>
-    <div class="element" style="width:100%;">
+    <div>
       <h2>Se connecter</h2>
       <form method="post" action="models/connexion.php">
         <label for="email">Email</label><input type="email" id="email" name="email" placeholder="Email *"><br>
