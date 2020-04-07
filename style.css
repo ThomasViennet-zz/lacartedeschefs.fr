@@ -6,7 +6,7 @@ body
 nav
 {
   background-color: white;
-  height: 10%;
+  height: 150px;
   width: 100%;
   box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.5);
   z-index: 1;
@@ -15,11 +15,15 @@ nav
 
 nav ul
 {
-  margin-top: 10px;
   display: flex;
   justify-content: space-around;
   list-style: none;
   height: auto;
+}
+
+.navItem
+{
+  width: 100px;
 }
 
 a
@@ -40,7 +44,7 @@ header
   text-align: center;
   background-color: black;
   color: white;
-  padding: 10% 0px 5% 0px;
+  padding: 30% 0px 10% 0px;
 
 }
 
@@ -92,9 +96,8 @@ footer
 
 #logo
 {
-  position: fixed;
-  padding: 5px;
   z-index: 2;
+  width: 100px;
 }
 
 #recipe_header
