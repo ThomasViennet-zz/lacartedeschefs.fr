@@ -2,7 +2,7 @@
 <nav>
   <ul>
     <a href="?action=accueil"><li><img src="images/home.svg" alt="Accueil"></li></a>
-    <a href="?action=recipeAdd"><li><img src="images/add.svg"></li></a>
+    <a href="?action=recipeAdd"><li><img src="images/add.svg" alt="Ajouter une recette"></li></a>
     <?php
     if (isset($_SESSION['id']) AND $_GET['action'] == 'account') {
       if ($_SESSION['id'] == $cook->id()) {
