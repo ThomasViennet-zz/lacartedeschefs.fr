@@ -1,12 +1,14 @@
+
 body
 {
   margin: 0px;
+  width: auto;
 }
 
 nav
 {
   background-color: white;
-  height: 150px;
+  height: 100px;
   width: 100%;
   box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.5);
   z-index: 1;
@@ -19,11 +21,6 @@ nav ul
   justify-content: space-around;
   list-style: none;
   height: auto;
-}
-
-.navItem
-{
-  width: 100px;
 }
 
 a
@@ -44,7 +41,7 @@ header
   text-align: center;
   background-color: black;
   color: white;
-  padding: 30% 0px 10% 0px;
+  padding: 20% 0px 10% 0px;
 
 }
 
@@ -114,6 +111,11 @@ footer
   margin-top: -40px;
 }
 
+.navItem
+{
+  width: 80px;
+}
+
 .profilPicture
 {
   border-radius: 100%;
@@ -180,11 +182,12 @@ footer
   outline: 1px solid #f39614;
 }
 
+
 @media screen and (min-width: 768px)
 {
   section
   {
-      padding: 0px 5%;
+    padding: 0px 5%;
   }
 }
 
@@ -192,6 +195,6 @@ footer
 {
   section
   {
-      padding: 0px 10%;
+    padding: 0px 10%;
   }
 }
