@@ -28,7 +28,7 @@ $cook = new Cook($_SESSION['id']);
   <div id="cookInfo">
       <h1><?php echo $cook->identifiant();?></h1>
       <?php echo $cook->moyenne();?>
-        <p><a href="models/deconnexion.php">Ce n'est pas vous ?</a></p>
+        <p><a href="?action=accountEdit">Modifier</a></p>
   </header>
 
   <section>

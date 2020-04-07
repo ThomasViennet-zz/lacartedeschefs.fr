@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+echo crypt('lcdc');
+
   $action = $_GET['action'];
 
   switch ($action)

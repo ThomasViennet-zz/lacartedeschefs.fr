@@ -17,7 +17,7 @@ $cook = new Cook($recipe->idCook());
   <?php include 'includes/nav.php';?>
 
   <header id="recipe_header">
-    <img src="/uploads/recipes/400x400_<?php echo $recipe->picture();?>" alt="<?php echo $recipe->title();?>"/>
+    <img src="uploads/recipes/400x400_<?php echo $recipe->picture();?>" alt="<?php echo $recipe->title();?>"/>
   </header>
 
   <div id="recipe_cook">

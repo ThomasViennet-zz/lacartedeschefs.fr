@@ -13,7 +13,7 @@
 
   <header>
       <h1>La carte des chefs</h1>
-      <p class="colorMain"><i>Nous révélons les passionnés de la gastronomie.</i></p>
+      <p class="colorMain"><i>Révélons les talents de la gastronomie.</i></p>
   </header>
 
   <section>
@@ -39,7 +39,7 @@
     </p>
 
     <p>
-      Ces notes permettent de faire monter ou descendre les participants dans <a href="?action=cooks">le classement des chefs.</a>
+      Ces notes permettent de faire monter ou descendre les participants dans <a href="?action=listCooks">le classement des chefs.</a>
     </p>
 
     <p>
@@ -63,7 +63,7 @@
     <ol>
       <li>Les abonnées recoivent par email <i>La carte des chefs</i></li>
       <li>Ceux qui cuisinent une recette peuvent la noter</li>
-      <li>Les notes font évoluer les chefs dans <a href="?action=cooks">le classement des chefs</a></li>
+      <li>Les notes font évoluer les chefs dans <a href="?action=listCooks">le classement des chefs</a></li>
     </ol>
   </section>
 

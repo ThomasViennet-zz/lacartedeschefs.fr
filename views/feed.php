@@ -13,7 +13,7 @@
       <img src="images/plateaux_de_legumes_1920px.jpg" alt="Plateaux de légumes"/ height="100%" width="100%" class="headerBackground">
       <div id="headerDescription">
         <h1>La carte des chefs</h1>
-        <p><i>Nous révélons les passionnés de la gastronomie.</i></p>
+        <p><i>Révélons les talents de la gastronomie.</i></p>
       </div>
   </header>
   <?php include 'models/listRecipes.php';?>

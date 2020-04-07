@@ -26,9 +26,9 @@ $cook = new Cook($_SESSION['id']);
       <label for="profile_picture">Photo</label><br>
       <img src="uploads/avatars/80x80_<?php echo $cook->picture();?>" width="80px" class="profilPicture"/>
       <input type="file" id="profile_picture" name="profile_picture" />
-    <h2>Confirmation</h2>
+    <h2>Sécurité</h2>
 
-      <label for="password">Mot de passe</label><input type="password" id="password" name="password" placeholder="Saisissez votre mot de passe *"><br>
+      <label for="password">Votre mot de passe</label><input type="password" id="password" name="password" placeholder="Saisissez votre mot de passe *"><br>
       <input type="submit" name="submit" value="Valider" class="button">
     </form>
   </section>

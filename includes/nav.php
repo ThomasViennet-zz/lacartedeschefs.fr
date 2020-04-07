@@ -9,8 +9,7 @@
         echo '<a href="?action=accountEdit"><li><img src="images/accountEdit.svg" alt="Éditer mon compte"></li></a>';
       }
     }else {
-    echo '
-      <a href="?action=account"><li><img src="images/account.svg" alt="Mon compte"></li></a>';
+      echo '<a href="?action=account"><li><img src="images/account.svg" alt="Mon compte"></li></a>';
     }
     ?>
   </ul>

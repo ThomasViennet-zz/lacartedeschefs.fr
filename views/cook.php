@@ -27,6 +27,11 @@ $cook = new Cook($cook_id);
   <div id="cookInfo">
       <h1><?php echo $cook->identifiant();?></h1>
       <?php echo $cook->moyenne();?>
+      <?php
+      if ($_SESSION['id'] == $cook->id()) {
+        echo '<p><a href="?action=accountEdit">Modifier</a></p>';
+      }
+      ?>
   </header>
 
   <section>
