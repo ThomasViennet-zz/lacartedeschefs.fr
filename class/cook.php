@@ -122,7 +122,6 @@ class Cook
       </div>
       ';
     }
-
     $reponse->closeCursor();
   }
 

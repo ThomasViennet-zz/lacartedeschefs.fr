@@ -10,13 +10,14 @@
 <body id="Abonner">
   <?php include 'includes/nav.php';?>
   <header>
-      <img src="images/plateaux_de_legumes_1920px.jpg" alt="Plateaux de légumes"/ height="100%" width="100%" class="headerBackground">
-      <div id="headerDescription">
-        <h1>La carte des chefs</h1>
-        <p><i>Révélons les talents de la gastronomie.</i></p>
-      </div>
+    <h1>La carte des chefs</h1>
+    <p class="colorMain"><i>Révélons les talents de la gastronomie.</i></p>
   </header>
-  <?php include 'models/listRecipes.php';?>
+  <section>
+    <div id="conteneur">
+      <?php include 'models/listRecipes.php';?>
+    </div>
+  </section>
   <?php include 'includes/footer.php';?>
 </body>
 </html>
