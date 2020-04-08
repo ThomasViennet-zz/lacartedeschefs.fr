@@ -14,7 +14,7 @@
     <p class="colorMain"><i>Révélons les talents de la gastronomie.</i></p>
   </header>
   <section>
-    <div id="conteneur">
+    <div class="conteneur">
       <?php include 'models/listRecipes.php';?>
     </div>
   </section>

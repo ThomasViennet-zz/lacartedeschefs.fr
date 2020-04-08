@@ -1,8 +1,3 @@
-
-<?php
-require 'class/cook.php';
-$cook = new Cook($_SESSION['id']);
-?>
 <!DOCTYPE html>
 <html>
 <head>

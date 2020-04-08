@@ -10,7 +10,11 @@ session_start();
       break;
 
       case 'recipe':
-          include 'views/recipe.php';
+        require 'class/recipe.php';
+        require 'class/cook.php';
+        $recipe = new Recipe($_GET['id_recipe']);
+        $cook = new Cook($recipe->idCook());
+        include 'views/recipe.php';
       break;
 
       case 'recipeAdd':
@@ -27,6 +31,8 @@ session_start();
 
       case 'account':
           if (!empty($_SESSION['id'])) {
+            require 'class/cook.php';
+            $cook = new Cook($_SESSION['id']);
             include 'views/account.php';
           }else {
             include 'views/connexion.php';
@@ -35,6 +41,8 @@ session_start();
 
       case 'accountEdit':
           if (!empty($_SESSION['id'])) {
+            require 'class/cook.php';
+            $cook = new Cook($_SESSION['id']);
             include 'views/accountEdit.php';
           }else {
             include 'views/connexion.php';
@@ -43,7 +51,8 @@ session_start();
 
       case 'cook':
         if ($_GET['cook_id']) {
-          $cook_id = $_GET['cook_id'];
+          require 'class/cook.php';
+          $cook = new Cook($_GET['cook_id']);
           include 'views/cook.php';
         }
       break;

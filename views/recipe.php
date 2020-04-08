@@ -1,9 +1,3 @@
-<?php
-require 'class/recipe.php';
-require 'class/cook.php';
-$recipe = new Recipe($_GET['id_recipe']);
-$cook = new Cook($recipe->idCook());
-?>
 <!DOCTYPE html>
 <html>
 <head>

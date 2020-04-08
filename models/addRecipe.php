@@ -16,7 +16,7 @@ if(!empty($_POST['title']) AND !empty($_POST['ingredients']) AND !empty($_POST['
 
         require '../base.php';
 
-        $req = $bdd->prepare('INSERT INTO recipes (title, id_cook, recipe_picture, ingredients, steps, serve) VALUES(:title, :id_cook, :recipe_picture, :ingredients, :steps, :serve)');
+        $req = $bdd->prepare('INSERT INTO recipes (title, id_cook, recipe_picture, ingredients, steps, serve, date) VALUES(:title, :id_cook, :recipe_picture, :ingredients, :steps, :serve, NOW())');
         $req->execute(array(
           'title' => $_POST['title'],
           'id_cook' => $_SESSION['id'],

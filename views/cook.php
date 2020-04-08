@@ -1,7 +1,3 @@
-<?php
-require 'class/cook.php';
-$cook = new Cook($cook_id);
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,7 +27,7 @@ $cook = new Cook($cook_id);
     <h2 style="text-align:center;">Vos recettes</h2>
     <p style="text-align:center;"><a href="?action=recipeAdd">Ajouter une recette</a></p>
     <div class="conteneur">
-      <?php echo $cook->getRecipes($cook_id);?>
+      <?php echo $cook->getRecipes($cook->id());?>
     </div>
   </section>
 
