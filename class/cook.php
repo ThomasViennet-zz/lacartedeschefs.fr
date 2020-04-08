@@ -5,6 +5,7 @@ class Cook
   private $_identifiant;
   private $_picture;
   private $_moyenne;
+  private $_total;
   private $_email;
 
   public function __construct($id)
@@ -22,17 +23,11 @@ class Cook
     $resultat = $reponse->fetch();
     $reponse->closeCursor();
 
-    $reponse->closeCursor();
     $this->setId($id);
     $this->setIdentifiant($resultat['cook_identifiant']);
     $this->setEmail($resultat['cook_email']);
-
-    if (!empty($resultat['cook_picture'])) {
-      $this->setPicture($resultat['cook_picture']);
-    }else {
-      $this->setPicture('account.svg');
-    }
-
+    $this->setTotal($resultat['note_total']);
+    $this->setPicture($resultat['cook_picture']);
 
     if(empty($resultat['note_moyenne']))
     {
@@ -40,7 +35,7 @@ class Cook
       $note = 'Pas encore de note';
       $this->setMoyenne($note);
     }else {
-      if($resultat['note_moyenne'] > 1)
+      if($resultat['note_moyenne'] < 2)
       {
         $etoile = '<img src="images/starFull.svg"/>';
         $note = $etoile;
@@ -106,18 +101,12 @@ class Cook
       $resultat3 = $reponse3->fetch();
       $reponse3->closeCursor();
 
-      if (empty($resultat3['profile_picture'])) {
-        $profil_picture = '<img src="images/account.svg" alt="Mon compte">';
-      }else {
-        $profil_picture = '<img src="uploads/avatars/80x80_'.$resultat3['profile_picture'].'" width="30px" class="profilPicture">';
-      }
-
       echo '
       <div class="element" style="background-color:rgb(245,245,245);margin: 5px;">
 
         <div style="padding:5px;">
-          <a href="?action=cook">
-          '.$profil_picture.'
+          <a href="?action=cook&cook_id='.$idCook.'">
+          <img src="uploads/avatars/80x80_'.$resultat3['profile_picture'].'" width="30px" class="profilPicture">
           '.$resultat3['identifiant'].'
           </a>
         </div>
@@ -135,6 +124,16 @@ class Cook
     }
 
     $reponse->closeCursor();
+  }
+
+  public function total()
+  {
+    return htmlspecialchars($this->_total);
+  }
+
+  public function setTotal($total)
+  {
+    $this->_total = $total;
   }
 
   public function email()

@@ -35,7 +35,7 @@ if(!empty($_POST['identifiant']) AND !empty($_POST['email']) AND !empty($_POST['
 					'email' => $_POST['email'],
 					'password' => $password_hash,
 					'biography' => '',
-					'profile_picture' => '',
+					'profile_picture' => 'account.svg',
 					'identifiant' => $_POST['identifiant'],
 					'subscription' => ''
 				)) or die('Une erreur s\'est produite');

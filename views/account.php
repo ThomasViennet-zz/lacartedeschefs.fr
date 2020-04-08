@@ -16,19 +16,13 @@ $cook = new Cook($_SESSION['id']);
   <?php include 'includes/nav.php';?>
   <header>
     <div id="cookPicture">
-    <?php
-    if (empty($cook->picture())) {
-      include 'images/account.svg';
-    }else {
-      echo '
-      <img src="uploads/avatars/80x80_'.$cook->picture().'" width="80px" height="80px" class="profilPicture"/>';
-    }
-    ?>
+    <?php echo '<img src="uploads/avatars/80x80_'.$cook->picture().'" width="80px" height="80px" class="profilPicture"/>';?>
   </div>
   <div id="cookInfo">
       <h1><?php echo $cook->identifiant();?></h1>
       <?php echo $cook->moyenne();?>
         <p><a href="?action=accountEdit">Modifier</a></p>
+        <p><a href="models/deconnexion.php">Ce n'est pas vous ?</a></p>
   </header>
 
   <section>

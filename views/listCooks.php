@@ -18,13 +18,16 @@
 
   <section>
     <h2>Le classement des chefs</h2>
-    <?php include 'models/listCooks.php'; ?>
+
+    <div class="conteneur">
+      <?php include 'models/listCooks.php'; ?>
+    </div>
 
     <h2>Comment fonctionne le classement ?</h2>
     <p>
       Ceux qui cuisinent les recettes, peuvent attribuer entre une et trois étoiles aux recettes.<br>
       <br>
-      Ces étoiles donnent des points aux chefs, qui le font évoluer dans le classement :<br>
+      Ces étoiles donnent des points aux chefs, qui les font évoluer dans le classement :<br>
       <br>
       - 3 étoiles donne 3 points<br>
       - 2 étoiles donne 2 points<br>

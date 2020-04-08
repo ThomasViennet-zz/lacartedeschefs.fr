@@ -15,14 +15,7 @@ $cook = new Cook($cook_id);
   <?php include 'includes/nav.php';?>
   <header>
     <div id="cookPicture">
-    <?php
-    if (empty($cook->picture())) {
-      include 'images/account.svg';
-    }else {
-      echo '
-      <img src="uploads/avatars/80x80_'.$cook->picture().'" width="80px" height="80px" class="profilPicture"/>';
-    }
-    ?>
+    <?php echo '<img src="uploads/avatars/80x80_'.$cook->picture().'" width="80px" height="80px" class="profilPicture"/>';?>
   </div>
   <div id="cookInfo">
       <h1><?php echo $cook->identifiant();?></h1>
