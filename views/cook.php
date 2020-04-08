@@ -8,8 +8,11 @@
   <title>Mon compte</title>
 </head>
 
-<body id="Abonner">
-  <?php include 'includes/nav.php';?>
+<body>
+
+  <?php include 'includes/navTop.php';?>
+  <?php include 'includes/navFooter.php';?>
+
   <header>
     <div id="cookPicture">
     <?php echo '<img src="uploads/avatars/80x80_'.$cook->picture().'" width="80px" height="80px" class="profilPicture"/>';?>
@@ -25,8 +28,7 @@
   </header>
 
   <section>
-    <h2 style="text-align:center;">Vos recettes</h2>
-    <p style="text-align:center;"><a href="?action=recipeAdd">Ajouter une recette</a></p>
+    <h2 style="text-align:center;">Recettes</h2>
     <div class="conteneur">
       <?php echo $cook->getRecipes($cook->id());?>
     </div>

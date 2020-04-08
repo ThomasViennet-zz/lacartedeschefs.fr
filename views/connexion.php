@@ -8,8 +8,11 @@
   <title>Mon compte</title>
 </head>
 
-<body id="Abonner">
-  <?php include 'includes/nav.php';?>
+<body>
+
+  <?php include 'includes/navTop.php';?>
+  <?php include 'includes/navFooter.php';?>
+
   <header>
     <h1>Mon compte</h1>
     <p class="colorMain"><i>Marquez l'histoire de la gastronomie.</i></p>
@@ -17,7 +20,7 @@
 
   <section>
     <div>
-      <h2>Créer un compte</h2>
+      <h2>Créez un compte</h2>
       <form method="post" action="models/registerCook.php">
         <label for="email">Email</label><input type="email" id="email" name="email" placeholder="Votre adresse email *"><br>
         <label for="identifiant">Identifiant</label><input type="text" id="identifiant" name="identifiant" placeholder="Choisissez un identifiant *"><br>
@@ -27,7 +30,7 @@
       </form>
     </div>
     <div>
-      <h2>Se connecter</h2>
+      <h2>Connectez-vous</h2>
       <form method="post" action="models/connexion.php">
         <label for="email">Email</label><input type="email" id="email" name="email" placeholder="Email *"><br>
         <label for="password">Mot de passe</label><input type="password" id="password" name="password" placeholder="Mot de passe *"><br>

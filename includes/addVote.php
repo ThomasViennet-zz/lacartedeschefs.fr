@@ -30,5 +30,5 @@ if(isset($_SESSION['id']))
   </form>
   ';
 }else {
-  echo '<a href="/#abonnement">Abonnez-vous</a> à <i>La carte des chefs</i> pour voter.';
+  echo '<a href="?action=account">Créez un compte</a> pour proposer une recette.';
 }

@@ -60,9 +60,10 @@
   </script>
 </head>
 
-<body id="Abonner">
+<body>
 
-  <?php include 'includes/nav.php';?>
+  <?php include 'includes/navTop.php';?>
+  <?php include 'includes/navFooter.php';?>
 
   <header>
     <h1>Modifier votre recette</h1>

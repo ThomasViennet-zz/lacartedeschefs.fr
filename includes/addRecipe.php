@@ -26,5 +26,5 @@ if(isset($_SESSION['id']))
   </form>
   ';
 }else {
-  echo '<a href="?action=cook">Créez un compte pour proposer une recette.</a>';
+  echo '<a href="?action=account">Créez un compte</a> pour proposer une recette.';
 }

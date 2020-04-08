@@ -8,8 +8,11 @@
   <title>La carte des chefs</title>
 </head>
 
-<body id="Abonner">
-  <?php include 'includes/nav.php';?>
+<body>
+
+  <?php include 'includes/navTop.php';?>
+  <?php include 'includes/navFooter.php';?>
+
   <header>
     <h1>La carte des chefs</h1>
     <p class="colorMain"><i>Révélons les talents de la gastronomie.</i></p>

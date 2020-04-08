@@ -8,8 +8,11 @@
   <title>Mon compte</title>
 </head>
 
-<body id="Abonner">
-  <?php include 'includes/nav.php';?>
+<body>
+
+  <?php include 'includes/navTop.php';?>
+  <?php include 'includes/navFooter.php';?>
+
   <header>
       <h1>Modifier mon Compte</h1>
   </header>

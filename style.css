@@ -5,9 +5,21 @@ body
   width: auto;
 }
 
-nav
+#navTop
 {
   background-color: white;
+  height: 50px;
+  width: 100%;
+  box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.5);
+  z-index: 1;
+  position: fixed;
+  top: 0px;
+}
+
+#navFooter
+{
+  background-color: white;
+  height: 50px;
   width: 100%;
   box-shadow: 0px -1px 3px 0px rgba(0,0,0,0.5);
   z-index: 1;
@@ -22,6 +34,12 @@ nav ul
   list-style: none;
   height: auto;
   padding: 0px;
+  margin: 10px;
+}
+
+.navItem
+{
+  width: 30px;
 }
 
 a
@@ -38,17 +56,17 @@ a:hover
 
 header
 {
-  margin-top: 0px;
+  margin: 0px;
   text-align: center;
   background-color: black;
   color: white;
   padding: 10% 0px;
-
+margin-top: 50px;
 }
 
 section
 {
-  padding: 0px 1%;
+  padding: 0px 5%;
 }
 
 h1
@@ -60,6 +78,7 @@ h2
 {
   color: #f39614;
   padding: 0px 2%;
+  text-align: center;
 }
 
 h3
@@ -122,11 +141,6 @@ footer
 {
   text-align: center;
   margin-top: -40px;
-}
-
-.navItem
-{
-  width: 40px;
 }
 
 .profilPicture

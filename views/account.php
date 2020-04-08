@@ -8,8 +8,10 @@
   <title>Mon compte</title>
 </head>
 
-<body id="Abonner">
-  <?php include 'includes/nav.php';?>
+<body>
+  <?php include 'includes/navTop.php';?>
+  <?php include 'includes/navFooter.php';?>
+
   <header>
     <div id="cookPicture">
     <?php echo '<img src="uploads/avatars/80x80_'.$cook->picture().'" width="80px" height="80px" class="profilPicture"/>';?>

@@ -8,76 +8,57 @@
   <title>La carte des chefs</title>
 </head>
 
-<body id="Abonner">
-  <img src="images/80x80_logo_la_carte_des_chefs.png" alt="Logo La carte des chefs" id="logo"/>
-  <?php include 'includes/nav.php';?>
+<body>
+
+  <?php include 'includes/navTop.php';?>
+  <?php include 'includes/navFooter.php';?>
 
   <header>
-      <h1>La carte des chefs</h1>
-      <p class="colorMain"><i>Révélons les talents de la gastronomie.</i></p>
+    <img src="images/80x80_logo_la_carte_des_chefs.png" alt="Logo La carte des chefs"/><br>
+    <h1>La carte des chefs</h1>
+    <p class="colorMain"><i>Révélons les talents de la gastronomie.</i></p>
   </header>
 
   <section>
-    <h2>Qu'est-ce que c'est ?</h2>
+    <h2>Le concept</h2>
 
     <p>
-      Le monde regorge de talents de la gastronomie méconnus.<br>
-      Recevez par email le top 10 de leurs plus délicieuses recettes.
+      Le monde regorge de talents de la gastronomie encore méconnus !
     </p>
 
     <p>
-      Régulièrement nous proposons une thématique culinaire.<br>
+      <i>La carte des chefs</i> c'est une invitation à tous ces talents de marquer l'histoire de la gastronomie.
+    </p>
+
+    <p>
       Tous ceux qui le souhaitent peuvent participer à la compétition en proposant leur recette.
     </p>
 
     <p>
-      Les 10 recettes ayant reçu le plus de votes sont retenues pour <i>La carte des chefs</i>,
-      que nous envoyons par email aux abonnés.
-    </p>
-
-    <p>
-      Cerise sur le gâteau, ceux qui cuisinent les recettes des chefs ont la possibilité de donner des notes aux plats.
+      Les recettes seront ensuite notées par ceux qui les cuisinent.
     </p>
 
     <p>
       Ces notes permettent de faire monter ou descendre les participants dans <a href="?action=listCooks">le classement des chefs.</a>
     </p>
-
-    <p>
-      <i>La carte des chefs</i>, c'est une invitation ouverte à tous, de marquer l'histoire de la gastronomie.
-    </p>
   </section>
 
   <section>
-    <h2>Comment se déroule la compétition ?</h2>
-
-    <h3>Phase de sélection</h3>
+    <h2>Comment partiper ?</h2>
 
     <ol>
-      <li>Une thématique culinaire est proposée sur <a href="https://www.instagram.com/la_carte_des_chefs/" target="_blank" alt="Profil instagram la carte des chefs/">notre profil Instagram</a></li>
-      <li>Ceux qui le souhaitent proposent une seule recette sur leur profil Instagram en notifiant @la_carte_des_chefs</li>
-      <li>Nous publions les recettes sur <a href="https://www.instagram.com/la_carte_des_chefs/" target="_blank" alt="Profil instagram la carte des chefs/">notre profil Instagram</a> pour que tout le monde puisse voter en "likant".</li>
-      <li>Les 10 participants qui reçoivent le plus de votes sont sélectionnées pour <i>La carte des chefs</i> de la thématique</li>
+      <li><a href="?action=account">Créez un compte</a></li>
+      <li>Publiez votre recette</li>
     </ol>
 
-    <h3>Phase de notation</h3>
+    <h2>Comment noter ?</h2>
+
     <ol>
-      <li>Les abonnées recoivent par email <i>La carte des chefs</i></li>
-      <li>Ceux qui cuisinent une recette peuvent la noter</li>
-      <li>Les notes font évoluer les chefs dans <a href="?action=listCooks">le classement des chefs</a></li>
+      <li><a href="?action=feed">Cusiniez une des recettes</a></li>
+      <li><a href="?action=account">Créez un compte</a></li>
+      <li>Notez la recette</li>
     </ol>
-  </section>
 
-  <section id="abonnement">
-    <h2>Recevoir <i>La carte des chefs</i></h2>
-    <p class="colorMain"><?php echo $_GET['message'];?></p>
-    <form method="post" action="models/registerCook.php">
-      <label for="email">Votre adresse email</label><input type="email" id="email" name="email" placeholder="Votre adresse email"><br>
-      <label for="identifiant">Choisissez un identifiant</label><input type="identifiant" id="identifiant" name="identifiant" placeholder="Choisissez un identifiant"><br>
-      <label for="password">Choisissez un mot de passe</label><input type="password" id="password" name="password" placeholder="Choisissez un mot de passe"><br>
-      <label for="passwordConfirm">Confirmer le mot de passe</label><input type="password" id="passwordConfirm" name="passwordConfirm" placeholder="Confirmer le mot de passe"><br>
-      <input type="submit" name="submit" value="Recevoir la carte des chefs !"class="button">
-    </form>
   </section>
 
   <?php include 'includes/footer.php';?>

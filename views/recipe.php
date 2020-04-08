@@ -8,21 +8,28 @@
   <title>La carte des chefs - <?php echo $recipe->title();?></title>
 </head>
 
-<body id="Abonner">
-  <?php include 'includes/nav.php';?>
+<body>
+
+  <?php include 'includes/navTop.php';?>
+  <?php include 'includes/navFooter.php';?>
 
   <header id="recipe_header">
     <img src="uploads/recipes/400x400_<?php echo $recipe->picture();?>" alt="<?php echo $recipe->title();?>"/>
   </header>
   <div id="recipe_cook">
     <a href="?action=cook&cook_id=<?php echo $cook->id();?>"><img src="/uploads/avatars/80x80_<?php echo $cook->picture();?>"  width="80px" height="80px" class="profilPicture" /></a><br>
-    <h2><?php echo $cook->identifiant();?></h2>
-    <?php echo $cook->moyenne();?><br>
+        <?php echo $cook->moyenne();?><br>
   </div>
 
   <section style="text-align:center;">
     <h1 style="color:black;"><u><?php echo $recipe->title();?></u></h1>
-    <a href="?action=recipeEdit&id_recipe=<?php echo $recipe->id();?>">Modifier la recette</a>
+    par <?php echo $cook->identifiant();?>
+    <?php
+    if ($_SESSION['id'] == $recipe->id()) {
+      echo '<a href="?action=recipeEdit&id_recipe=$recipe->id()">Modifier la recette</a>';
+    }
+    ?>
+
   </section>
 
   <section id="recipe_ingredients">
