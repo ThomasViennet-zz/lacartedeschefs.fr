@@ -2,6 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" type="image/png" href="images/30x30_logo_la_carte_des_chefs.png">
   <title>La carte des chefs - <?php echo $recipe->title();?></title>
@@ -19,8 +20,9 @@
     <?php echo $cook->moyenne();?><br>
   </div>
 
-  <section>
-    <h1 style="text-align:center;color:black;"><u><?php echo $recipe->title();?></u></h1>
+  <section style="text-align:center;">
+    <h1 style="color:black;"><u><?php echo $recipe->title();?></u></h1>
+    <a href="?action=recipeEdit&id_recipe=<?php echo $recipe->id();?>">Modifier la recette</a>
   </section>
 
   <section id="recipe_ingredients">

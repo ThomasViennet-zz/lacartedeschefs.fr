@@ -2,13 +2,14 @@
 <html>
 <head>
   <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" type="image/png" href="images/30x30_logo_la_carte_des_chefs.png">
   <title>La carte des chefs</title>
 </head>
 
 <body id="Abonner">
-
+  <img src="images/80x80_logo_la_carte_des_chefs.png" alt="Logo La carte des chefs" id="logo"/>
   <?php include 'includes/nav.php';?>
 
   <header>

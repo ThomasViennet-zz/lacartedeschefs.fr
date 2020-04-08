@@ -25,6 +25,19 @@ session_start();
         }
       break;
 
+      case 'recipeEdit':
+        require 'class/recipe.php';
+        $recipe = new Recipe($_GET['id_recipe']);
+        if ($recipe->idCook() == $_SESSION['id']) {
+          require 'class/cook.php';
+          $cook = new Cook($recipe->idCook());
+          
+          include 'views/recipeEdit.php';
+        }else {
+          include 'views/connexion.php';
+        }
+      break;
+
       case 'listCooks':
           include 'views/listCooks.php';
       break;

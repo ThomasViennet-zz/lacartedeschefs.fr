@@ -8,11 +8,11 @@ body
 nav
 {
   background-color: white;
-  height: 100px;
   width: 100%;
-  box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.5);
+  box-shadow: 0px -1px 3px 0px rgba(0,0,0,0.5);
   z-index: 1;
   position: fixed;
+  bottom: 0px;
 }
 
 nav ul
@@ -21,6 +21,7 @@ nav ul
   justify-content: space-around;
   list-style: none;
   height: auto;
+  padding: 0px;
 }
 
 a
@@ -41,7 +42,7 @@ header
   text-align: center;
   background-color: black;
   color: white;
-  padding: 20% 0px 10% 0px;
+  padding: 10% 0px;
 
 }
 
@@ -83,9 +84,16 @@ textarea
   box-sizing: border-box;
 }
 
+img
+{
+  max-width: 100%;
+  height: auto;
+}
+
 footer
 {
   margin-top: 50px;
+  margin-bottom: 50px;
   width: 100%;
   height: auto;
   color: black;
@@ -95,8 +103,11 @@ footer
 
 #logo
 {
-  z-index: 2;
-  width: 100px;
+  position: fixed;
+  width: 50px;
+  margin-left: 50%;
+  margin-top: 7px;
+  transform: translate(-50%, 0%);
 }
 
 #recipe_header
@@ -115,7 +126,7 @@ footer
 
 .navItem
 {
-  width: 80px;
+  width: 40px;
 }
 
 .profilPicture

@@ -2,6 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" type="image/png" href="images/30x30_logo_la_carte_des_chefs.png">
   <title>La carte des chefs</title>
@@ -54,7 +55,7 @@
       <ol>
         <li>Les abonnées recoivent par email <i>La carte des chefs</i></li>
         <li>Ceux qui cuisinent une recette peuvent la noter</li>
-        <li>Les notes font évoluer les chefs dans <a href="?action=cooks">le classement des chefs</a></li>
+        <li>Les notes font évoluer les chefs dans <a href="?action=listCooks">le classement des chefs</a></li>
       </ol>
     </section>
 
