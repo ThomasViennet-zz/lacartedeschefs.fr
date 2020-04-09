@@ -182,10 +182,6 @@ nav ul
   padding: 0px;
 }
 
-.element
-{
-}
-
 .colorMain
 {
   color: #f39614;
@@ -212,6 +208,16 @@ nav ul
 
 @media screen and (min-width: 768px)
 {
+  .conteneur
+  {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 100%;
+    padding: 0px;
+
+  }
+
 }
 
 @media screen and (min-width: 1024px)

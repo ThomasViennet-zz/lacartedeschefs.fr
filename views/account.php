@@ -18,17 +18,17 @@
   </div>
   <div id="cookInfo">
       <h1><?php echo $cook->identifiant();?></h1>
+      <p><?php echo $cook->total();?> points</p>
       <?php echo $cook->moyenne();?>
+
         <p><a href="?action=accountEdit">Modifier</a></p>
         <p><a href="models/deconnexion.php">Ce n'est pas vous ?</a></p>
   </header>
 
   <p style="text-align:center;"><a href="?action=recipeAdd">Ajouter une recette</a></p>
+  <h2 style="text-align:center;">Vos recettes</h2>
 
   <section class="conteneur">
-
-    <h2 style="text-align:center;">Vos recettes</h2><br>
-
     <?php echo $cook->getRecipes($_SESSION['id']);?>
   </section>
 

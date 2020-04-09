@@ -22,9 +22,11 @@
     <h2>Le classement des chefs</h2>
 
     <div class="conteneur">
-      <?php echo cookList(); ?>
+      <?php cookList(); ?>
     </div>
+  </section>
 
+  <section style="text-align:center;">
     <h2>Comment fonctionne le classement ?</h2>
     <p>
       Ceux qui cuisinent les recettes, peuvent attribuer entre une et trois étoiles aux recettes.<br>
