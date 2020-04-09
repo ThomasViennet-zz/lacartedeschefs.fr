@@ -32,15 +32,15 @@
     <p>
       Ceux qui cuisinent les recettes, peuvent attribuer entre une et trois étoiles aux recettes.<br>
       <br>
-      Ces étoiles donnent des points aux chefs, qui les font évoluer dans le classement :<br>
+      <strong>Ces étoiles donnent des points aux chefs, qui les font évoluer dans le classement :</strong><br>
       <br>
     </p>
 
-      <ul>
-        <li>3 étoiles donne 3 points</li>
-        <li>2 étoiles donne 2 points</li>
-        <li>1 étoile donne 1 point</li>
-      <ul>
+    <ul>
+      <li>3 étoiles donne 3 points</li>
+      <li>2 étoiles donne 2 points</li>
+      <li>1 étoile donne 1 point</li>
+    </ul>
 
     <p>
       <i>Scénario : Vous avez proposé une recette et elle a reçu 3 votes "1 étoile" et 2 votes "2 étoiles".<br>

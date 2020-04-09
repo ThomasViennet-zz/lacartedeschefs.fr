@@ -27,7 +27,7 @@
     </p>
 
     <p>
-      <i>La carte des chefs</i> c'est une invitation à tous ces talents de marquer l'histoire de la gastronomie.
+      <strong><i>La carte des chefs</i> c'est une invitation à tous ces talents de marquer l'histoire de la gastronomie.</strong>
     </p>
 
     <p>

@@ -18,8 +18,8 @@
     <p class="colorMain"><i>Marquez l'histoire de la gastronomie.</i></p>
   </header>
 
-  <section>
-    <div>
+  <section style="display:flex;justify-content:center;">
+    <div style="width:400px;padding:0 10px;">
       <h2>Connectez-vous</h2>
       <form method="post" action="?action=connexion">
         <label for="email">Email</label><input type="email" id="email" name="email" placeholder="Email *"><br>
@@ -28,7 +28,7 @@
       </form>
     </div>
 <p class="colorMain"><?php echo $reponse;?></p>
-    <div>
+    <div style="width:400px;padding:0 10px;">
       <h2>Créez un compte</h2>
       <form method="post" action="?action=cookRegister">
         <label for="email">Email</label><input type="email" id="email" name="email" placeholder="Votre adresse email *"><br>
