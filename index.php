@@ -80,10 +80,19 @@ session_start();
         }
       break;
 
-      case 'cookList':
-          require 'class/cook.php';
-          require 'models/cookList.php';
-          include 'views/cooksList.php';
+      case 'cookRegister':
+          include 'models/cook.php';
+          $reponse = cookRegister();
+          include 'views/connexion.php';
+      break;
+
+      case 'cookUpdate':
+        require 'class/cook.php';
+        require 'models/cook.php';
+        $reponse = cookUpdate();
+        $cook = new Cook($_SESSION['id']);
+
+        include 'views/accountEdit.php';
       break;
 
       case 'connexion':
@@ -124,6 +133,12 @@ session_start();
             include 'views/cook.php';
           }
         }
+      break;
+
+      case 'cookList':
+          require 'class/cook.php';
+          require 'models/cook.php';
+          include 'views/cooksList.php';
       break;
 
       default:

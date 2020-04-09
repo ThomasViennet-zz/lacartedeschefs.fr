@@ -26,6 +26,7 @@
   <p style="text-align:center;"><a href="?action=recipeAdd">Ajouter une recette</a></p>
 
   <section class="conteneur">
+
     <h2 style="text-align:center;">Vos recettes</h2><br>
 
     <?php echo $cook->getRecipes($_SESSION['id']);?>

@@ -20,7 +20,9 @@
   <section>
     <h2>Modifier mes informations</h2>
 
-    <form method="post" action="models/updateCook.php" enctype="multipart/form-data">
+    <p class="colorMain"><?php echo $reponse;?></p>
+
+    <form method="post" action="?action=cookUpdate" enctype="multipart/form-data">
       <label for="email">Email</label><input type="email" id="email" name="email" placeholder="<?php echo $cook->email();?> *"><br>
       <label for="identifiant">Identifiant</label><input type="text" id="identifiant" name="identifiant" placeholder="<?php echo $cook->identifiant();?>  *"><br>
       <label for="profile_picture">Photo</label><br>
