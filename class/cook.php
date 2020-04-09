@@ -102,7 +102,7 @@ class Cook
       $reponse3->closeCursor();
 
       echo '
-      <div class="element" style="background-color:rgb(245,245,245);margin: 5px;">
+      <div class="element" style="background-color:rgb(245,245,245);margin: 5px 0px;">
 
         <div style="padding:5px;">
           <a href="?action=cook&cook_id='.$idCook.'">

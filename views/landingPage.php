@@ -39,7 +39,7 @@
     </p>
 
     <p>
-      Ces notes permettent de faire monter ou descendre les participants dans <a href="?action=listCooks">le classement des chefs.</a>
+      Ces notes permettent de faire monter ou descendre les participants dans <a href="?action=cookList">le classement des chefs.</a>
     </p>
   </section>
 

@@ -17,10 +17,8 @@
     <h1>La carte des chefs</h1>
     <p class="colorMain"><i>Révélons les talents de la gastronomie.</i></p>
   </header>
-  <section>
-    <div class="conteneur">
-      <?php include 'models/listRecipes.php';?>
-    </div>
+  <section class="conteneur">
+      <?php echo recipeList();?>
   </section>
   <?php include 'includes/footer.php';?>
 </body>

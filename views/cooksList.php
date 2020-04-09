@@ -22,7 +22,7 @@
     <h2>Le classement des chefs</h2>
 
     <div class="conteneur">
-      <?php include 'models/listCooks.php'; ?>
+      <?php echo cookList(); ?>
     </div>
 
     <h2>Comment fonctionne le classement ?</h2>
@@ -38,7 +38,7 @@
       <i>Scénario : "Vous avez proposé une recette et elle a reçu 3 votes "1 étoile" et 2 votes "2 étoiles".<br>
         Les 3 votes à "1 étoile" vous apporteront 3 points et les 2 votes à "2 étoiles" 4 points.</i>
       </p>
-    </section>  
+    </section>
 
     <?php include 'includes/footer.php';?>
 

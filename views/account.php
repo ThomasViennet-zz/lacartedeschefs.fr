@@ -23,12 +23,12 @@
         <p><a href="models/deconnexion.php">Ce n'est pas vous ?</a></p>
   </header>
 
-  <section>
-    <h2 style="text-align:center;">Vos recettes</h2>
-    <p style="text-align:center;"><a href="?action=recipeAdd">Ajouter une recette</a></p>
-    <div class="conteneur">
-      <?php echo $cook->getRecipes($_SESSION['id']);?>
-    </div>
+  <p style="text-align:center;"><a href="?action=recipeAdd">Ajouter une recette</a></p>
+
+  <section class="conteneur">
+    <h2 style="text-align:center;">Vos recettes</h2><br>
+
+    <?php echo $cook->getRecipes($_SESSION['id']);?>
   </section>
 
   <?php include 'includes/footer.php';?>

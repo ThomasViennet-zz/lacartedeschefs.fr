@@ -1,52 +1,46 @@
 <?php
-if(isset($_POST['email']) && isset($_POST['password']))
+function connexion()
 {
-	require '../base.php';
-
-	$req = $bdd->prepare('SELECT id, password, email, identifiant FROM cooks WHERE email = :email');
-	$req->execute(array('email' => $_POST['email']));
-	$resultat = $req->fetch();
-	$req->closeCursor();
-
-	$id = $resultat['id'];
-	$email = $resultat['email'];
-	$identifiant = $resultat['identifiant'];
-
-	$isPasswordCorrect = password_verify($_POST['password'], $resultat['password']);
-
-	if (!$resultat)
+	if(isset($_POST['email']) && isset($_POST['password']))
 	{
-		echo '
-		Mauvais email ou mot de passe ! <br>
-		Si vous n\'êtes pas redirigé, <a href="../?action=account"">cliquez ici</a>.';
-		header( "refresh:3;url=../?action=account" );
-	}else{
-		if ($isPasswordCorrect)
+		require 'base.php';
+
+		$req = $bdd->prepare('SELECT id, password, email, identifiant FROM cooks WHERE email = :email');
+		$req->execute(array('email' => $_POST['email']));
+		$resultat = $req->fetch();
+		$req->closeCursor();
+
+		$id = $resultat['id'];
+		$email = $resultat['email'];
+		$identifiant = $resultat['identifiant'];
+
+		$isPasswordCorrect = password_verify($_POST['password'], $resultat['password']);
+
+		if (!$resultat)
 		{
-			$req = $bdd->prepare('SELECT AVG(note) AS note_moyenne FROM votes WHERE id_cook = :id_cook');
-			$req->execute(array('id_cook' => $id));
-			$resultat = $req->fetch();
-			$req->closeCursor();
+			return 'Mauvais email ou mot de passe !';
 
-			session_start();
-			$_SESSION['id'] = $id;
-			$_SESSION['email'] = $email;
-			$_SESSION['identifiant'] = $identifiant;
-			$_SESSION['moyenne'] = $resultat['note_moyenne'];;
+		}else{
+			if ($isPasswordCorrect)
+			{
+				$req = $bdd->prepare('SELECT AVG(note) AS note_moyenne FROM votes WHERE id_cook = :id_cook');
+				$req->execute(array('id_cook' => $id));
+				$resultat = $req->fetch();
+				$req->closeCursor();
 
-			header('Location: ../?action=account');
+				session_start();
+				$_SESSION['id'] = $id;
+				$_SESSION['email'] = $email;
+				$_SESSION['identifiant'] = $identifiant;
+				$_SESSION['moyenne'] = $resultat['note_moyenne'];;
 
-		}else {
-				echo '
-				Mauvais email ou mot de passe ! <br>
-				Si vous n\'êtes pas redirigé, <a href="../?action=account"">cliquez ici</a>.';
-				header( "refresh:3;url=../?action=account" );
+				header('Location: ../?action=account');
+
+			}else {
+				return 'Mauvais email ou mot de passe !';
+			}
 		}
+	}else {
+		return 'Veuilliez saisir toutes les informations !';
 	}
-}else {
-	echo '
-	Veuilliez saisir toutes les informations ! <br>
-	Si vous n\'êtes pas redirigé, <a href="../?action=account"">cliquez ici</a>.';
-	header( "refresh:3;url=../?action=account" );
 }
-?>

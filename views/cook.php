@@ -20,18 +20,11 @@
   <div id="cookInfo">
       <h1><?php echo $cook->identifiant();?></h1>
       <?php echo $cook->moyenne();?>
-      <?php
-      if ($_SESSION['id'] == $cook->id()) {
-        echo '<p><a href="?action=accountEdit">Modifier</a></p>';
-      }
-      ?>
   </header>
 
-  <section>
-    <h2 style="text-align:center;">Recettes</h2>
-    <div class="conteneur">
+  <section class="conteneur">
+  <h2 style="text-align:center;">Recettes</h2>    
       <?php echo $cook->getRecipes($cook->id());?>
-    </div>
   </section>
 
   <?php include 'includes/footer.php';?>

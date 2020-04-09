@@ -5,55 +5,6 @@ body
   width: auto;
 }
 
-#navTop
-{
-  background-color: white;
-  height: 50px;
-  width: 100%;
-  box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.5);
-  z-index: 1;
-  position: fixed;
-  top: 0px;
-}
-
-#navFooter
-{
-  background-color: white;
-  height: 50px;
-  width: 100%;
-  box-shadow: 0px -1px 3px 0px rgba(0,0,0,0.5);
-  z-index: 1;
-  position: fixed;
-  bottom: 0px;
-}
-
-nav ul
-{
-  display: flex;
-  justify-content: space-around;
-  list-style: none;
-  height: auto;
-  padding: 0px;
-  margin: 10px;
-}
-
-.navItem
-{
-  width: 30px;
-}
-
-a
-{
-  color: #f39614;
-  text-decoration: none;
-}
-
-a:hover
-{
-  color: black;
-  background-color: #f39614;
-}
-
 header
 {
   margin: 0px;
@@ -61,7 +12,7 @@ header
   background-color: black;
   color: white;
   padding: 10% 0px;
-margin-top: 50px;
+  margin-top: 50px;
 }
 
 section
@@ -109,6 +60,18 @@ img
   height: auto;
 }
 
+a
+{
+  color: #f39614;
+  text-decoration: none;
+}
+
+a:hover
+{
+  color: black;
+  background-color: #f39614;
+}
+
 footer
 {
   margin-top: 50px;
@@ -118,6 +81,43 @@ footer
   color: black;
   text-align: center;
   box-shadow: 0px -3px 7px -7px rgba(0,0,0,0.75);
+}
+
+#navTop
+{
+  background-color: white;
+  height: 50px;
+  width: 100%;
+  box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.5);
+  z-index: 1;
+  position: fixed;
+  top: 0px;
+}
+
+#navFooter
+{
+  background-color: white;
+  height: 50px;
+  width: 100%;
+  box-shadow: 0px -1px 3px 0px rgba(0,0,0,0.5);
+  z-index: 1;
+  position: fixed;
+  bottom: 0px;
+}
+
+nav ul
+{
+  display: flex;
+  justify-content: space-around;
+  list-style: none;
+  height: auto;
+  padding: 0px;
+  margin: 10px;
+}
+
+.navItem
+{
+  width: 30px;
 }
 
 #logo
@@ -179,11 +179,11 @@ footer
   flex-wrap: wrap;
   justify-content: center;
   width: 100%;
+  padding: 0px;
 }
 
 .element
 {
-  padding: 2px;
 }
 
 .colorMain
@@ -212,16 +212,8 @@ footer
 
 @media screen and (min-width: 768px)
 {
-  section
-  {
-    padding: 0px 5%;
-  }
 }
 
 @media screen and (min-width: 1024px)
 {
-  section
-  {
-    padding: 0px 10%;
-  }
 }

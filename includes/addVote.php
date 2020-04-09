@@ -2,7 +2,7 @@
 if(isset($_SESSION['id']))
 {
   echo '
-  <form method="post" action="models/addVote.php?id_recipe='.$recipe->id().'">
+  <form method="post" action="?action=addVote&id_recipe='.$recipe->id().'">
     <div class="hiddenradio">
     <label>
       <input type="radio" name="vote" id="vote" name="vote" value="3">
@@ -30,5 +30,5 @@ if(isset($_SESSION['id']))
   </form>
   ';
 }else {
-  echo '<a href="?action=account">Créez un compte</a> pour proposer une recette.';
+  echo '<a href="?action=account">Créez un compte</a> pour noter la recette.';
 }

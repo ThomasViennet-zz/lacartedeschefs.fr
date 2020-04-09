@@ -25,8 +25,8 @@
     <h1 style="color:black;"><u><?php echo $recipe->title();?></u></h1>
     par <?php echo $cook->identifiant();?>
     <?php
-    if ($_SESSION['id'] == $recipe->id()) {
-      echo '<a href="?action=recipeEdit&id_recipe=$recipe->id()">Modifier la recette</a>';
+    if ($_SESSION['id'] == $cook->id()) {
+      echo '<p><a href="?action=recipeEdit&id_recipe='.$recipe->id().'&edit">Modifier la recette</a></p>';
     }
     ?>
 
@@ -49,6 +49,11 @@
 
   <section>
     <h2>Noter</h2>
+    <p class="colorMain"><?php
+    if ($_GET['action'] == 'addVote') {
+      echo $reponse;
+    }
+    ?></p>
     <?php include 'includes/addVote.php'; ?>
   </section>
 
