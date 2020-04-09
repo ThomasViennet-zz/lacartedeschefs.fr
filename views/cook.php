@@ -22,8 +22,9 @@
       <?php echo $cook->moyenne();?>
   </header>
 
+<h2 style="text-align:center;">Recettes</h2>
+
   <section class="conteneur">
-  <h2 style="text-align:center;">Recettes</h2>    
       <?php echo $cook->getRecipes($cook->id());?>
   </section>
 

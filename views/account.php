@@ -18,7 +18,7 @@
   </div>
   <div id="cookInfo">
       <h1><?php echo $cook->identifiant();?></h1>
-      <p><?php echo $cook->total();?> points</p>
+      <p><?php echo $cook->total();?></p>
       <?php echo $cook->moyenne();?>
 
         <p><a href="?action=accountEdit">Modifier</a></p>

@@ -26,8 +26,18 @@ class Cook
     $this->setId($id);
     $this->setIdentifiant($resultat['cook_identifiant']);
     $this->setEmail($resultat['cook_email']);
-    $this->setTotal($resultat['note_total']);
     $this->setPicture($resultat['cook_picture']);
+
+    if ($resultat['note_total'] == 0) {
+      $nbr_point = 'Pas encore de point';
+      $this->setTotal($nbr_point);
+    }elseif ($resultat['note_total'] == 1) {
+      $nbr_point = '1 point';
+      $this->setTotal($nbr_point);
+    }else {
+      $nbr_point = $resultat['note_total'].' points';
+      $this->setTotal($nbr_point);
+    }
 
     if(empty($resultat['note_moyenne']))
     {
@@ -102,7 +112,7 @@ class Cook
       $reponse3->closeCursor();
 
       echo '
-      <div class="element" style="background-color:rgb(245,245,245);margin: 5px 0px;">
+      <div class="element" style="background-color:rgb(245,245,245);">
 
         <div style="padding:5px;">
           <a href="?action=cook&cook_id='.$idCook.'">

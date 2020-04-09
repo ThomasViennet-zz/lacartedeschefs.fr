@@ -148,7 +148,7 @@ function recipeList()
     $recipe = new Recipe($resultat['id']);
     $cook = new Cook($recipe->idCook());
 
-    echo '<div class="element" style="background-color:rgb(245,245,245);margin: 5px 0px;">
+    echo '<div class="element" style="background-color:rgb(245,245,245);">
 
     <div style="padding:5px;">
     <a href="?action=cook&cook_id='.$cook->id().'">

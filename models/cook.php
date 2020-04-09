@@ -20,7 +20,7 @@ function cookList()
       <div class="element" style="width:200px;text-align:center;">
         <a href="?action=cook&cook_id='.$cook->id().'"><img src="/uploads/avatars/80x80_'.$cook->picture().'"  width="80px" height="80px" class="profilPicture" /></a><br>
         #'.$position.' '.$cook->identifiant().'<br>
-        '.$cook->total().' points<br>
+        '.$cook->total().'<br>
         '.$cook->moyenne().'
 
       </div>
@@ -116,8 +116,6 @@ function cookUpdate()
           'email' => $_POST['email'],
           'id' => $_SESSION['id']
         )) or die('Une erreur s\'est produite');
-
-        return 'Adresse email sauvegardée.';
       }else {
         return 'Cette adresse email est déjà utilisée.';
       }
@@ -138,7 +136,6 @@ function cookUpdate()
           'identifiant' => $_POST['identifiant'],
           'id' => $_SESSION['id']
         )) or die('Une erreur s\'est produite');
-        return 'Identifiant sauvegardé';
       }
     }
 
@@ -154,15 +151,15 @@ function cookUpdate()
         {
           $name_profile_picture = time().''.rand().'.jpeg';
 
-          move_uploaded_file($_FILES['profile_picture']['tmp_name'], '../uploads/avatars/'.$name_profile_picture);
+          move_uploaded_file($_FILES['profile_picture']['tmp_name'], 'uploads/avatars/'.$name_profile_picture);
 
           if($extension_upload == 'png')
-            $image = imagecreatefrompng("../uploads/avatars/".$name_profile_picture."");
+            $image = imagecreatefrompng("uploads/avatars/".$name_profile_picture."");
           else {
-            $image = imagecreatefromjpeg("../uploads/avatars/".$name_profile_picture."");
+            $image = imagecreatefromjpeg("uploads/avatars/".$name_profile_picture."");
           }
 
-          $filename = '../uploads/avatars/80x80_'.$name_profile_picture;
+          $filename = 'uploads/avatars/80x80_'.$name_profile_picture;
 
           $thumb_width = 80;
           $thumb_height = 80;
@@ -203,14 +200,15 @@ function cookUpdate()
             'profile_picture' => $name_profile_picture,
             'id' => $_SESSION['id']
           )) or die('Une erreur s\'est produite<br>');
-
-          return 'Photo modifié';
+        }else {
+          return 'Format de photo non autorisé.';
         }
+      }else {
+        return 'La photo est trop lourde.';
       }
     }
 
   }else {
     return 'Mauvais mot de passe !';
   }
-
 }
