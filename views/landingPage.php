@@ -19,7 +19,7 @@
     <p class="colorMain"><i>Révélons les talents de la gastronomie.</i></p>
   </header>
 
-  <section>
+  <section style="text-align:center;">
     <h2>Le concept</h2>
 
     <p>
@@ -43,7 +43,7 @@
     </p>
   </section>
 
-  <section>
+  <section style="text-align:center;">
     <h2>Comment partiper ?</h2>
 
     <ol>

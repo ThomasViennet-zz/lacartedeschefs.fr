@@ -1,6 +1,26 @@
 
+@font-face {
+    font-family: 'Source_Sans_Pro_light';
+    src: url('SourceSansPro-Light.ttf');
+}
+
+@font-face {
+    font-family: 'Source_Sans_Pro_refular';
+    src: url('SourceSansPro-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'Source_Sans_Pro_extraLight';
+    src: url('SourceSansPro-ExtraLight.ttf');
+}
+@font-face {
+    font-family: 'Source_Sans_Pro_extraLightItalic';
+    src: url('SourceSansPro-ExtraLightItalic.ttf');
+}
+
 body
 {
+  font-family: Source_Sans_Pro_extraLight;
   margin: 0px;
   width: auto;
 }
@@ -18,6 +38,16 @@ header
 section
 {
   padding: 0px 5%;
+}
+
+ol
+{
+  list-style-position: inside;
+}
+
+ul
+{
+  list-style-position: inside;
 }
 
 h1
@@ -81,6 +111,21 @@ footer
   color: black;
   text-align: center;
   box-shadow: 0px -3px 7px -7px rgba(0,0,0,0.75);
+}
+
+label
+{
+  font-family:Source_Sans_Pro_refular;
+}
+
+strong
+{
+  font-family:Source_Sans_Pro_refular;
+}
+
+i
+{
+  font-family:Source_Sans_Pro_extraLightItalic;
 }
 
 #navTop
@@ -213,14 +258,9 @@ nav ul
 
 @media screen and (min-width: 768px)
 {
-
     .element
     {
       margin: 5px 5px!important;
     }
 
-}
-
-@media screen and (min-width: 1024px)
-{
 }

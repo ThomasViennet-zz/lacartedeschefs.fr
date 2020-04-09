@@ -25,8 +25,8 @@
         <p><a href="models/deconnexion.php">Ce n'est pas vous ?</a></p>
   </header>
 
-  <p style="text-align:center;"><a href="?action=recipeAdd">Ajouter une recette</a></p>
   <h2 style="text-align:center;">Vos recettes</h2>
+  <p style="text-align:center;"><a href="?action=recipeAdd">Ajouter une recette</a></p>
 
   <section class="conteneur">
     <?php echo $cook->getRecipes($_SESSION['id']);?>

@@ -22,6 +22,7 @@
     <h2>Le classement des chefs</h2>
 
     <div class="conteneur">
+      <!-- <p><u>Début de la compétition le dimanche 26 avril 2020</u></p> -->
       <?php cookList(); ?>
     </div>
   </section>
@@ -33,10 +34,15 @@
       <br>
       Ces étoiles donnent des points aux chefs, qui les font évoluer dans le classement :<br>
       <br>
-      - 3 étoiles donne 3 points<br>
-      - 2 étoiles donne 2 points<br>
-      - 1 étoile donne 1 point<br>
-      <br>
+    </p>
+
+      <ul>
+        <li>3 étoiles donne 3 points</li>
+        <li>2 étoiles donne 2 points</li>
+        <li>1 étoile donne 1 point</li>
+      <ul>
+
+    <p>
       <i>Scénario : Vous avez proposé une recette et elle a reçu 3 votes "1 étoile" et 2 votes "2 étoiles".<br>
         Alors les 3 votes à "1 étoile" vous apporteront 3 points et les 2 votes à "2 étoiles" 4 points.</i>
       </p>
