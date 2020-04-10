@@ -2,14 +2,20 @@
 function cookList()
 {
   require 'base.php';
+
+  $reponse = $bdd->query('SELECT SUM(v.note) note_total FROM votes v');
+  $resultat = $reponse->fetch();
+
   //Liste des moyennes des cooks ordonnée de la plus grande à la plus petite
   $reponse = $bdd->query(
-    'SELECT SUM(v.note) cook_note_total, AVG(v.note) cook_note_moyenne, c.identifiant cook_identifiant, c.profile_picture cook_picture, c.id cook_id
+    'SELECT AVG(v.note) / '.$resultat['note_total'].' AS cook_note_moyenne, c.identifiant cook_identifiant, c.profile_picture cook_picture, c.id cook_id
     FROM cooks c
     LEFT JOIN votes v
     ON c.id = v.id_cook
     GROUP BY cook_id
     ORDER BY cook_note_moyenne DESC');
+
+    //(total point / nbr de votes)/total des points de tout le Monde
 
     $position = 1;
 
