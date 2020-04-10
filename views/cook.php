@@ -19,7 +19,9 @@
   </div>
   <div id="cookInfo">
       <h1><?php echo $cook->identifiant();?></h1>
+      <p><?php echo $cook->total();?></p>
       <?php echo $cook->moyenne();?>
+
   </header>
 
 <h2 style="text-align:center;">Recettes</h2>
