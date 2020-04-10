@@ -143,12 +143,18 @@ session_start();
 
       case 'forgetPwd':
         if (isset($_GET['sent'])) {
+
           require 'models/cook.php';
           $reponse = forgetPwd();
+          include 'views/forgetPwd.php';
+
         }elseif (isset($_GET['update'])) {
+
           require 'models/password.php';
-          $reponse = pwdConfirm();
-          include 'views/forgetPwdConfirm.php';
+          
+
+        }else {
+          include 'views/forgetPwd.php';
         }
       break;
 
