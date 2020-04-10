@@ -14,7 +14,7 @@
   <?php include 'includes/navFooter.php';?>
 
   <header>
-    <img src="images/80x80_logo_la_carte_des_chefs.png" alt="Logo La carte des chefs"/><br>
+    <img src="images/logo_la_carte_des_chefs.svg" alt="Logo La carte des chefs" width="80px;"/><br>
     <h1>La carte des chefs</h1>
     <p class="colorMain"><i>Révélons les talents de la gastronomie.</i></p>
   </header>

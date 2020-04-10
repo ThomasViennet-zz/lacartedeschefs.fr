@@ -132,7 +132,7 @@ i
 #navTop
 {
   background-color: white;
-  height: 50px;
+  height: 80px;
   width: 100%;
   box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.5);
   z-index: 1;
@@ -142,8 +142,8 @@ i
 
 #navFooter
 {
-  background-color: white;
-  height: 50px;
+  background-color: #f39614;
+  height: 80px;
   width: 100%;
   box-shadow: 0px -1px 3px 0px rgba(0,0,0,0.5);
   z-index: 1;
@@ -163,16 +163,7 @@ nav ul
 
 .navItem
 {
-  width: 30px;
-}
-
-#logo
-{
-  position: fixed;
   width: 50px;
-  margin-left: 50%;
-  margin-top: 7px;
-  transform: translate(-50%, 0%);
 }
 
 #recipe_header

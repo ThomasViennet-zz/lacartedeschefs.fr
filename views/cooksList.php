@@ -44,6 +44,7 @@
 
     <p>
       <i>Scénario : Vous avez proposé une recette et elle a reçu 3 votes "1 étoile" et 2 votes "2 étoiles".<br>
+        <br>
         Alors les 3 votes à "1 étoile" vous apporteront 3 points et les 2 votes à "2 étoiles" 4 points.</i>
       </p>
     </section>
