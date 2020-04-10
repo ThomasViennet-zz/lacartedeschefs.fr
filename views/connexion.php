@@ -27,6 +27,7 @@
         <label for="password">Mot de passe</label><input type="password" id="password" name="password" placeholder="Mot de passe *"><br>
         <input type="submit" name="submit" value="Valider" class="button">
       </form>
+      <a href="?action=forgetPwd">Mot de passe oublié</a>
     </div>
 
     <div style="width:400px;padding:0 10px;">

@@ -141,6 +141,17 @@ session_start();
           include 'views/cooksList.php';
       break;
 
+      case 'forgetPwd':
+        if (isset($_GET['sent'])) {
+          require 'models/cook.php';
+          $reponse = forgetPwd();
+        }elseif (isset($_GET['update'])) {
+          require 'models/password.php';
+          $reponse = pwdConfirm();
+          include 'views/forgetPwdConfirm.php';
+        }
+      break;
+
       default:
           include 'views/landingPage.php';
   }

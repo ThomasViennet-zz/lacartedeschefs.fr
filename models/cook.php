@@ -219,3 +219,53 @@ function cookUpdate()
     return 'Mauvais mot de passe !';
   }
 }
+
+function forgetPwd()
+{
+  $cle = password_hash(time(), PASSWORD_DEFAULT);
+
+  require ('base.php');
+
+  $req = $bdd->prepare('INSERT INTO password (cle, email, date) VALUES(:cle, :email,  NOW())');
+  $req->execute(array(
+    'cle' => $cle,
+    'email' => $_POST['email']
+  )) or die('Une erreur s\'est produite');
+
+  $to    = "viennet.t@gmail.com";
+  $from  = "bonjour@lacartedeschefs.fr";
+  ini_set("SMTP", "smtp.lacartedeschefs.fr");
+
+  $JOUR  = date("Y-m-d");
+  $HEURE = date("H:i");
+
+  $Subject = "La carte des chefs - Modifier mot de passe";
+
+  $mail_Data = "";
+  $mail_Data .= "<html> \n";
+  $mail_Data .= "<head> \n";
+  $mail_Data .= "<title> La carte des chefs - Modifier mot de passe</title> \n";
+  $mail_Data .= "</head> \n";
+  $mail_Data .= "<body> \n";
+
+  $mail_Data .= "<b>$Subject </b> <br> \n";
+  $mail_Data .= "<br> \n";
+  $mail_Data .= "Si vous n'avez pas fait de demande de changement de mot de passe, ne faites rien.<br> \n";
+  $mail_Data .= "Cliquez sur le lien pour changer de mot de passe :<br> \n";
+  $mail_Data .= "http://lacartedeschefs.fr/?action=forgetPwd&update&cle=$cle&email=$to<br>\n";
+  $mail_Data .= "</body> \n";
+  $mail_Data .= "</HTML> \n";
+
+  $headers  = "MIME-Version: 1.0 \n";
+  $headers .= "Content-type: text/html; charset=iso-8859-1 \n";
+  $headers .= "From: $from  \n";
+  $headers .= "Disposition-Notification-To: $from  \n";
+  $headers .= "X-Priority: 1  \n";
+  $headers .= "X-MSMail-Priority: High \n";
+
+  $CR_Mail = TRUE;
+  $CR_Mail = @mail ($to, $Subject, $mail_Data, $headers);
+
+  return 'Demande enregistrée. <br>
+  Vous allez recevoir un email à <strong>'.$_POST['email'].'</stong>';
+}
