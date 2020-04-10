@@ -5,13 +5,14 @@ function cookList()
   //Liste des moyennes des cooks ordonnée de la plus grande à la plus petite
   $reponse = $bdd->query(
     'SELECT SUM(v.note) cook_note_total, AVG(v.note) cook_note_moyenne, c.identifiant cook_identifiant, c.profile_picture cook_picture, c.id cook_id
-    FROM votes v
-    INNER JOIN cooks c
+    FROM cooks c
+    LEFT JOIN votes v
     ON c.id = v.id_cook
-    GROUP BY id_cook
-    ORDER BY cook_note_total DESC');
+    GROUP BY cook_id
+    ORDER BY cook_note_moyenne DESC');
 
     $position = 1;
+
     while ($resultat = $reponse->fetch())
     {
       $cook = new Cook($resultat['cook_id']);
