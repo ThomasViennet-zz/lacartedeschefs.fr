@@ -26,12 +26,11 @@ body
 
 header
 {
-  margin: 0px;
   text-align: center;
   background-color: black;
   color: white;
   padding: 10% 0px;
-  margin-top: 50px;
+  margin-top: 80px;
 }
 
 section
@@ -105,8 +104,8 @@ a:hover
 
 footer
 {
-  margin-top: 50px;
-  margin-bottom: 50px;
+  margin-top: 80px;
+  margin-bottom: 80px;
   width: 100%;
   height: auto;
   color: black;
