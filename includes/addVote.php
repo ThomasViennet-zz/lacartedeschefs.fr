@@ -3,7 +3,7 @@ if(isset($_SESSION['id']))
 {
   echo '
   <form method="post" action="?action=addVote&id_recipe='.$recipe->id().'">
-    <div class="hiddenradio">
+    <div class="hiddenradio" style="text-align:center;">
     <label>
       <input type="radio" name="vote" id="vote" name="vote" value="3">
       <img src="images/starFull.svg">

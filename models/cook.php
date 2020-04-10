@@ -17,7 +17,7 @@ function cookList()
       $cook = new Cook($resultat['cook_id']);
 
       echo '
-      <div class="element" style="width:200px;text-align:center;">
+      <div class="element" style="width:150px;text-align:center;">
         <a href="?action=cook&cook_id='.$cook->id().'"><img src="/uploads/avatars/80x80_'.$cook->picture().'"  width="80px" height="80px" class="profilPicture" /></a><br>
         #'.$position.' '.$cook->identifiant().'<br>
         '.$cook->total().'<br>

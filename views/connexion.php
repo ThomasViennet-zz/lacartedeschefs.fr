@@ -18,6 +18,7 @@
     <p class="colorMain"><i>Marquez l'histoire de la gastronomie.</i></p>
   </header>
 
+  <p class="colorMain" style="text-align:center;"><?php echo $reponse;?></p>
   <section style="display:flex;justify-content:center;">
     <div style="width:400px;padding:0 10px;">
       <h2>Connectez-vous</h2>
@@ -27,7 +28,7 @@
         <input type="submit" name="submit" value="Valider" class="button">
       </form>
     </div>
-<p class="colorMain"><?php echo $reponse;?></p>
+
     <div style="width:400px;padding:0 10px;">
       <h2>Créez un compte</h2>
       <form method="post" action="?action=cookRegister">
