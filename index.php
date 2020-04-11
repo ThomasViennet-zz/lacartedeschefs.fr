@@ -142,16 +142,25 @@ session_start();
       break;
 
       case 'forgetPwd':
-        if (isset($_GET['sent'])) {
+
+        if (isset($_GET['ask'])) { //Demande de réinitialisation
 
           require 'models/cook.php';
-          $reponse = forgetPwd();
+          $reponse = forgetPwd($_POST['email']);
           include 'views/forgetPwd.php';
 
-        }elseif (isset($_GET['update'])) {
 
-          require 'models/password.php';
-          
+        }elseif (isset($_GET['update']) AND !isset($_GET['sent'])) { //form de nv pwd
+
+          require 'models/cook.php';
+          $reponse = pwdConfirm($_GET['email'], $_GET['cle']);
+          include 'views/forgetPwdConfirm.php';
+
+        }elseif (isset($_GET['sent'])) { //confirmation nv pwd
+
+          require 'models/cook.php';
+          $reponse = pwdUpdate($_GET['email'], $_POST['password'], $_GET['cle']);
+          include 'views/forgetPwdConfirm.php';
 
         }else {
           include 'views/forgetPwd.php';

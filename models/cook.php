@@ -220,17 +220,18 @@ function cookUpdate()
   }
 }
 
-function forgetPwd()
+function forgetPwd($email)
 {
   $cle = password_hash(time(), PASSWORD_DEFAULT);
 
   require ('base.php');
 
-  $req = $bdd->prepare('INSERT INTO password (cle, email, date) VALUES(:cle, :email,  NOW())');
+  $req = $bdd->prepare('INSERT INTO password (cle, email, date, done) VALUES(:cle, :email, NOW(), :done)');
   $req->execute(array(
     'cle' => $cle,
-    'email' => $_POST['email']
-  )) or die('Une erreur s\'est produite');
+    'email' => $email,
+    'done' => 0))
+    or die('Une erreur s\'est produite');
 
   $to    = "viennet.t@gmail.com";
   $from  = "bonjour@lacartedeschefs.fr";
@@ -268,4 +269,54 @@ function forgetPwd()
 
   return 'Demande enregistrée. <br>
   Vous allez recevoir un email à <strong>'.$_POST['email'].'</stong>';
+}
+
+function pwdConfirm($email, $cle)
+{
+  require 'base.php';
+
+  $req = $bdd->prepare('SELECT cle, done FROM password WHERE email = :email');
+  $req->execute(array('email' => $email)) or die('Une erreur s\'est produite');
+  $resultat = $req->fetch();
+
+  if (isset($resultat['cle']) AND $resultat['cle'] == $cle) {
+    if ($resultat['done'] == 0) {
+      return 'Vous êtes autorisé à changer de mot de passe.';
+    }else {
+      return 'Ce lien a déjà été utilisé.';
+    }
+  }else {
+    return 'Vous n\'êtes pas autorisé à changer de mot de passe.';
+  }
+}
+
+function pwdUpdate($email, $pwd, $cle)
+{
+  if (!empty($_POST['password'])) {
+    if ($_POST['passwordConfirm'] == $_POST['password']) {
+
+      require 'base.php';
+      $req = $bdd->prepare('SELECT cle, done FROM password WHERE email = :email');
+      $req->execute(array('email' => $email)) or die('Une erreur s\'est produite');
+      $resultat = $req->fetch();
+
+      if (isset($resultat['cle']) AND $resultat['cle'] == $cle) {
+        $password_hash = password_hash($pwd, PASSWORD_DEFAULT);
+
+        $req = $bdd->prepare('UPDATE cooks SET password = :pwd WHERE email = :email');
+        $req->execute(array('email' => $email, 'pwd' => $password_hash)) or die('Une erreur s\'est produite');
+
+        $req = $bdd->prepare('DELETE FROM password WHERE email = :email');
+        $req->execute(array('email' => $email)) or die('Une erreur s\'est produite');
+
+        return 'Votre mot de passe a été mis à jour.';
+      }else {
+        return 'Vous n\'êtes pas autorisé à changer de mot de passe.';
+      }
+    }else {
+      return 'Les mots de passe ne correspondent pas.';
+    }
+  }else {
+    return 'Choisissez un mot de passe.';
+  }
 }

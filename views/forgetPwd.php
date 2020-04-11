@@ -21,7 +21,7 @@
   <p class="colorMain" style="text-align:center;"><?php echo $reponse;?></p>
   <section>
       <h2>Modifier votre mot de passe</h2>
-      <form method="post" action="?action=forgetPwd&sent">
+      <form method="post" action="?action=forgetPwd&ask">
         <label for="email">Votre email</label><input type="email" id="email" name="email" placeholder="Email *"><br>
         <input type="submit" name="submit" value="Valider" class="button">
       </form>

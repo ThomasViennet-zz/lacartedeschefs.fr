@@ -19,11 +19,12 @@
   </header>
 
   <p class="colorMain" style="text-align:center;"><?php echo $reponse;?></p>
-  <?php echo $reponse;?>
+
   <section>
       <h2>Modifier votre mot de passe</h2>
-      <form method="post" action="?action=forgetPwd&update">
-        <label for="email">Mot de passe</label><input type="password" id="password" name="password" placeholder="Choisissez un mot de passe *"><br>
+      <form method="post" action="?action=forgetPwd&update&sent&email=<?php echo $_GET['email']?>&cle=<?php echo $_GET['cle']?>">
+        <label for="password">Nouveau mot de passe</label><input type="password" id="password" name="password" placeholder="Choisissez un nouveau mot de passe *"><br>
+        <label for="passwordConfirm">Confirmer mot de passe</label><input type="password" id="passwordConfirm" name="passwordConfirm" placeholder="Confirmez le mot de passe *">
         <input type="submit" name="submit" value="Valider" class="button">
       </form>
   </section>
