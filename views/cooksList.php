@@ -31,20 +31,11 @@
     <h2>Comment fonctionne le classement ?</h2>
     <p>
       Ceux qui cuisinent les recettes, peuvent attribuer entre une et trois étoiles aux recettes.<br>
-      <br>
-      <strong>Ces étoiles donnent des points aux chefs, qui les font évoluer dans le classement :</strong><br>
-      <br>
+      <strong>L'ordre des chefs dans le classement est basé sur leur moyenne pondérée.</strong>
     </p>
-
-    <ul>
-      <li>3 étoiles donne 3 points</li>
-      <li>2 étoiles donne 2 points</li>
-      <li>1 étoile donne 1 point</li>
-    </ul>
-
     <p>
-      L'ordre des chefs dans le classement est pondéré.<br>
-      <strong>Plus vous aurez de bonnes notes plus vous serez haut dans le classement.</strong>
+
+
     </p>
     </section>
 

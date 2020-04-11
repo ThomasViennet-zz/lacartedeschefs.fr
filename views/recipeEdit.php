@@ -65,8 +65,13 @@
   <?php include 'includes/navTop.php';?>
   <?php include 'includes/navFooter.php';?>
 
-  <header>
-    <h1>Ajouter une recette</h1>
+  <header id="recipe_header">
+<img src="uploads/recipes/400x400_<?php echo $recipe->picture();?>" alt="<?php echo $recipe->title();?>" title="<?php echo $recipe->title();?>"/>
+    <form  style="position:absolute;" method="post" action="?action=recipeEditImage&id_recipe=<?php echo $recipe->id();?>" enctype="multipart/form-data">
+      <input type="file" name="recipe_picture">
+      <input type="submit" name="submit" value="Modifier photo">
+    </form>
+
   </header>
   <div id="recipe_cook">
     <a href="?action=cook&cook_id=<?php echo $cook->id();?>"><img src="/uploads/avatars/80x80_<?php echo $cook->picture();?>"  width="80px" height="80px" class="profilPicture" /></a><br>
@@ -75,12 +80,12 @@
     <a href="models/deconnexion.php">Ce n'est pas vous ?</a><br>
   </div>
 
-
   <section>
-    <?php if(isset($_GET['sent'])) echo '<p class="colorMain">'.$reponse.'</p>'; ?>
-    <form method="post" action="?action=recipeAdd&sent" enctype="multipart/form-data">
-      <label for="title">Titre</label><input type="text" name="title" id="title" value="<?php echo $_SESSION['post_recipe_title'];?>" placeholder="Titre de votre recette *"/>
+    <p class="colorMain" style="text-align:center;"><?php echo $reponse; ?></p>
 
+    <form method="post" action="?action=recipeUpdate&id_recipe=<?php echo $_GET['id_recipe'];?>" enctype="multipart/form-data">
+      <h1 class="colorMain">Modifier votre recette</h1>
+      <label for="title">Titre</label><input type="text" name="title" id="title" value="<?php echo $_SESSION['post_recipe_title'];?>" placeholder="Titre de votre recette *"/>
       <label for="ingredients">Ingrédients</label>
       <div id="indicIngredients"></div>
       <textarea onblur="calculeLongueur();" onfocus="calculeLongueur();" onkeydown="calculeLongueur();" onkeyup="calculeLongueur();" name="ingredients" id="ingredients" placeholder="Les ingrédients de votre recette" rows="5"><?php echo $_SESSION['post_recipe_ingredients'];?></textarea><br>
@@ -95,7 +100,7 @@
 
       <textarea onblur="calculeLongueur();" onfocus="calculeLongueur();" onkeydown="calculeLongueur();" onkeyup="calculeLongueur();" name="serve" id="serve" placeholder="Décrivez votre recette ..." rows="5"><?php echo $_SESSION['post_recipe_serve'];?></textarea><br>
 
-      Photo du plat * (400 pixels par 400 pixels) <input type="file" name="recipe_picture" /><br>
+      <!-- Photo du plat * (400 pixels par 400 pixels) <input type="file" name="recipe_picture" /><br> -->
       <input type="submit" name="submit" value="Envoyer" class="button">
     </form>
   </section>

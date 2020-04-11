@@ -17,16 +17,16 @@
     <img src="uploads/recipes/400x400_<?php echo $recipe->picture();?>" alt="<?php echo $recipe->title();?>"/>
   </header>
   <div id="recipe_cook">
-    <a href="?action=cook&cook_id=<?php echo $cook->id();?>"><img src="/uploads/avatars/80x80_<?php echo $cook->picture();?>"  width="80px" height="80px" class="profilPicture" /></a><br>
-        <?php echo $cook->moyenne();?><br>
+    <a href="?action=cook&cook_id=<?php echo $cook->id();?>"><img src="/uploads/avatars/80x80_<?php echo $cook->picture();?>"  width="80px" height="80px" class="profilPicture" /></a>
   </div>
 
   <section style="text-align:center;">
     <h1 style="color:black;"><u><?php echo $recipe->title();?></u></h1>
-    par <?php echo $cook->identifiant();?>
+    <?php echo $recipe->moyenne();?><br>
+    par <a href="?action=cook&cook_id=<?php echo $cook->id();?>"><?php echo $cook->identifiant();?></a>
     <?php
     if ($_SESSION['id'] == $cook->id()) {
-      echo '<p><a href="?action=recipeEdit&id_recipe='.$recipe->id().'&edit">Modifier la recette</a></p>';
+      echo '<p><a href="?action=recipeEdit&id_recipe='.$recipe->id().'">Modifier la recette</a></p>';
     }
     ?>
 

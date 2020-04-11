@@ -18,8 +18,9 @@
   </div>
   <div id="cookInfo">
       <h1><?php echo $cook->identifiant();?></h1>
-      <p><?php echo $cook->total();?></p>
-      <?php echo $cook->moyenne();?>
+      <?php echo $cook->moyenne();?><br>
+      <?php echo $cook->total();?><br>
+      <?php echo $cook->nbrNote();?>
 
         <p><a href="?action=accountEdit">Modifier</a></p>
         <p><a href="models/deconnexion.php">Ce n'est pas vous ?</a></p>

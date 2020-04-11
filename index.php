@@ -35,25 +35,11 @@ session_start();
         include 'views/recipe.php';
       break;
 
-      case 'recipeEdit':
-        if (!empty($_SESSION['id'])) {
-            require 'class/recipe.php';
-            $recipe = new Recipe($_GET['id_recipe']);
-
-            if ($recipe->idCook() == $_SESSION['id']) {
-              $_SESSION['post_recipe_title'] = $recipe->title();
-              $_SESSION['post_recipe_ingredients'] = $recipe->ingredients();
-              $_SESSION['post_recipe_steps'] = $recipe->ingredients();
-              $_SESSION['post_recipe_serve'] = $recipe->ingredients();
-            }
-            include 'views/recipeAdd.php';
-          }else {
-          include 'views/connexion.php';
-        }
-      break;
-
       case 'recipeAdd':
         if (!empty($_SESSION['id'])) {
+          require 'class/cook.php';
+          $cook = new Cook($_SESSION['id']);
+
           if (isset($_GET['sent'])) {
             require 'models/recipe.php';
             $reponse = recipeAdd();
@@ -71,10 +57,55 @@ session_start();
         }
       break;
 
-      case 'recipeSent':
-        if (!empty($_SESSION['id'])) {
+      case 'recipeEdit':
+        require 'class/recipe.php';
+        $recipe = new Recipe($_GET['id_recipe']);
+
+        if ($recipe->idCook() == $_SESSION['id']) {
+          require 'class/cook.php';
+          $cook = new Cook($recipe->idCook());
+
+          $_SESSION['post_recipe_title'] = $recipe->title();
+          $_SESSION['post_recipe_ingredients'] = $recipe->ingredients();
+          $_SESSION['post_recipe_steps'] = $recipe->steps();
+          $_SESSION['post_recipe_serve'] = $recipe->serve();
+
+          include 'views/recipeEdit.php';
+        }else {
+          include 'views/connexion.php';
+        }
+      break;
+
+      case 'recipeUpdate':
+        require 'class/recipe.php';
+        $recipe = new Recipe($_GET['id_recipe']);
+
+        if ($recipe->idCook() == $_SESSION['id']) {
           require 'models/recipe.php';
-          $reponse = recipeAdd();
+          $reponse = recipeUpdate($recipe->id());
+
+          require 'class/cook.php';
+          $cook = new Cook($recipe->idCook());
+          include 'views/recipeEdit.php';
+
+        }else {
+          include 'views/connexion.php';
+        }
+      break;
+
+      case 'recipeEditImage':
+        require 'class/recipe.php';
+        $recipe = new Recipe($_GET['id_recipe']);
+
+        if ($recipe->idCook() == $_SESSION['id']) {
+          require 'models/recipe.php';
+          $reponse = recipeUpdateImage($recipe->id());
+
+          require 'class/cook.php';
+          $cook = new Cook($recipe->idCook());
+
+          include 'views/recipeEdit.php';
+
         }else {
           include 'views/connexion.php';
         }
@@ -89,9 +120,8 @@ session_start();
       case 'cookUpdate':
         require 'class/cook.php';
         require 'models/cook.php';
-        $reponse = cookUpdate();
         $cook = new Cook($_SESSION['id']);
-
+        $reponse = cookUpdate();
         include 'views/accountEdit.php';
       break;
 

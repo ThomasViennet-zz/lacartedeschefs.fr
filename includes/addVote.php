@@ -16,12 +16,15 @@ if(isset($_SESSION['id']))
       <input type="radio" name="vote" id="vote" name="vote" value="2">
       <img src="images/starFull.svg">
       <img src="images/starFull.svg">
+      <img src="images/star.svg">
     </label>
     <br>
 
     <label>
       <input type="radio" id="vote" name="vote" value="1">
       <img src="images/starFull.svg">
+      <img src="images/star.svg">
+      <img src="images/star.svg">
     </label>
     <br>
 

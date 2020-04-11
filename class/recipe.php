@@ -35,28 +35,32 @@ class Recipe
 
     if(empty($resultat['note_moyenne']))
     {
-      $etoile = '<img src="images/starFull.svg"/>';
-      $note = 'Pas encore de note';
+      $etoileFull = '<img src="images/starFull.svg"/>';
+      $etoile = '<img src="images/star.svg"/>';
+      $note = $etoile.''.$etoile.''.$etoile;
       $this->setMoyenne($note);
     }else {
       if($resultat['note_moyenne'] < 2)
       {
-        $etoile = '<img src="images/starFull.svg"/>';
-        $note = $etoile;
+        $etoileFull = '<img src="images/starFull.svg"/>';
+        $etoile = '<img src="images/star.svg"/>';
+        $note = $etoileFull.''.$etoile.''.$etoile;
         $this->setMoyenne($note);
       }
 
       if($resultat['note_moyenne'] >= 2)
       {
-        $etoile = '<img src="images/starFull.svg"/>';
-        $note = $etoile.''.$etoile;
+        $etoileFull = '<img src="images/starFull.svg"/>';
+        $etoile = '<img src="images/star.svg"/>';
+        $note = $etoileFull.''.$etoileFull.''.$etoile;
         $this->setMoyenne($note);
       }
 
-      if($resultat['note_moyenne'] >= 3)
+      if($resultat['note_moyenne'] >= 2.5)
       {
-        $etoile = '<img src="images/starFull.svg"/>';
-        $note = $etoile.''.$etoile.''.$etoile;
+        $etoileFull = '<img src="images/starFull.svg"/>';
+        $etoile = '<img src="images/star.svg"/>';
+        $note = $etoileFull.''.$etoileFull.''.$etoileFull;
         $this->setMoyenne($note);
       }
     }

@@ -6,6 +6,7 @@ class Cook
   private $_picture;
   private $_moyenne;
   private $_total;
+  private $_nbrNote;
   private $_email;
 
   public function __construct($id)
@@ -14,7 +15,7 @@ class Cook
 
     $reponse = $bdd->prepare(
       'SELECT c.profile_picture cook_picture, c.identifiant cook_identifiant, c.email cook_email,
-      AVG(v.note) note_moyenne, SUM(v.note) note_total
+      AVG(v.note) note_moyenne, SUM(v.note) note_total, COUNT(v.note) nbr_note
       FROM cooks c
       INNER JOIN votes v
       ON c.id = v.id_cook
@@ -39,30 +40,45 @@ class Cook
       $this->setTotal($nbr_point);
     }
 
+    if ($resultat['nbr_note'] == 0) {
+      $nbr_point = 'Pas encore de note';
+      $this->setNbrNote($nbr_point);
+    }elseif ($resultat['nbr_note'] == 1) {
+      $nbr_point = '1 note';
+      $this->setNbrNote($nbr_point);
+    }else {
+      $nbr_point = $resultat['nbr_note'].' notes';
+      $this->setNbrNote($nbr_point);
+    }
+
     if(empty($resultat['note_moyenne']))
     {
-      $etoile = '<img src="images/starFull.svg"/>';
-      $note = 'Pas encore de note';
+      $etoileFull = '<img src="images/starFull.svg"/>';
+      $etoile = '<img src="images/star.svg"/>';
+      $note = $etoile.''.$etoile.''.$etoile;
       $this->setMoyenne($note);
     }else {
       if($resultat['note_moyenne'] < 2)
       {
-        $etoile = '<img src="images/starFull.svg"/>';
-        $note = $etoile;
+        $etoileFull = '<img src="images/starFull.svg"/>';
+        $etoile = '<img src="images/star.svg"/>';
+        $note = $etoileFull.''.$etoile.''.$etoile;
         $this->setMoyenne($note);
       }
 
       if($resultat['note_moyenne'] >= 2)
       {
-        $etoile = '<img src="images/starFull.svg"/>';
-        $note = $etoile.''.$etoile;
+        $etoileFull = '<img src="images/starFull.svg"/>';
+        $etoile = '<img src="images/star.svg"/>';
+        $note = $etoileFull.''.$etoileFull.''.$etoile;
         $this->setMoyenne($note);
       }
 
       if($resultat['note_moyenne'] >= 2.5)
       {
-        $etoile = '<img src="images/starFull.svg"/>';
-        $note = $etoile.''.$etoile.''.$etoile;
+        $etoileFull = '<img src="images/starFull.svg"/>';
+        $etoile = '<img src="images/star.svg"/>';
+        $note = $etoileFull.''.$etoileFull.''.$etoileFull;
         $this->setMoyenne($note);
       }
     }
@@ -85,25 +101,29 @@ class Cook
 
       if(empty($resultat2['recipe_moyenne']))
       {
-        $etoile = '<img src="images/starFull.svg"/>';
-        $note = 'Pas encore de note';
+        $etoileFull = '<img src="images/starFull.svg"/>';
+        $etoile = '<img src="images/star.svg"/>';
+        $note = $etoile.''.$etoile.''.$etoile;
       }else {
         if($resultat2['recipe_moyenne'] < 2)
         {
-          $etoile = '<img src="images/starFull.svg"/>';
-          $note = $etoile;
+          $etoileFull = '<img src="images/starFull.svg"/>';
+          $etoile = '<img src="images/star.svg"/>';
+          $note = $etoileFull.''.$etoile.''.$etoile;
         }
 
         if($resultat2['recipe_moyenne'] >= 2)
         {
-          $etoile = '<img src="images/starFull.svg"/>';
-          $note = $etoile.''.$etoile;
+          $etoileFull = '<img src="images/starFull.svg"/>';
+          $etoile = '<img src="images/star.svg"/>';
+          $note = $etoileFull.''.$etoileFull.''.$etoile;
         }
 
-        if($resultat2['recipe_moyenne'] >= 3)
+        if($resultat2['recipe_moyenne'] >= 2.5)
         {
-          $etoile = '<img src="images/starFull.svg"/>';
-          $note = $etoile.''.$etoile.''.$etoile;
+          $etoileFull = '<img src="images/starFull.svg"/>';
+          $etoile = '<img src="images/star.svg"/>';
+          $note = $etoileFull.''.$etoileFull.''.$etoileFull;
         }
       }
 
@@ -133,6 +153,16 @@ class Cook
       ';
     }
     $reponse->closeCursor();
+  }
+
+  public function nbrNote()
+  {
+    return $this->_nbrNote;
+  }
+
+  public function setNbrNote($nbrNote)
+  {
+    $this->_nbrNote = $nbrNote;
   }
 
   public function total()

@@ -3,19 +3,17 @@ function cookList()
 {
   require 'base.php';
 
-  $reponse = $bdd->query('SELECT SUM(v.note) note_total FROM votes v');
+  $reponse = $bdd->query('SELECT COUNT(v.id) nbr_vote_total FROM votes v');
   $resultat = $reponse->fetch();
 
   //Liste des moyennes des cooks ordonnée de la plus grande à la plus petite
   $reponse = $bdd->query(
-    'SELECT AVG(v.note) / '.$resultat['note_total'].' AS cook_note_moyenne, c.identifiant cook_identifiant, c.profile_picture cook_picture, c.id cook_id
+    'SELECT AVG(v.note) * COUNT(v.note) / '.$resultat['nbr_vote_total'].' cook_note_moyenne, c.identifiant cook_identifiant, c.profile_picture cook_picture, c.id cook_id
     FROM cooks c
     LEFT JOIN votes v
     ON c.id = v.id_cook
     GROUP BY cook_id
     ORDER BY cook_note_moyenne DESC');
-
-    //(total point / nbr de votes)/total des points de tout le Monde
 
     $position = 1;
 
@@ -27,9 +25,9 @@ function cookList()
       <div class="element" style="width:150px;text-align:center;">
         <a href="?action=cook&cook_id='.$cook->id().'"><img src="/uploads/avatars/80x80_'.$cook->picture().'"  width="80px" height="80px" class="profilPicture" /></a><br>
         #'.$position.' '.$cook->identifiant().'<br>
+        '.$cook->moyenne().'<br>
         '.$cook->total().'<br>
-        '.$cook->moyenne().'
-
+        '.$cook->nbrNote().'
       </div>
       ';
 
@@ -121,8 +119,7 @@ function cookUpdate()
         $req = $bdd->prepare('UPDATE cooks SET email = :email WHERE id = :id');
         $req->execute(array(
           'email' => $_POST['email'],
-          'id' => $_SESSION['id']
-        )) or die('Une erreur s\'est produite');
+          'id' => $_SESSION['id'])) or die('Une erreur s\'est produite');
       }else {
         return 'Cette adresse email est déjà utilisée.';
       }
