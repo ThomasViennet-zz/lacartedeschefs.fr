@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <?php include 'includes/gtmHead.php';?>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="style.css" />
@@ -61,7 +62,7 @@
 </head>
 
 <body>
-
+  <?php include 'includes/gtmBody.php';?>
   <?php include 'includes/navTop.php';?>
   <?php include 'includes/navFooter.php';?>
 

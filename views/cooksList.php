@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <?php include 'includes/gtmHead.php';?>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="style.css" />
@@ -9,7 +10,7 @@
 </head>
 
 <body>
-
+  <?php include 'includes/gtmBody.php';?>
   <?php include 'includes/navTop.php';?>
   <?php include 'includes/navFooter.php';?>
 
@@ -30,7 +31,9 @@
   <section style="text-align:center;">
     <h2>Comment fonctionne le classement ?</h2>
     <p>
-      Ceux qui cuisinent les recettes, peuvent attribuer entre une et trois étoiles aux recettes.<br>
+      Ceux qui cuisinent les recettes, peuvent attribuer entre une et trois étoiles aux recettes.
+    </p>
+    <p>
       <strong>L'ordre des chefs dans le classement est basé sur leur moyenne pondérée.</strong>
     </p>
     <p>

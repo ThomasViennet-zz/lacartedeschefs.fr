@@ -204,6 +204,9 @@ function cookUpdate()
             'profile_picture' => $name_profile_picture,
             'id' => $_SESSION['id']
           )) or die('Une erreur s\'est produite<br>');
+
+          return 'Photo modifiée.';
+          
         }else {
           return 'Format de photo non autorisé.';
         }
