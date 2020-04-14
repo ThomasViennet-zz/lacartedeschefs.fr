@@ -15,12 +15,13 @@
   <?php include 'includes/navFooter.php';?>
 
   <header>
-    <h1>Votre carte des chefs</h1>
-    <p class="colorMain"><i>Retrouvez les recettes des chefs que vous suivez.</i></p>
+    <h1>La carte des chefs</h1>
+    <p class="colorMain"><i>Révélons les talents de la gastronomie.</i></p>
   </header>
   <section class="conteneur">
     <!-- <p><u>Début de la compétition le dimanche 26 avril 2020</u></p> -->
-      <?php echo recipeFeed();?>
+    <!-- afficher nbr de points des recipes -->
+      <?php echo recipeList();?>
   </section>
   <?php include 'includes/footer.php';?>
 </body>

@@ -1,32 +1,95 @@
 <?php
-function addVote()
+function addVoteWeighted($id_recipe)
 {
-  if(!empty($_POST['vote'])) {
+  /*étoile
+  *** = Top 5%
+  ** = Top 6% - 20%
+  * = Top 21% - 50%
+
+  valeur note
+  Top 5% = count(vote total) * 0,095 * note
+  Top 6% - 20% = count(vote total) * 0,08 * note
+  Top 21% - 50% = count(vote total) * 0,05 * note
+  */
+
+  if(!empty($_POST['vote']) AND $_POST['vote'] <= 3) {//S'il essaie d'augmenter sa note bloquée à 3
 
     require 'base.php';
 
     //Est-ce que l'utilisateur a déjà voté pour cette recette ?
-    $req = $bdd->prepare('SELECT id_cook FROM votes WHERE id_recipe = :id_recipe AND id_customer = :id_customer');
-    $req->execute(array('id_recipe' => $_GET['id_recipe'], 'id_customer' => $_SESSION['id']));
-    $resultat = $req->fetch();
+    $req = $bdd->prepare('SELECT COUNT(id) id_vote FROM votes WHERE id_recipe = :id_recipe AND id_customer = :id_customer');
+    $req->execute(array('id_recipe' => $id_recipe, 'id_customer' => $_SESSION['id']));
+    $vote = $req->fetch();
 
-    if (!empty($resultat)) {
-      return 'Vous avez déjà voté !';
+    if (empty($vote['id_vote'])) {
 
+      //Est-ce qu'il vote pour lui même ?
+      $recipe = new Recipe($id_recipe);
+
+      if ($_SESSION['id'] != $recipe->idCook()) {
+
+        $etoileCook = 0;
+        $etoileSession = 0;
+
+        //Combien de customers ont déjà voté
+        $req = $bdd->query('SELECT COUNT(DISTINCT id_customer) nbr_customer FROM votes');
+        $vote = $req->fetch();
+
+        $cookSession = new Cook($_SESSION['id']);
+        $cook = new Cook($recipe->idCook());
+
+        if($vote['nbr_customer'] >= 100) {//nbr_customer changer 100
+
+
+          //S'il est moins étoilé que le cook
+          if ($cookSession->nbrEtoile() > $cook->nbrEtoile() OR $cookSession->nbrEtoile() == 0) {
+
+            $coef = $cookSession->coef()*$vote['nbr_customer'];
+            $note = $coef*$_POST['vote'];
+
+            //J'enregistre la note en base
+            $req = $bdd->prepare('INSERT INTO votes (id_recipe, id_cook, id_customer, note, date, coef) VALUES(:id_recipe, :id_cook, :id_customer, :note, NOW(), :coef)');
+            $req->execute(array(
+              'id_recipe' => $id_recipe,
+              'id_cook' => $recipe->idCook(),
+              'id_customer' => $_SESSION['id'],
+              'note' => $note,
+              'coef' => $coef)) or die('Une erreur s\'est produite');
+
+            $cook = new Cook($recipe->idCook());
+
+            $req = $bdd->prepare('UPDATE cooks SET points = :points WHERE id = :id');
+            $req->execute(array(
+              'points' => $cook->total(),
+              'id' => $cook->id())) or die('Une erreur s\'est produite');
+
+            return 'La vote a bien été ajouté !';
+          }else {
+            return 'Vous pouvez noter uniquement des chefs moins étoilés que vous.';
+          }
+        }else { //Sinon il n'y a pas encore de vote.
+          $req = $bdd->prepare('INSERT INTO votes (id_recipe, id_cook, id_customer, note, date, coef) VALUES(:id_recipe, :id_cook, :id_customer, :note, NOW(), :coef)');
+          $req->execute(array(
+            'id_recipe' => $id_recipe,
+            'id_cook' => $recipe->idCook(),
+            'id_customer' => $_SESSION['id'],
+            'note' => $_POST['vote'],
+            'coef' => '1')) or die('Une erreur s\'est produite 1');
+
+          $cook = new Cook($recipe->idCook());
+
+          $req = $bdd->prepare('UPDATE cooks SET points = :points WHERE id = :id');
+          $req->execute(array(
+            'points' => $cook->total(),
+            'id' => $recipe->idCook())) or die('Une erreur s\'est produite');
+
+          return 'La vote a bien été ajouté !';
+        }
+      }else {
+        return 'Vous ne pouvez pas noter votre recette.';
+      }
     }else {
-      //Qui est le cook ?
-      $req = $bdd->query('SELECT id_cook FROM recipes WHERE id = '.$_GET['id_recipe']);
-      $resultat = $req->fetch();
-
-      $req = $bdd->prepare('INSERT INTO votes (id_recipe, id_cook, id_customer, note) VALUES(:id_recipe, :id_cook, :id_customer, :note)');
-      $req->execute(array(
-        'id_recipe' => $_GET['id_recipe'],
-        'id_cook' => $resultat['id_cook'],
-        'id_customer' => $_SESSION['id'],
-        'note' => $_POST['vote']
-      )) or die('Une erreur s\'est produite');
-
-      return 'La vote a bien été ajouté !';
+      return 'Vous avez déjà voté !';
     }
   }else {
     return 'Choississez une note.';

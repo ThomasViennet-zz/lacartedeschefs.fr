@@ -5,12 +5,39 @@ session_start();
 
   switch ($action)
   {
+      case 'lacartedeschefs':
+        include 'views/landingPage.php';
+      break;
+
+      case 'follow':
+        require 'models/cook.php';
+        require 'class/cook.php';
+        $reponse = follow($_GET['id_cook']);
+        $cook = new Cook($_GET['id_cook']);
+        include 'views/cook.php';
+      break;
+
+      case 'unfollow':
+        require 'models/cook.php';
+        require 'class/cook.php';
+        $reponse = unfollow($_GET['id_cook']);
+        $cook = new Cook($_GET['id_cook']);
+        include 'views/cook.php';
+      break;
+
       case 'feed':
+        require 'models/recipe.php';
+        require 'models/cook.php';
+        require 'class/recipe.php';
+        require 'class/cook.php';
+        include 'views/feed.php';
+      break;
+
+      case 'recipeList':
         require 'models/recipe.php';
         require 'class/recipe.php';
         require 'class/cook.php';
-
-        include 'views/feed.php';
+        include 'views/recipeList.php';
       break;
 
       case 'addVote':
@@ -18,7 +45,7 @@ session_start();
         require 'class/recipe.php';
         require 'class/cook.php';
 
-        $reponse = addVote();
+        $reponse = addVoteWeighted($_GET['id_recipe']);
         $recipe = new Recipe($_GET['id_recipe']);
         $cook = new Cook($recipe->idCook());
 
@@ -101,6 +128,7 @@ session_start();
           require 'models/recipe.php';
           $reponse = recipeUpdateImage($recipe->id());
 
+          $recipe = new Recipe($_GET['id_recipe']);
           require 'class/cook.php';
           $cook = new Cook($recipe->idCook());
 
@@ -200,6 +228,7 @@ session_start();
       break;
 
       default:
-          include 'views/landingPage.php';
+        include 'views/landingPage.php';
+
   }
 ?>

@@ -30,16 +30,22 @@
 
   <section style="text-align:center;">
     <h2>Comment fonctionne le classement ?</h2>
-    <p>
+    <!-- <p>
       Ceux qui cuisinent les recettes, peuvent attribuer entre une et trois étoiles aux recettes.
-    </p>
-    <p>
+    </p> -->
+    <!-- <p>
       <strong>L'ordre des chefs dans le classement est basé sur leur moyenne pondérée.</strong>
-    </p>
+    </p> -->
     <p>
-
-
+      Ceux qui cuisinent les recettes peuvent noter les recettes.
     </p>
+
+    <p>
+      <strong>Vous êtes un chef "étoilé" ?</strong><br>
+      Vos notes donnent plus de points et vous pouvez uniquement noter des chefs qui ont moins d'étoiles que vous.
+    </p>
+
+
     </section>
 
     <?php include 'includes/footer.php';?>

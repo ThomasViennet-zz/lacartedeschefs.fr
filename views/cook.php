@@ -20,9 +20,14 @@
   </div>
   <div id="cookInfo">
       <h1><?php echo $cook->identifiant();?></h1>
-      <?php echo $cook->moyenne();?><br>
-      <?php echo $cook->total();?><br>
-      <?php echo $cook->nbrNote();?>
+      <?php echo $cook->etoile();?><br>
+
+      <!-- reponse de l'abonnement -->
+      <?php echo $reponse;?>
+
+      <a href="?action=follow&id_cook=<?php echo $cook->id()?>">Follow</a><br>
+      <a href="?action=unfollow&id_cook=<?php echo $cook->id()?>">Unfollow</a><br>
+      <?php echo $cook->nbrFollower();?>
   </header>
 
 <h2 style="text-align:center;">Recettes</h2>
@@ -33,5 +38,8 @@
 
   <?php include 'includes/footer.php';?>
 
+  <!-- <script src="jquery-3.5.0.js"></script>
+  <script src="scripts.js"></script> -->
+  <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script> -->
 </body>
 </html>

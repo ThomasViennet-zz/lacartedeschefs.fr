@@ -1,6 +1,6 @@
 <nav id="navTop">
   <ul>
-    <li><img src="images/logo_la_carte_des_chefs.svg" alt="Logo La carte des chefs" class="navItem"/></li>
+    <a href="?action=lacartedeschefs"><li><img src="images/logo_la_carte_des_chefs.svg" alt="Logo La carte des chefs" class="navItem"/></li></a>
     <?php
     if (!empty($_SESSION['id'])) {
       echo '<a href="?action=recipeAdd"><li><img src="images/add.svg" alt="Ajouter une recette" class="navItem"></li></a>';

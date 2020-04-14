@@ -6,26 +6,24 @@ function cookList()
   $reponse = $bdd->query('SELECT COUNT(v.id) nbr_vote_total FROM votes v');
   $resultat = $reponse->fetch();
 
-  //Liste des moyennes des cooks ordonnée de la plus grande à la plus petite
+  //Liste des cooks ordonnée par le nbr de point total
   $reponse = $bdd->query(
-    'SELECT AVG(v.note) * COUNT(v.note) / '.$resultat['nbr_vote_total'].' cook_note_moyenne, c.identifiant cook_identifiant, c.profile_picture cook_picture, c.id cook_id
-    FROM cooks c
-    LEFT JOIN votes v
-    ON c.id = v.id_cook
-    GROUP BY cook_id
-    ORDER BY cook_note_moyenne DESC');
+    'SELECT id
+    FROM cooks
+    ORDER BY points DESC');
 
     $position = 1;
 
     while ($resultat = $reponse->fetch())
     {
-      $cook = new Cook($resultat['cook_id']);
+      // echo $resultat['cook_note_total'];
+      $cook = new Cook($resultat['id']);
 
       echo '
       <div class="element" style="width:150px;text-align:center;">
         <a href="?action=cook&cook_id='.$cook->id().'"><img src="/uploads/avatars/80x80_'.$cook->picture().'"  width="80px" height="80px" class="profilPicture" /></a><br>
         #'.$position.' '.$cook->identifiant().'<br>
-        '.$cook->moyenne().'<br>
+        '.$cook->etoile().'<br>
         '.$cook->total().'<br>
         '.$cook->nbrNote().'
       </div>
@@ -62,7 +60,7 @@ function cookRegister()
 				}else {
 					$password_hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-					$req = $bdd->prepare('INSERT INTO cooks (last_name, first_name, email, password, biography, profile_picture, identifiant, date, subscription) VALUES(:last_name, :first_name, :email, :password, :biography, :profile_picture, :identifiant, NOW(), :subscription)');
+					$req = $bdd->prepare('INSERT INTO cooks (last_name, first_name, email, password, biography, profile_picture, identifiant, date, subscription, points) VALUES(:last_name, :first_name, :email, :password, :biography, :profile_picture, :identifiant, NOW(), :subscription, :points)');
 					$req->execute(array(
 						'last_name' => '',
 						'first_name' => '',
@@ -71,7 +69,8 @@ function cookRegister()
 						'biography' => '',
 						'profile_picture' => 'account.svg',
 						'identifiant' => $_POST['identifiant'],
-						'subscription' => ''
+						'subscription' => '',
+            'points' => 0
 					)) or die('Une erreur s\'est produite');
 
 					$req = $bdd->prepare('SELECT id FROM cooks WHERE email = :email');
@@ -153,7 +152,7 @@ function cookUpdate()
         $extensions_autorisees = array('jpg', 'jpeg', 'png');
         if (in_array($extension_upload, $extensions_autorisees))
         {
-          $name_profile_picture = time().''.rand().'.jpeg';
+          $name_profile_picture = $_SESSION['id'].'.jpeg';
 
           move_uploaded_file($_FILES['profile_picture']['tmp_name'], 'uploads/avatars/'.$name_profile_picture);
 
@@ -205,8 +204,10 @@ function cookUpdate()
             'id' => $_SESSION['id']
           )) or die('Une erreur s\'est produite<br>');
 
+          unlink('uploads/avatars/'.$name_profile_picture.'');
+
           return 'Photo modifiée.';
-          
+
         }else {
           return 'Format de photo non autorisé.';
         }
@@ -318,5 +319,49 @@ function pwdUpdate($email, $pwd, $cle)
     }
   }else {
     return 'Choisissez un mot de passe.';
+  }
+}
+
+function follow($id_following)
+{
+  if(!empty($_SESSION['id']))
+  {
+    require 'base.php';
+
+    //est-ce qu'il est déjà abonné ?
+    $req = $bdd->query('SELECT id FROM followers WHERE id_follower = '.$_SESSION['id'].' AND id_following = '.$id_following);
+    $resultat = $req->fetch();
+
+    if (empty($resultat)) {
+      $req = $bdd->prepare('INSERT INTO followers (id_follower, id_following, date) VALUES(:id_follower, :id_following, NOW())');
+      $req->execute(array('id_follower' => $_SESSION['id'],'id_following' => $id_following)) or die('Une erreur s\'est produite');
+
+      return 'Vous êtes abonné !<br> Retrouvez les recettes de ce chefs dans <a href="?action=feed">votre sélection</a>.<br>';
+    }else {
+      return 'Vous êtes déjà abonné.<br>';
+    }
+  }else {
+    return '<a href="?action=account">Connectez-vous</a> pour vous abonner.';
+  }
+}
+
+function unfollow($id_following)
+{
+  if(!empty($_SESSION['id']))
+  {
+    require 'base.php';
+
+    //est-ce qu'il est déjà abonné ?
+    $req = $bdd->query('SELECT id FROM followers WHERE id_follower = '.$_SESSION['id'].' AND id_following = '.$id_following);
+
+    if (!empty($req)) {
+      $req = $bdd->prepare('DELETE FROM followers WHERE id_follower = :id_follower AND id_following = :id_following');
+      $req->execute(array('id_follower' => $_SESSION['id'], 'id_following' => $id_following)) or die('Une erreur s\'est produite');
+      return 'Vous êtes désabonné !<br>';
+    }else {
+      return 'Vous n\'êtes pas abonné.';
+    }
+  }else {
+    return '<a href="?action=account">Connectez-vous</a> pour vous abonner.';
   }
 }

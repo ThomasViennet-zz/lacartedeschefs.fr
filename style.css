@@ -130,6 +130,7 @@ i
 
 #navTop
 {
+  /* display: none; */
   background-color: white;
   height: 80px;
   width: 100%;
@@ -141,6 +142,7 @@ i
 
 #navFooter
 {
+  /* display: none; */
   background-color: #f39614;
   height: 80px;
   width: 100%;

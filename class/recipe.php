@@ -33,6 +33,10 @@ class Recipe
     $this->setTotal($resultat['note_total']);
     $this->setServe($resultat['recipe_serve']);
 
+    //MAJ %
+    //
+    //
+    //
     if(empty($resultat['note_moyenne']))
     {
       $etoileFull = '<img src="images/starFull.svg"/>';
