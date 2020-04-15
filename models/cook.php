@@ -35,11 +35,13 @@ function cookList()
 
 function cookRegister()
 {
-  // Ma clé privée
+  //reCaptcha
+
+  // clé privée
   $secret = "6Ld31ukUAAAAAK2FNOGCcp0XHg4bPnpDV5jqdZAI";
   // Paramètre renvoyé par le recaptcha
   $response = $_POST['g-recaptcha-response'];
-  // On récupère l'IP de l'utilisateur
+  // IP de l'utilisateur
   $remoteip = $_SERVER['REMOTE_ADDR'];
 
   $api_url = "https://www.google.com/recaptcha/api/siteverify?secret="
@@ -50,6 +52,7 @@ function cookRegister()
   $decode = json_decode(file_get_contents($api_url), true);
 
   if ($decode['success'] == true) {
+
     if(!empty($_POST['identifiant']) AND !empty($_POST['email']) AND !empty($_POST['password']) AND !empty($_POST['passwordConfirm']))
   	{
   		if($_POST['password'] == $_POST['passwordConfirm'])
@@ -240,104 +243,127 @@ function cookUpdate()
   }
 }
 
+//Demande de changement de mot de passe
 function forgetPwd($email)
 {
-  $cle = password_hash(time(), PASSWORD_DEFAULT);
-
   require ('base.php');
 
-  $req = $bdd->prepare('INSERT INTO password (cle, email, date, done) VALUES(:cle, :email, NOW(), :done)');
-  $req->execute(array(
-    'cle' => $cle,
-    'email' => $email,
-    'done' => 0))
-    or die('Une erreur s\'est produite');
+  $req = $bdd->prepare('SELECT id FROM cooks WHERE email = :email');
+  $req->execute(array('email' => $email));
+  $resultat = $req->fetch();
 
-  $to    = "viennet.t@gmail.com";
-  $from  = "bonjour@lacartedeschefs.fr";
-  ini_set("SMTP", "smtp.lacartedeschefs.fr");
+  if (!empty($resultat)) {
 
-  $JOUR  = date("Y-m-d");
-  $HEURE = date("H:i");
+    $cle = password_hash(time(), PASSWORD_DEFAULT);
 
-  $Subject = "La carte des chefs - Modifier mot de passe";
+    $req = $bdd->prepare('INSERT INTO password (cle, email, date, done) VALUES(:cle, :email, NOW(), :done)');
+    $req->execute(array(
+      'cle' => $cle,
+      'email' => $email,
+      'done' => 0))
+      or die('Une erreur s\'est produite');
 
-  $mail_Data = "";
-  $mail_Data .= "<html> \n";
-  $mail_Data .= "<head> \n";
-  $mail_Data .= "<title> La carte des chefs - Modifier mot de passe</title> \n";
-  $mail_Data .= "</head> \n";
-  $mail_Data .= "<body> \n";
+    $to    = "$email";
+    $from  = "bonjour@lacartedeschefs.fr";
+    ini_set("SMTP", "smtp.lacartedeschefs.fr");
 
-  $mail_Data .= "<b>$Subject </b> <br> \n";
-  $mail_Data .= "<br> \n";
-  $mail_Data .= "Si vous n'avez pas fait de demande de changement de mot de passe, ne faites rien.<br> \n";
-  $mail_Data .= "Cliquez sur le lien pour changer de mot de passe :<br> \n";
-  $mail_Data .= "http://lacartedeschefs.fr/?action=forgetPwd&update&cle=$cle&email=$to<br>\n";
-  $mail_Data .= "</body> \n";
-  $mail_Data .= "</HTML> \n";
+    $JOUR  = date("Y-m-d");
+    $HEURE = date("H:i");
 
-  $headers  = "MIME-Version: 1.0 \n";
-  $headers .= "Content-type: text/html; charset=iso-8859-1 \n";
-  $headers .= "From: $from  \n";
-  $headers .= "Disposition-Notification-To: $from  \n";
-  $headers .= "X-Priority: 1  \n";
-  $headers .= "X-MSMail-Priority: High \n";
+    $Subject = "Modifier votre mot de passe";
 
-  $CR_Mail = TRUE;
-  $CR_Mail = @mail ($to, $Subject, $mail_Data, $headers);
+    $mail_Data = "";
+    $mail_Data .= "<html> \n";
+    $mail_Data .= "<head> \n";
+    $mail_Data .= "<title>Modifier votre mot de passe</title> \n";
+    $mail_Data .= "</head> \n";
+    $mail_Data .= "<body> \n";
 
-  return 'Demande enregistrée. <br>
-  Vous allez recevoir un email à <strong>'.$_POST['email'].'</stong>';
+    $mail_Data .= "<b>$Subject </b> <br> \n";
+    $mail_Data .= "<br> \n";
+    $mail_Data .= "Cliquez sur le lien pour changer de mot de passe :<br> \n";
+    $mail_Data .= "http://lacartedeschefs.fr/?action=forgetPwd&update&cle=$cle&email=$to<br>\n";
+    $mail_Data .= "Si vous n'avez pas fait de demande de changement de mot de passe, ne faites rien.<br> \n";
+    $mail_Data .= "</body> \n";
+    $mail_Data .= "</HTML> \n";
+
+    $headers  = "MIME-Version: 1.0 \n";
+    $headers .= "Content-type: text/html; charset=iso-8859-1 \n";
+    $headers .= "From: $from  \n";
+    $headers .= "Disposition-Notification-To: $from  \n";
+    $headers .= "X-Priority: 1  \n";
+    $headers .= "X-MSMail-Priority: High \n";
+
+    $CR_Mail = TRUE;
+    $CR_Mail = @mail ($to, $Subject, $mail_Data, $headers);
+
+    if ($CR_Mail === FALSE) {
+      return 'Une erreur s\'est produite.';
+    }else {
+      return 'Si un compte avec cette adresse email existe,<br>
+      vous allez recevoir un email contenant un lien de réinitialisation.';
+    }
+  }else {
+    return 'Si un compte avec cette adresse email existe,<br>
+    vous allez recevoir un email contenant un lien de réinitialisation.';
+  }
 }
 
+//Confirmation par email de la demande de mot de passe (simple information)
 function pwdConfirm($email, $cle)
 {
   require 'base.php';
 
-  $req = $bdd->prepare('SELECT cle, done FROM password WHERE email = :email');
+  $req = $bdd->prepare('SELECT cle FROM password WHERE email = :email');
   $req->execute(array('email' => $email)) or die('Une erreur s\'est produite');
   $resultat = $req->fetch();
 
-  if (isset($resultat['cle']) AND $resultat['cle'] == $cle) {
-    if ($resultat['done'] == 0) {
+  if (in_array($cle, $resultat)) {
       return 'Vous êtes autorisé à changer de mot de passe.';
     }else {
-      return 'Ce lien a déjà été utilisé.';
+      return 'Vous n\'êtes pas autorisé à changer de mot de passe.';
+    }
+}
+
+//Màj du cook
+function pwdUpdate($email, $pwd, $cle)
+{
+  require 'base.php';
+
+  $req = $bdd->prepare('SELECT cle FROM password WHERE email = :email');
+  $req->execute(array('email' => $email)) or die('Une erreur s\'est produite');
+  $resultat = $req->fetch();
+
+  if (in_array($cle, $resultat)) {
+
+    if (!empty($_POST['password'])) {
+      if ($_POST['passwordConfirm'] == $_POST['password']) {
+
+        $req = $bdd->prepare('SELECT cle, done FROM password WHERE email = :email');
+        $req->execute(array('email' => $email)) or die('Une erreur s\'est produite');
+        $resultat = $req->fetch();
+
+        if (isset($resultat['cle']) AND $resultat['cle'] == $cle) {
+          $password_hash = password_hash($pwd, PASSWORD_DEFAULT);
+
+          $req = $bdd->prepare('UPDATE cooks SET password = :pwd WHERE email = :email');
+          $req->execute(array('email' => $email, 'pwd' => $password_hash)) or die('Une erreur s\'est produite');
+
+          $req = $bdd->prepare('DELETE FROM password WHERE email = :email');
+          $req->execute(array('email' => $email)) or die('Une erreur s\'est produite');
+
+          return 'Votre mot de passe a été mis à jour.';
+        }else {
+          return 'Vous n\'êtes pas autorisé à changer de mot de passe.';
+        }
+      }else {
+        return 'Les mots de passe ne correspondent pas.';
+      }
+    }else {
+      return 'Choisissez un mot de passe.';
     }
   }else {
     return 'Vous n\'êtes pas autorisé à changer de mot de passe.';
-  }
-}
-
-function pwdUpdate($email, $pwd, $cle)
-{
-  if (!empty($_POST['password'])) {
-    if ($_POST['passwordConfirm'] == $_POST['password']) {
-
-      require 'base.php';
-      $req = $bdd->prepare('SELECT cle, done FROM password WHERE email = :email');
-      $req->execute(array('email' => $email)) or die('Une erreur s\'est produite');
-      $resultat = $req->fetch();
-
-      if (isset($resultat['cle']) AND $resultat['cle'] == $cle) {
-        $password_hash = password_hash($pwd, PASSWORD_DEFAULT);
-
-        $req = $bdd->prepare('UPDATE cooks SET password = :pwd WHERE email = :email');
-        $req->execute(array('email' => $email, 'pwd' => $password_hash)) or die('Une erreur s\'est produite');
-
-        $req = $bdd->prepare('DELETE FROM password WHERE email = :email');
-        $req->execute(array('email' => $email)) or die('Une erreur s\'est produite');
-
-        return 'Votre mot de passe a été mis à jour.';
-      }else {
-        return 'Vous n\'êtes pas autorisé à changer de mot de passe.';
-      }
-    }else {
-      return 'Les mots de passe ne correspondent pas.';
-    }
-  }else {
-    return 'Choisissez un mot de passe.';
   }
 }
 

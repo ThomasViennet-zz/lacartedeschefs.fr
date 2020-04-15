@@ -27,12 +27,13 @@
       <form method="post" action="?action=connexion">
         <label for="email">Email</label><input type="email" id="email" name="email" placeholder="Email *"><br>
         <label for="password">Mot de passe</label><input type="password" id="password" name="password" placeholder="Mot de passe *"><br>
+        <a href="?action=forgetPwd">Mot de passe oublié</a>
         <div class="g-recaptcha"
         data-sitekey="6Ld31ukUAAAAABk5yCzRpNIFnzjXvWHhnVHaR8Ib">
         </div>
         <input type="submit" name="submit" value="Valider" class="button">
       </form>
-      <a href="?action=forgetPwd">Mot de passe oublié</a>
+
     </div>
 
     <div class="element" style="width:300px;">
