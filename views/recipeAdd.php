@@ -83,8 +83,8 @@
       <label for="title">Titre</label><input type="text" name="title" id="title" value="<?php echo $_SESSION['post_recipe_title'];?>" placeholder="Titre de votre recette *"/>
 
       <label for="ingredients">Ingrédients</label>
-      <div id="indicIngredients"></div>
-      <textarea onblur="calculeLongueur();" onfocus="calculeLongueur();" onkeydown="calculeLongueur();" onkeyup="calculeLongueur();" name="ingredients" id="ingredients" placeholder="Les ingrédients de votre recette" rows="5"><?php echo $_SESSION['post_recipe_ingredients'];?></textarea><br>
+      <div id="indicIngredients">500 caractères disponibles</div>
+      <textarea onblur="calculeLongueur();" onfocus="calculeLongueur();" onkeydown="calculeLongueur();" onkeyup="calculeLongueur();" name="ingredients" id="ingredients" placeholder="Listez les ingrédients de votre recette" rows="5"><?php echo $_SESSION['post_recipe_ingredients'];?></textarea><br>
 
       <label for="steps">Préparation</label>
       <div id="indicSteps">1000 caractères restant</div>
@@ -94,7 +94,7 @@
       <label for="serve">Servir</label>
       <div id="indicServe">500 caractères disponibles</div>
 
-      <textarea onblur="calculeLongueur();" onfocus="calculeLongueur();" onkeydown="calculeLongueur();" onkeyup="calculeLongueur();" name="serve" id="serve" placeholder="Décrivez votre recette ..." rows="5"><?php echo $_SESSION['post_recipe_serve'];?></textarea><br>
+      <textarea onblur="calculeLongueur();" onfocus="calculeLongueur();" onkeydown="calculeLongueur();" onkeyup="calculeLongueur();" name="serve" id="serve" placeholder="Décrivez votre comment présenter le plat ..." rows="5"><?php echo $_SESSION['post_recipe_serve'];?></textarea><br>
 
       Photo du plat * (400 pixels par 400 pixels) <input type="file" name="recipe_picture" /><br>
       <input type="submit" name="submit" value="Envoyer" class="button">
