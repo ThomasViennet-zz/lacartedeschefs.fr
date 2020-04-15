@@ -183,13 +183,14 @@ session_start();
 
       case 'cook':
         if ($_GET['cook_id']) {
+          require 'class/cook.php';
           if ($_SESSION['id'] == $_GET['cook_id']) {
-            require 'class/cook.php';
             $cook = new Cook($_SESSION['id']);
             include 'views/account.php';
           }else {
-            require 'class/cook.php';
+            require 'models/cook.php';
             $cook = new Cook($_GET['cook_id']);
+            $reponse = following($cook->id());
             include 'views/cook.php';
           }
         }

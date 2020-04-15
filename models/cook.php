@@ -322,21 +322,22 @@ function pwdUpdate($email, $pwd, $cle)
   }
 }
 
-function follow($id_following)
+function follow($idCook)
 {
   if(!empty($_SESSION['id']))
   {
     require 'base.php';
 
     //est-ce qu'il est déjà abonné ?
-    $req = $bdd->query('SELECT id FROM followers WHERE id_follower = '.$_SESSION['id'].' AND id_following = '.$id_following);
+    $req = $bdd->query('SELECT id FROM followers WHERE id_follower = '.$_SESSION['id'].' AND id_following = '.$idCook);
     $resultat = $req->fetch();
 
     if (empty($resultat)) {
       $req = $bdd->prepare('INSERT INTO followers (id_follower, id_following, date) VALUES(:id_follower, :id_following, NOW())');
-      $req->execute(array('id_follower' => $_SESSION['id'],'id_following' => $id_following)) or die('Une erreur s\'est produite');
+      $req->execute(array('id_follower' => $_SESSION['id'],'id_following' => $idCook)) or die('Une erreur s\'est produite');
 
-      return 'Vous êtes abonné !<br> Retrouvez les recettes de ce chefs dans <a href="?action=feed">votre sélection</a>.<br>';
+      return 'Vous êtes abonné !<br> Retrouvez les recettes de ce chefs dans <a href="?action=feed">votre sélection</a>.<br>
+      <a href="?action=unfollow&id_cook='.$idCook.'">Se désabonner</a><br>';
     }else {
       return 'Vous êtes déjà abonné.<br>';
     }
@@ -345,23 +346,45 @@ function follow($id_following)
   }
 }
 
-function unfollow($id_following)
+function unfollow($idCook)
 {
   if(!empty($_SESSION['id']))
   {
     require 'base.php';
 
     //est-ce qu'il est déjà abonné ?
-    $req = $bdd->query('SELECT id FROM followers WHERE id_follower = '.$_SESSION['id'].' AND id_following = '.$id_following);
+    $req = $bdd->query('SELECT id FROM followers WHERE id_follower = '.$_SESSION['id'].' AND id_following = '.$idCook);
 
     if (!empty($req)) {
       $req = $bdd->prepare('DELETE FROM followers WHERE id_follower = :id_follower AND id_following = :id_following');
-      $req->execute(array('id_follower' => $_SESSION['id'], 'id_following' => $id_following)) or die('Une erreur s\'est produite');
-      return 'Vous êtes désabonné !<br>';
+      $req->execute(array('id_follower' => $_SESSION['id'], 'id_following' => $idCook)) or die('Une erreur s\'est produite');
+      return 'Vous êtes désabonné !<br>
+      <a href="?action=follow&id_cook='.$idCook.'">S\'abonner</a><br>';
     }else {
       return 'Vous n\'êtes pas abonné.';
     }
   }else {
     return '<a href="?action=account">Connectez-vous</a> pour vous abonner.';
+  }
+}
+
+function following($idCook)
+{
+  if(!empty($_SESSION['id']))
+  {
+    require 'base.php';
+    //est-ce qu'il est déjà abonné ?
+    $req = $bdd->query(
+      'SELECT COUNT(id) nbId
+      FROM followers
+      WHERE id_follower = '.$_SESSION['id'].' AND id_following = '.$idCook) or die('erreur');
+    $resultat = $req->fetch();
+
+    if(empty($resultat['nbId']))
+    {
+      return '<a href="?action=follow&id_cook='.$idCook.'">S\'abonner</a><br>';
+    }else {
+      return '<a href="?action=unfollow&id_cook='.$idCook.'">Se désabonner</a><br>';
+    }
   }
 }

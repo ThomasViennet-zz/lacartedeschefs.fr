@@ -25,8 +25,6 @@
       <!-- reponse de l'abonnement -->
       <?php echo $reponse;?>
 
-      <a href="?action=follow&id_cook=<?php echo $cook->id()?>">Follow</a><br>
-      <a href="?action=unfollow&id_cook=<?php echo $cook->id()?>">Unfollow</a><br>
       <?php echo $cook->nbrFollower();?>
   </header>
 
