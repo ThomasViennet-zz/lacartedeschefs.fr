@@ -4,6 +4,8 @@
     <?php
     if (!empty($_SESSION['id'])) {
       echo '<a href="?action=recipeAdd"><li><img src="images/add.svg" alt="Ajouter une recette" class="navItem"></li></a>';
+    }else {
+      echo '<a href="?action=lacartedeschefs"><li><img src="images/help.svg" alt="La carte des chefs" class="navItem"></li></a>';
     }
     if (isset($_SESSION['id']) AND $_GET['action'] == 'account') {
       if ($_SESSION['id'] == $cook->id()) {
