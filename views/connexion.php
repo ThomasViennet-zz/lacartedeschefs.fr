@@ -22,9 +22,9 @@
 
   <p class="colorMain" style="text-align:center;"><?php echo $reponse;?></p>
   <section class="conteneur" style="justify-content:space-evenly;">
-    <div class="element">
+    <div class="element" style="width:300px;">
       <h2>Connectez-vous</h2>
-      <form method="post" action="?action=connexion" id="">
+      <form method="post" action="?action=connexion">
         <label for="email">Email</label><input type="email" id="email" name="email" placeholder="Email *"><br>
         <label for="password">Mot de passe</label><input type="password" id="password" name="password" placeholder="Mot de passe *"><br>
         <div class="g-recaptcha"
@@ -35,7 +35,7 @@
       <a href="?action=forgetPwd">Mot de passe oublié</a>
     </div>
 
-    <div class="element">
+    <div class="element" style="width:300px;">
       <h2>Créez un compte</h2>
       <form method="post" action="?action=cookRegister">
         <label for="email">Email</label><input type="email" id="email" name="email" placeholder="Votre adresse email *"><br>

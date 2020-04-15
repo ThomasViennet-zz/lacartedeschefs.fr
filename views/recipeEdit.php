@@ -77,7 +77,7 @@
   <div id="recipe_cook">
     <a href="?action=cook&cook_id=<?php echo $cook->id();?>"><img src="/uploads/avatars/80x80_<?php echo $cook->picture();?>"  width="80px" height="80px" class="profilPicture" /></a><br>
     <?php echo $cook->identifiant();?><br>
-    <?php echo $cook->moyenne();?><br>
+    <?php echo $cook->etoile();?><br>
     <a href="models/deconnexion.php">Ce n'est pas vous ?</a><br>
   </div>
 

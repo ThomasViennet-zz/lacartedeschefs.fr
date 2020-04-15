@@ -94,7 +94,7 @@
       <label for="serve">Servir</label>
       <div id="indicServe">500 caractères disponibles</div>
 
-      <textarea onblur="calculeLongueur();" onfocus="calculeLongueur();" onkeydown="calculeLongueur();" onkeyup="calculeLongueur();" name="serve" id="serve" placeholder="Décrivez votre comment présenter le plat ..." rows="5"><?php echo $_SESSION['post_recipe_serve'];?></textarea><br>
+      <textarea onblur="calculeLongueur();" onfocus="calculeLongueur();" onkeydown="calculeLongueur();" onkeyup="calculeLongueur();" name="serve" id="serve" placeholder="Vos suggestions pour présenter ..." rows="5"><?php echo $_SESSION['post_recipe_serve'];?></textarea><br>
 
       Photo du plat * (400 pixels par 400 pixels) <input type="file" name="recipe_picture" /><br>
       <input type="submit" name="submit" value="Envoyer" class="button">
