@@ -48,7 +48,7 @@
     <?php echo $recipe->serve();?>
   </section>
 
-  <section>
+  <section id="vote">
     <h2>Noter</h2>
     <p class="colorMain"><?php
     if ($_GET['action'] == 'addVote') {

@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" type="image/png" href="images/30x30_logo_la_carte_des_chefs.png">
   <title>Mon compte</title>
+  <script src="https://www.google.com/recaptcha/api.js"></script>
 </head>
 
 <body>
@@ -16,16 +17,19 @@
 
   <header>
     <h1>Mon compte</h1>
-    <p class="colorMain"><i>Marquez l'histoire de la gastronomie.</i></p>
+    <p class="boldItalic">Marquez l'histoire de la gastronomie.</p>
   </header>
 
   <p class="colorMain" style="text-align:center;"><?php echo $reponse;?></p>
   <section style="display:flex;justify-content:center;">
     <div style="width:400px;padding:0 10px;">
       <h2>Connectez-vous</h2>
-      <form method="post" action="?action=connexion">
+      <form method="post" action="?action=connexion" id="">
         <label for="email">Email</label><input type="email" id="email" name="email" placeholder="Email *"><br>
         <label for="password">Mot de passe</label><input type="password" id="password" name="password" placeholder="Mot de passe *"><br>
+        <div class="g-recaptcha"
+        data-sitekey="6Ld31ukUAAAAABk5yCzRpNIFnzjXvWHhnVHaR8Ib">
+        </div>
         <input type="submit" name="submit" value="Valider" class="button">
       </form>
       <a href="?action=forgetPwd">Mot de passe oublié</a>
@@ -38,6 +42,9 @@
         <label for="identifiant">Identifiant</label><input type="text" id="identifiant" name="identifiant" placeholder="Choisissez un identifiant *"><br>
         <label for="password">Mot de passe</label><input type="password" id="password" name="password" placeholder="Votre mot de passe *"><br>
         <label for="passwordConfirm">Confirmer mot de passe</label><input type="password" id="passwordConfirm" name="passwordConfirm" placeholder="Confirmer le mot de passe *"><br>
+        <div class="g-recaptcha"
+        data-sitekey="6Ld31ukUAAAAABk5yCzRpNIFnzjXvWHhnVHaR8Ib">
+        </div>
         <input type="submit" name="submit" value="Valider" class="button">
       </form>
     </div>

@@ -16,7 +16,7 @@
 
   <header>
     <h1>La carte des chefs</h1>
-    <p class="colorMain"><i>Révélons les talents de la gastronomie.</i></p>
+    <p class="boldItalic">Révélons les talents de la gastronomie.</p>
   </header>
   <section class="conteneur">
     <!-- <p><u>Début de la compétition le dimanche 26 avril 2020</u></p> -->

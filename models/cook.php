@@ -35,62 +35,81 @@ function cookList()
 
 function cookRegister()
 {
-	if(!empty($_POST['identifiant']) AND !empty($_POST['email']) AND !empty($_POST['password']) AND !empty($_POST['passwordConfirm']))
-	{
-		if($_POST['password'] == $_POST['passwordConfirm'])
-		{
-			require 'base.php';
+  // Ma clé privée
+  $secret = "6Ld31ukUAAAAAK2FNOGCcp0XHg4bPnpDV5jqdZAI";
+  // Paramètre renvoyé par le recaptcha
+  $response = $_POST['g-recaptcha-response'];
+  // On récupère l'IP de l'utilisateur
+  $remoteip = $_SERVER['REMOTE_ADDR'];
 
-			$req = $bdd->prepare('SELECT email, identifiant FROM cooks WHERE email = :email');
-			$req->execute(array('email' => $_POST['email']));
-			$resultat = $req->fetch();
+  $api_url = "https://www.google.com/recaptcha/api/siteverify?secret="
+      . $secret
+      . "&response=" . $response
+      . "&remoteip=" . $remoteip ;
 
-			if(!empty($resultat['identifiant']) AND !empty($resultat['email']))
-			{
-				return 'Vous avez déjà un compte.';
-			}else {
+  $decode = json_decode(file_get_contents($api_url), true);
 
-				$req = $bdd->prepare('SELECT identifiant FROM cooks WHERE identifiant = :identifiant');
-				$req->execute(array('identifiant' => $_POST['identifiant']));
-				$resultat = $req->fetch();
+  if ($decode['success'] == true) {
+    if(!empty($_POST['identifiant']) AND !empty($_POST['email']) AND !empty($_POST['password']) AND !empty($_POST['passwordConfirm']))
+  	{
+  		if($_POST['password'] == $_POST['passwordConfirm'])
+  		{
+  			require 'base.php';
 
-				if(!empty($resultat))
-				{
-					return 'Cet identifiant est déjà utilisé.';
-				}else {
-					$password_hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
+  			$req = $bdd->prepare('SELECT email, identifiant FROM cooks WHERE email = :email');
+  			$req->execute(array('email' => $_POST['email']));
+  			$resultat = $req->fetch();
 
-					$req = $bdd->prepare('INSERT INTO cooks (last_name, first_name, email, password, biography, profile_picture, identifiant, date, subscription, points) VALUES(:last_name, :first_name, :email, :password, :biography, :profile_picture, :identifiant, NOW(), :subscription, :points)');
-					$req->execute(array(
-						'last_name' => '',
-						'first_name' => '',
-						'email' => $_POST['email'],
-						'password' => $password_hash,
-						'biography' => '',
-						'profile_picture' => 'account.svg',
-						'identifiant' => $_POST['identifiant'],
-						'subscription' => '',
-            'points' => 0
-					)) or die('Une erreur s\'est produite');
+  			if(!empty($resultat['identifiant']) AND !empty($resultat['email']))
+  			{
+  				return 'Vous avez déjà un compte.';
+  			}else {
 
-					$req = $bdd->prepare('SELECT id FROM cooks WHERE email = :email');
-					$req->execute(array('email' => $_POST['email']));
-					$resultat = $req->fetch();
+  				$req = $bdd->prepare('SELECT identifiant FROM cooks WHERE identifiant = :identifiant');
+  				$req->execute(array('identifiant' => $_POST['identifiant']));
+  				$resultat = $req->fetch();
 
-					session_start();
-					$_SESSION['id'] = $resultat['id'];
-					$_SESSION['email'] = $_POST['email'];
-					$_SESSION['identifiant'] = $_POST['identifiant'];
+  				if(!empty($resultat))
+  				{
+  					return 'Cet identifiant est déjà utilisé.';
+  				}else {
+  					$password_hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-					header('Location: ../?action=account');
-				}
-			}
-		}else {
-			return 'Les mots de passe de correspondent pas.';
-		}
-	}else {
-		return 'Veuilliez saisir toutes les informations obligatoires.';
-	}
+  					$req = $bdd->prepare('INSERT INTO cooks (last_name, first_name, email, password, biography, profile_picture, identifiant, date, subscription, points) VALUES(:last_name, :first_name, :email, :password, :biography, :profile_picture, :identifiant, NOW(), :subscription, :points)');
+  					$req->execute(array(
+  						'last_name' => '',
+  						'first_name' => '',
+  						'email' => $_POST['email'],
+  						'password' => $password_hash,
+  						'biography' => '',
+  						'profile_picture' => 'account.svg',
+  						'identifiant' => $_POST['identifiant'],
+  						'subscription' => '',
+              'points' => 0
+  					)) or die('Une erreur s\'est produite');
+
+  					$req = $bdd->prepare('SELECT id FROM cooks WHERE email = :email');
+  					$req->execute(array('email' => $_POST['email']));
+  					$resultat = $req->fetch();
+
+  					session_start();
+  					$_SESSION['id'] = $resultat['id'];
+  					$_SESSION['email'] = $_POST['email'];
+  					$_SESSION['identifiant'] = $_POST['identifiant'];
+
+  					header('Location: ../?action=account');
+  				}
+  			}
+  		}else {
+  			return 'Les mots de passe de correspondent pas.';
+  		}
+  	}else {
+  		return 'Veuilliez saisir toutes les informations obligatoires.';
+  	}
+  }
+  else {
+  	return 'Veuillez cocher la case "I\'m not a bot"';
+  }
 }
 
 function cookUpdate()
@@ -337,9 +356,9 @@ function follow($idCook)
       $req->execute(array('id_follower' => $_SESSION['id'],'id_following' => $idCook)) or die('Une erreur s\'est produite');
 
       return 'Vous êtes abonné !<br> Retrouvez les recettes de ce chefs dans <a href="?action=feed">votre sélection</a>.<br>
-      <a href="?action=unfollow&id_cook='.$idCook.'">Se désabonner</a><br>';
+      <a href="?action=unfollow&id_cook='.$idCook.'">Se désabonner</a>';
     }else {
-      return 'Vous êtes déjà abonné.<br>';
+      return 'Vous êtes déjà abonné.';
     }
   }else {
     return '<a href="?action=account">Connectez-vous</a> pour vous abonner.';
@@ -386,5 +405,7 @@ function following($idCook)
     }else {
       return '<a href="?action=unfollow&id_cook='.$idCook.'">Se désabonner</a><br>';
     }
+  }else {
+    return '<a href="?action=account">Connectez-vous</a> pour vous abonner.';
   }
 }

@@ -23,7 +23,7 @@
       <?php echo $cook->etoile();?><br>
 
       <!-- reponse de l'abonnement -->
-      <?php echo $reponse;?>
+      <p><?php echo $reponse;?></p>
 
       <?php echo $cook->nbrFollower();?>
   </header>

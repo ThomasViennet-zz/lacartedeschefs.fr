@@ -16,8 +16,26 @@
 
   <header>
     <h1>Les chefs</h1>
-    <p class="colorMain"><i>Révélons les talents de la gastronomie.</i></p>
+    <p class="boldItalic">Révélons les talents de la gastronomie.</p>
   </header>
+
+  <section style="text-align:center;">
+    <h2>Comment fonctionne le classement ?</h2>
+
+    <p>
+      Ceux qui cuisinent les recettes peuvent noter les recettes.
+    </p>
+
+    <p>
+      Les meilleurs chefs obtiennent des étoiles.
+    </p>
+
+    <p>
+      <strong>Vous êtes un chef "étoilé" ?</strong><br>
+      Vos notes donnent plus de points et vous pouvez uniquement noter des chefs qui ont moins d'étoiles que vous.
+    </p>
+
+  </section>
 
   <section>
     <h2>Le classement des chefs</h2>
@@ -27,26 +45,6 @@
       <?php cookList(); ?>
     </div>
   </section>
-
-  <section style="text-align:center;">
-    <h2>Comment fonctionne le classement ?</h2>
-    <!-- <p>
-      Ceux qui cuisinent les recettes, peuvent attribuer entre une et trois étoiles aux recettes.
-    </p> -->
-    <!-- <p>
-      <strong>L'ordre des chefs dans le classement est basé sur leur moyenne pondérée.</strong>
-    </p> -->
-    <p>
-      Ceux qui cuisinent les recettes peuvent noter les recettes.
-    </p>
-
-    <p>
-      <strong>Vous êtes un chef "étoilé" ?</strong><br>
-      Vos notes donnent plus de points et vous pouvez uniquement noter des chefs qui ont moins d'étoiles que vous.
-    </p>
-
-
-    </section>
 
     <?php include 'includes/footer.php';?>
 

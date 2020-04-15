@@ -16,7 +16,7 @@
 
   <header>
     <h1>Mon compte</h1>
-    <p class="colorMain"><i>Marquez l'histoire de la gastronomie.</i></p>
+    <p class="boldItalic">Marquez l'histoire de la gastronomie.</p>
   </header>
 
   <p class="colorMain" style="text-align:center;"><?php echo $reponse;?></p>

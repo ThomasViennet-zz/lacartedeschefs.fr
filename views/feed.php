@@ -16,7 +16,7 @@
 
   <header>
     <h1>Votre carte des chefs</h1>
-    <p class="colorMain"><i>Retrouvez les recettes des chefs que vous suivez.</i></p>
+    <p class="boldItalic">Retrouvez les recettes des chefs que vous suivez.</p>
   </header>
 
   <section>

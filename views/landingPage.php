@@ -17,7 +17,7 @@
   <header>
     <img src="images/logo_la_carte_des_chefs.svg" alt="Logo La carte des chefs" width="80px;"/><br>
     <h1>La carte des chefs</h1>
-    <p class="colorMain"><i>Révélons les talents de la gastronomie.</i></p>
+    <p class="boldItalic">Révélons les talents de la gastronomie.</p>
   </header>
 
   <section style="text-align:center;">
@@ -28,7 +28,7 @@
     </p>
 
     <p>
-      <strong><i>La carte des chefs</i> c'est une invitation à tous ces talents de marquer l'histoire de la gastronomie.</strong>
+      <span class="boldItalic">La carte des chefs</span><strong> c'est une invitation à tous ces talents de marquer l'histoire de la gastronomie.</strong>
     </p>
 
     <p>

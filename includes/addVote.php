@@ -2,7 +2,7 @@
 if(isset($_SESSION['id']))
 {
   echo '
-  <form method="post" action="?action=addVote&id_recipe='.$recipe->id().'">
+  <form method="post" action="?action=addVote&id_recipe='.$recipe->id().'&#vote">
     <div class="hiddenradio" style="text-align:center;">
     <label>
       <input type="radio" name="vote" id="vote" name="vote" value="3">

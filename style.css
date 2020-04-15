@@ -1,20 +1,25 @@
 @font-face {
+    font-family: 'Source_Sans_Pro_BoldItalic';
+    src: url('font/SourceSansPro-SemiBoldItalic.ttf');
+}
+
+@font-face {
     font-family: 'Source_Sans_Pro_light';
-    src: url('SourceSansPro-Light.ttf');
+    src: url('font/SourceSansPro-Light.ttf');
 }
 
 @font-face {
     font-family: 'Source_Sans_Pro_refular';
-    src: url('SourceSansPro-Regular.ttf');
+    src: url('font/SourceSansPro-Regular.ttf');
 }
 
 @font-face {
     font-family: 'Source_Sans_Pro_extraLight';
-    src: url('SourceSansPro-ExtraLight.ttf');
+    src: url('font/SourceSansPro-ExtraLight.ttf');
 }
 @font-face {
     font-family: 'Source_Sans_Pro_extraLightItalic';
-    src: url('SourceSansPro-ExtraLightItalic.ttf');
+    src: url('font/SourceSansPro-ExtraLightItalic.ttf');
 }
 
 body
@@ -126,6 +131,12 @@ strong
 i
 {
   font-family:Source_Sans_Pro_extraLightItalic;
+}
+
+.boldItalic
+{
+  font-family:Source_Sans_Pro_BoldItalic;
+  color: #f39614;
 }
 
 #navTop
