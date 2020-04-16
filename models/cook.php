@@ -316,13 +316,20 @@ function pwdConfirm($email, $cle)
 
   $req = $bdd->prepare('SELECT cle FROM password WHERE email = :email');
   $req->execute(array('email' => $email)) or die('Une erreur s\'est produite');
-  $resultat = $req->fetch();
 
-  if (in_array($cle, $resultat)) {
+  while ($resultat = $req->fetch()) {
+    if ($resultat['cle'] == $cle) {
       return 'Vous êtes autorisé à changer de mot de passe.';
-    }else {
-      return 'Vous n\'êtes pas autorisé à changer de mot de passe.';
     }
+  }
+
+  // return print_r($resultat);
+  //
+  // if (in_array($cle, $resultat)) {
+  //     return 'Vous êtes autorisé à changer de mot de passe.';
+  // }else {
+  //     return 'Vous n\'êtes pas autorisé à changer de mot de passe.';
+  // }
 }
 
 //Màj du cook
@@ -332,18 +339,15 @@ function pwdUpdate($email, $pwd, $cle)
 
   $req = $bdd->prepare('SELECT cle FROM password WHERE email = :email');
   $req->execute(array('email' => $email)) or die('Une erreur s\'est produite');
-  $resultat = $req->fetch();
 
-  if (in_array($cle, $resultat)) {
+  while ($resultat = $req->fetch()) {
+
+  if ($resultat['cle'] == $cle) {
 
     if (!empty($_POST['password'])) {
+
       if ($_POST['passwordConfirm'] == $_POST['password']) {
 
-        $req = $bdd->prepare('SELECT cle, done FROM password WHERE email = :email');
-        $req->execute(array('email' => $email)) or die('Une erreur s\'est produite');
-        $resultat = $req->fetch();
-
-        if (isset($resultat['cle']) AND $resultat['cle'] == $cle) {
           $password_hash = password_hash($pwd, PASSWORD_DEFAULT);
 
           $req = $bdd->prepare('UPDATE cooks SET password = :pwd WHERE email = :email');
@@ -354,18 +358,16 @@ function pwdUpdate($email, $pwd, $cle)
 
           return 'Votre mot de passe a été mis à jour.';
         }else {
-          return 'Vous n\'êtes pas autorisé à changer de mot de passe.';
+          return 'Les mots de passe ne correspondent pas.';
         }
       }else {
-        return 'Les mots de passe ne correspondent pas.';
+        return 'Choisissez un mot de passe.';
       }
-    }else {
-      return 'Choisissez un mot de passe.';
     }
-  }else {
-    return 'Vous n\'êtes pas autorisé à changer de mot de passe.';
   }
 }
+
+
 
 function follow($idCook)
 {
@@ -374,7 +376,8 @@ function follow($idCook)
     require 'base.php';
 
     //est-ce qu'il est déjà abonné ?
-    $req = $bdd->query('SELECT id FROM followers WHERE id_follower = '.$_SESSION['id'].' AND id_following = '.$idCook);
+    $req = $bdd->prepare('SELECT id FROM followers WHERE id_follower = :id_follower AND id_following = :id_following');
+    $req->execute(array('id_follower' => $_SESSION['id'], 'id_following' => $idCook)) or die('Une erreur s\'est produite');
     $resultat = $req->fetch();
 
     if (empty($resultat)) {
@@ -382,12 +385,13 @@ function follow($idCook)
       $req->execute(array('id_follower' => $_SESSION['id'],'id_following' => $idCook)) or die('Une erreur s\'est produite');
 
       return 'Vous êtes abonné !<br> Retrouvez les recettes de ce chefs dans <a href="?action=feed">votre sélection</a>.<br>
-      <a href="?action=unfollow&id_cook='.$idCook.'">Se désabonner</a>';
+      <a href="?action=unfollow&id_cook='.$idCook.'">Se désabonner</a><br>';
     }else {
-      return 'Vous êtes déjà abonné.';
+      return 'Vous êtes déjà abonné.<br>
+      <a href="?action=unfollow&id_cook='.$idCook.'">Se désabonner</a><br>';
     }
   }else {
-    return '<a href="?action=account">Connectez-vous</a> pour vous abonner.';
+    return '<a href="?action=account">Connectez-vous</a> pour vous abonner.<br>';
   }
 }
 
@@ -398,18 +402,21 @@ function unfollow($idCook)
     require 'base.php';
 
     //est-ce qu'il est déjà abonné ?
-    $req = $bdd->query('SELECT id FROM followers WHERE id_follower = '.$_SESSION['id'].' AND id_following = '.$idCook);
+    $req = $bdd->prepare('SELECT id FROM followers WHERE id_follower = :id_follower AND id_following = :id_following');
+    $req->execute(array('id_follower' => $_SESSION['id'], 'id_following' => $idCook)) or die('Une erreur s\'est produite');
+    $resultat = $req->fetch();
 
-    if (!empty($req)) {
+    if (!empty($resultat)) {
       $req = $bdd->prepare('DELETE FROM followers WHERE id_follower = :id_follower AND id_following = :id_following');
       $req->execute(array('id_follower' => $_SESSION['id'], 'id_following' => $idCook)) or die('Une erreur s\'est produite');
       return 'Vous êtes désabonné !<br>
       <a href="?action=follow&id_cook='.$idCook.'">S\'abonner</a><br>';
     }else {
-      return 'Vous n\'êtes pas abonné.';
+      return 'Vous n\'êtes pas abonné.<br>
+      <a href="?action=follow&id_cook='.$idCook.'">S\'abonner</a><br>';
     }
   }else {
-    return '<a href="?action=account">Connectez-vous</a> pour vous abonner.';
+    return '<a href="?action=account">Connectez-vous</a> pour vous abonner.<br>';
   }
 }
 
@@ -419,10 +426,11 @@ function following($idCook)
   {
     require 'base.php';
     //est-ce qu'il est déjà abonné ?
-    $req = $bdd->query(
+    $req = $bdd->prepare(
       'SELECT COUNT(id) nbId
       FROM followers
-      WHERE id_follower = '.$_SESSION['id'].' AND id_following = '.$idCook) or die('erreur');
+      WHERE id_follower = :id_follower AND id_following = :id_following') or die('erreur');
+    $req->execute(array('id_follower' => $_SESSION['id'], 'id_following' => $idCook)) or die('erreur');
     $resultat = $req->fetch();
 
     if(empty($resultat['nbId']))

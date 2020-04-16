@@ -126,12 +126,10 @@ session_start();
 
         if ($recipe->idCook() == $_SESSION['id']) {
           require 'models/recipe.php';
-          $reponse = recipeUpdateImage($recipe->id());
-
-          $recipe = new Recipe($_GET['id_recipe']);
           require 'class/cook.php';
+          $reponse = recipeUpdateImage($recipe->id());
+          $recipe = new Recipe($_GET['id_recipe']);//màj de l'image
           $cook = new Cook($recipe->idCook());
-
           include 'views/recipeEdit.php';
 
         }else {

@@ -155,13 +155,14 @@ function recipeFeed()
   require 'base.php';
 
   //Les recettes des cooks que je suis
-  $req = $bdd->query(
+  $req = $bdd->prepare(
     'SELECT r.id id_recipe
     FROM recipes r
     INNER JOIN followers f
     ON r.id_cook = f.id_following
-    WHERE f.id_follower = '.$_SESSION['id'].'
+    WHERE f.id_follower = :id_follower
     ORDER BY r.date DESC');
+    $req->execute(array('id_follower' => $_SESSION['id'])) or die ('erreur');
 
   while ($resultat = $req->fetch()) {
     $recipe = new Recipe($resultat['id_recipe']);
@@ -197,7 +198,6 @@ function recipeUpdate($id_recipe) {
     steps = :steps,
     serve = :serve
     WHERE id = '.$id_recipe);
-
   $req->execute(array(
     'title' => $_POST['title'],
     'ingredients' => $_POST['ingredients'],
@@ -215,17 +215,20 @@ function recipeUpdate($id_recipe) {
 
 function recipeUpdateImage($id_recipe) {
   if (isset($_FILES['recipe_picture']) AND $_FILES['recipe_picture']['error'] == 0) {
+
     if ($_FILES['recipe_picture']['size'] <= 5000000) {
+
       $infosfichier = pathinfo($_FILES['recipe_picture']['name']);
       $extension_upload = $infosfichier['extension'];
       $extensions_autorisees = array('jpg', 'jpeg', 'png');
+
       if (in_array($extension_upload, $extensions_autorisees)) {
         require 'base.php';
 
         $req = $bdd->query(
         'SELECT recipe_picture
         FROM recipes
-        WHERE id = '.$id_recipe);
+        WHERE id = '.$id_recipe);//attention id en get
         $resultat = $req->fetch();
 
         $name_recipe_picture = $resultat['recipe_picture'];

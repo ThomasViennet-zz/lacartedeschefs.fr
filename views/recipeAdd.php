@@ -87,7 +87,7 @@
       <textarea onblur="calculeLongueur();" onfocus="calculeLongueur();" onkeydown="calculeLongueur();" onkeyup="calculeLongueur();" name="ingredients" id="ingredients" placeholder="Listez les ingrédients de votre recette" rows="5"><?php echo $_SESSION['post_recipe_ingredients'];?></textarea><br>
 
       <label for="steps">Préparation</label>
-      <div id="indicSteps">1000 caractères restant</div>
+      <div id="indicSteps">1000 caractères disponibles</div>
 
       <textarea onblur="calculeLongueur();" onfocus="calculeLongueur();" onkeydown="calculeLongueur();" onkeyup="calculeLongueur();" name="steps" id="steps" placeholder="Décrivez votre recette ..." rows="5"><?php echo $_SESSION['post_recipe_steps'];?></textarea><br>
 
