@@ -47,7 +47,6 @@ function connexion()
 					$_SESSION['id'] = $id;
 					$_SESSION['email'] = $email;
 					$_SESSION['identifiant'] = $identifiant;
-					$_SESSION['moyenne'] = $resultat['note_moyenne'];;
 
 					header('Location: ../?action=account');
 

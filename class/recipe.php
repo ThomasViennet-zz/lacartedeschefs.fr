@@ -8,6 +8,8 @@ class Recipe
   private $_ingredients;
   private $_steps;
   private $_serve;
+  private $_moyenne;
+  private $_nbrNote;
 
   public function __construct($id)
   {
@@ -15,7 +17,7 @@ class Recipe
 
     $reponse = $bdd->prepare(
       'SELECT r.title recipe_title, r.recipe_picture recipe_picture, r.id_cook recipe_cook, r.steps recipe_steps, r.ingredients recipe_ingredients, r.serve recipe_serve,
-      AVG(v.note) note_moyenne, SUM(v.note) note_total
+      AVG(v.note) note_moyenne, SUM(v.note) note_total, COUNT(v.id) nbr_note
       FROM recipes r
       INNER JOIN votes v
       ON r.id = v.id_recipe
@@ -33,10 +35,15 @@ class Recipe
     $this->setTotal($resultat['note_total']);
     $this->setServe($resultat['recipe_serve']);
 
-    //MAJ %
-    //
-    //
-    //
+
+    if ($resultat['nbr_note'] <= 1) {
+      $nbrNote = $resultat['nbr_note'].' note';
+      $this->setNbrNote($nbrNote);
+    }else {
+      $nbrNote = $resultat['nbr_note'].' notes';
+      $this->setNbrNote($nbrNote);
+    }
+
     if(empty($resultat['note_moyenne']))
     {
       $etoileFull = '<img src="images/starFull.svg"/>';
@@ -70,6 +77,15 @@ class Recipe
     }
   }
 
+  public function nbrNote()
+  {
+    return $this->_nbrNote;
+  }
+
+  public function setNbrNote($nbrNote)
+  {
+    $this->_nbrNote = $nbrNote;
+  }
   public function serve()
   {
     return Nl2br(htmlspecialchars($this->_serve));

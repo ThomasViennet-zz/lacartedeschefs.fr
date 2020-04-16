@@ -21,7 +21,7 @@
   <div id="cookInfo">
       <h1><?php echo $cook->identifiant();?></h1>
       <?php echo $cook->etoile();?><br>
-      <?php echo $cook->nbrFollower();?>
+      <?php echo $cook->nbrFollower();?><br>
 
         <p><a href="?action=accountEdit">Modifier</a></p>
         <p><a href="models/deconnexion.php">Ce n'est pas vous ?</a></p>

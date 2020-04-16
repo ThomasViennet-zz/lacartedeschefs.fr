@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <?php include 'includes/gtmHead.php';?>
+  <?php include 'includes/gtmHead.php';
+  header("Cache-Control: no-cache, no-store, must-revalidate"); // HTTP 1.1.
+  header("Pragma: no-cache"); // HTTP 1.0.
+  header("Expires: 0"); // Proxies.
+  ?>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="style.css" />

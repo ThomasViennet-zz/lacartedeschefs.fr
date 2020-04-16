@@ -17,9 +17,10 @@ class Cook
     require 'base.php';
 
     //Le nbr de personnes qui me suivent
-    $req = $bdd->query('SELECT COUNT(f.id) nbr_follower
+    $req = $bdd->prepare('SELECT COUNT(f.id) nbr_follower
       FROM followers f
-      WHERE f.id_following = '.$id);
+      WHERE f.id_following = :id ');
+    $req->execute(array('id' => $id)) or die('erreur');
     $resultat = $req->fetch();
     $req->closeCursor();
 
@@ -128,7 +129,8 @@ class Cook
   {
     require 'base.php';
 
-    $req = $bdd->query('SELECT id FROM recipes WHERE id_cook = '.$idCook);
+    $req = $bdd->prepare('SELECT id FROM recipes WHERE id_cook = :id_cook');
+    $req->execute(array('id_cook' => $idCook)) or die('erreur');
 
     $cook = new Cook($idCook);
     require 'class/recipe.php';

@@ -24,8 +24,6 @@ function cookList()
         <a href="?action=cook&cook_id='.$cook->id().'"><img src="/uploads/avatars/80x80_'.$cook->picture().'"  width="80px" height="80px" class="profilPicture" /></a><br>
         #'.$position.' '.$cook->identifiant().'<br>
         '.$cook->etoile().'<br>
-        '.$cook->total().'<br>
-        '.$cook->nbrNote().'
       </div>
       ';
 
@@ -174,7 +172,7 @@ function cookUpdate()
         $extensions_autorisees = array('jpg', 'jpeg', 'png');
         if (in_array($extension_upload, $extensions_autorisees))
         {
-          $name_profile_picture = $_SESSION['id'].'.jpeg';
+          $name_profile_picture = $_SESSION['id'].''.time().'.jpeg';
 
           move_uploaded_file($_FILES['profile_picture']['tmp_name'], 'uploads/avatars/'.$name_profile_picture);
 
@@ -219,6 +217,13 @@ function cookUpdate()
                              $new_width, $new_height,
                              $width, $height);
           imagejpeg($thumb, $filename, 80);
+
+          //récupérer précédente adresse image pour la supprimer (ne pas écraser car besoin de vider cache)
+          $req = $bdd->prepare('SELECT profile_picture FROM cooks WHERE id = :id');
+          $req->execute(array('id' => $_SESSION['id'])) or die('Une erreur s\'est produite<br>');
+          $resultat = $req->fetch();
+
+          unlink('uploads/avatars/80x80_'.$resultat['profile_picture'].'');
 
           $req = $bdd->prepare('UPDATE cooks SET profile_picture = :profile_picture WHERE id = :id');
           $req->execute(array(

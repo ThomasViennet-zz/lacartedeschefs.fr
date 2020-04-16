@@ -197,12 +197,13 @@ function recipeUpdate($id_recipe) {
     ingredients = :ingredients,
     steps = :steps,
     serve = :serve
-    WHERE id = '.$id_recipe);
+    WHERE id = :id_recipe');
   $req->execute(array(
     'title' => $_POST['title'],
     'ingredients' => $_POST['ingredients'],
     'steps' => $_POST['steps'],
-    'serve' => $_POST['serve']))
+    'serve' => $_POST['serve'],
+    'id_recipe' => $id_recipe))
     or die('erreur');
 
   $_SESSION['post_recipe_title'] = $_POST['title'];
@@ -225,13 +226,17 @@ function recipeUpdateImage($id_recipe) {
       if (in_array($extension_upload, $extensions_autorisees)) {
         require 'base.php';
 
-        $req = $bdd->query(
+        $req = $bdd->prepare(
         'SELECT recipe_picture
         FROM recipes
-        WHERE id = '.$id_recipe);//attention id en get
+        WHERE id = :id_recipe');
+        $req->execute(array('id_recipe' => $id_recipe));
         $resultat = $req->fetch();
 
-        $name_recipe_picture = $resultat['recipe_picture'];
+        $name_recipe_picture_old = $resultat['recipe_picture'];
+        $name_recipe_picture = $_SESSION['id'].''.time().'.jpeg';
+
+
 
         move_uploaded_file($_FILES['recipe_picture']['tmp_name'], 'uploads/recipes/'.$name_recipe_picture);
 
@@ -275,6 +280,15 @@ function recipeUpdateImage($id_recipe) {
         $width, $height);
         imagejpeg($thumb, $filename, 80);
 
+        $req = $bdd->prepare(
+          'UPDATE recipes
+          SET recipe_picture = :recipe_picture
+          WHERE id = :id_recipe');
+        $req->execute(array(
+          'recipe_picture' => $name_recipe_picture,
+          'id_recipe' => $id_recipe))or die('erreur');
+
+        unlink('uploads/recipes/400x400_'.$name_recipe_picture_old.'');
         unlink('uploads/recipes/'.$name_recipe_picture.'');
 
         return 'Photo enregistrée.';
