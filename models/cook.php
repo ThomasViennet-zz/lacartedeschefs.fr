@@ -22,7 +22,7 @@ function cookList()
       echo '
       <div class="element" style="width:150px;text-align:center;">
         <a href="?action=cook&cook_id='.$cook->id().'"><img src="/uploads/avatars/80x80_'.$cook->picture().'"  width="80px" height="80px" class="profilPicture" /></a><br>
-        #'.$position.' '.$cook->identifiant().'<br>
+        <span class="colorMain">#'.$position.'</span> '.$cook->identifiant().'<br>
         '.$cook->etoile().'<br>
       </div>
       ';
@@ -165,7 +165,7 @@ function cookUpdate()
     //Changer photo
     if (isset($_FILES['profile_picture']) AND $_FILES['profile_picture']['error'] == 0)
     {
-      if ($_FILES['profile_picture']['size'] <= 5000000)
+      if ($_FILES['profile_picture']['size'] <= 7000000)
       {
         $infosfichier = pathinfo($_FILES['profile_picture']['name']);
         $extension_upload = $infosfichier['extension'];
@@ -223,7 +223,9 @@ function cookUpdate()
           $req->execute(array('id' => $_SESSION['id'])) or die('Une erreur s\'est produite<br>');
           $resultat = $req->fetch();
 
-          unlink('uploads/avatars/80x80_'.$resultat['profile_picture'].'');
+          if ($resultat['profile_picture'] != 'account.svg') {
+            unlink('uploads/avatars/80x80_'.$resultat['profile_picture'].'');
+          }
 
           $req = $bdd->prepare('UPDATE cooks SET profile_picture = :profile_picture WHERE id = :id');
           $req->execute(array(
@@ -389,7 +391,7 @@ function follow($idCook)
       $req = $bdd->prepare('INSERT INTO followers (id_follower, id_following, date) VALUES(:id_follower, :id_following, NOW())');
       $req->execute(array('id_follower' => $_SESSION['id'],'id_following' => $idCook)) or die('Une erreur s\'est produite');
 
-      return 'Vous êtes abonné !<br> Retrouvez les recettes de ce chefs dans <a href="?action=feed">votre sélection</a>.<br>
+      return 'Vous êtes abonné !<br> Retrouvez les recettes de ce chef dans <a href="?action=feed">votre sélection</a>.<br>
       <a href="?action=unfollow&id_cook='.$idCook.'">Se désabonner</a><br>';
     }else {
       return 'Vous êtes déjà abonné.<br>

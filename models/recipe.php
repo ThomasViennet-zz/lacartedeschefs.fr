@@ -142,7 +142,7 @@ function recipeList()
     <img src="uploads/recipes/400x400_'.$recipe->picture().'"/></a>
 
     <div style="padding: 5px">
-    '.$recipe->moyenne().'<br>
+    '.$recipe->moyenne().'('.$recipe->nbrNote().')<br>
     '.$recipe->title().'
     </div>
 

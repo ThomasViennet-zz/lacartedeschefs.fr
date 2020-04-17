@@ -35,7 +35,6 @@ class Recipe
     $this->setTotal($resultat['note_total']);
     $this->setServe($resultat['recipe_serve']);
 
-
     if ($resultat['nbr_note'] <= 1) {
       $nbrNote = $resultat['nbr_note'].' note';
       $this->setNbrNote($nbrNote);
@@ -88,7 +87,7 @@ class Recipe
   }
   public function serve()
   {
-    return Nl2br(htmlspecialchars($this->_serve));
+    return htmlspecialchars($this->_serve);
   }
 
   public function setServe($serve)
@@ -158,7 +157,7 @@ class Recipe
 
   public function ingredients()
   {
-    return Nl2br(htmlspecialchars($this->_ingredients));
+    return htmlspecialchars($this->_ingredients);
   }
 
   public function setIngredients($ingredients)
@@ -168,7 +167,7 @@ class Recipe
 
   public function steps()
   {
-    return Nl2br(htmlspecialchars($this->_steps));
+    return htmlspecialchars($this->_steps);
   }
 
   public function setSteps($steps)

@@ -63,10 +63,12 @@ class Cook
     $vote = $req->fetch();
     $req->closeCursor();
 
-    if($vote['nbr_cook'] >= 10) {//nbr_cook avant de créer le classement
+    if($vote['nbr_cook'] >= 0) {//nbr_cook avant de créer le classement
       $formuleTop5 = ceil($vote['nbr_cook']*0.1);
-      $formuleTop20 = ceil($vote['nbr_cook']*0.2);
-      $formuleTop50 = ceil($vote['nbr_cook']*0.3);
+      $formuleTop20 = ceil($vote['nbr_cook']*0.3);
+      $formuleTop50 = ceil($vote['nbr_cook']*0.5);
+
+      $etoileSession = 0;
 
       //classement top 50
       $req = $bdd->query(
@@ -154,7 +156,7 @@ class Cook
         </a>
 
         <div style="padding: 5px">
-          '.$recipe->moyenne().'<br>
+          '.$recipe->moyenne().'('.$recipe->nbrNote().')<br>
           '.$recipe->title().'
         </div>
 

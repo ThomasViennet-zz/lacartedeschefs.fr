@@ -23,8 +23,9 @@
 
   <section style="text-align:center;">
     <h1 style="color:black;"><u><?php echo $recipe->title();?></u></h1>
+    <p>par <a href="?action=cook&cook_id=<?php echo $cook->id();?>"><?php echo $cook->identifiant();?></a><br>
     <?php echo $recipe->moyenne();?><br>
-    par <a href="?action=cook&cook_id=<?php echo $cook->id();?>"><?php echo $cook->identifiant();?></a>
+    <?php echo $recipe->nbrNote();?></p>
     <?php
     if ($_SESSION['id'] == $cook->id()) {
       echo '<p><a href="?action=recipeEdit&id_recipe='.$recipe->id().'">Modifier la recette</a></p>';
@@ -35,17 +36,17 @@
 
   <section id="recipe_ingredients">
     <h2>Ingrédients</h2>
-    <?php echo $recipe->ingredients();?>
+    <?php echo Nl2br($recipe->ingredients());?>
   </section>
 
   <section id="recipe_steps">
     <h2>Préparation</h2>
-    <?php echo $recipe->steps();?>
+    <?php echo Nl2br($recipe->steps());?>
   </section>
 
   <section id="recipe_serve">
     <h2>Servir</h2>
-    <?php echo $recipe->serve();?>
+    <?php echo Nl2br($recipe->serve());?>
   </section>
 
   <section id="vote">
