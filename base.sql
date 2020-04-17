@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Apr 16, 2020 at 11:30 PM
+-- Generation Time: Apr 17, 2020 at 10:11 PM
 -- Server version: 5.7.26
 -- PHP Version: 7.4.2
 
@@ -13,6 +13,19 @@ SET time_zone = "+00:00";
 --
 -- Database: `laCarte`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `candidatures`
+--
+
+CREATE TABLE `candidatures` (
+  `id` int(11) NOT NULL,
+  `cook_id` int(11) NOT NULL,
+  `candidature` text NOT NULL,
+  `date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -31,24 +44,25 @@ CREATE TABLE `cooks` (
   `identifiant` text NOT NULL,
   `date` datetime NOT NULL,
   `subscription` text NOT NULL,
-  `points` int(11) NOT NULL
+  `points` int(11) NOT NULL,
+  `auth` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `cooks`
 --
 
-INSERT INTO `cooks` (`id`, `last_name`, `first_name`, `email`, `password`, `biography`, `profile_picture`, `identifiant`, `date`, `subscription`, `points`) VALUES
-(1, '', '', 'test1@email', '$2y$10$ak5RqYXjSU13nJew0E.wxOr8VO6DaZITWJ2QgTYEbXfbpD2b.b.FS', '', '11587071098.jpeg', 'id 1', '2020-04-14 13:13:15', '', 0),
-(2, '', '', 'test2@email', '$2y$10$jU95PE.NgNO6E6eiN3QI9eBotedqeC7Ms4Z/NKulotj8UNzHrmkqG', '', '21587079104.jpeg', 'id 2', '2020-04-14 14:20:38', '', 0),
-(3, '', '', 'test3@email', '$2y$10$WBcxPj6kmZVy3PSHMIRJI.a2fUO89Gdxmy35lxp8DHL3Efdd5DIhW', '', '31587079145.jpeg', 'id 3', '2020-04-14 14:21:33', '', 0),
-(4, '', '', 'test4@email', '$2y$10$hdZkUbCJjwYhv94lxtGVe.gugBgzKXntfm9hS9/uJPciIjFhsRepG', '', '41587079575.jpeg', 'id 4', '2020-04-14 14:22:35', '', 0),
-(5, '', '', 'test5@email', '$2y$10$iiSTQXTpKK12lROu4bVJXuVG/BPnL6IFaLgN2SCxgP3wvA2/xkaWm', '', '51587079186.jpeg', 'id 5', '2020-04-14 14:23:40', '', 0),
-(6, '', '', 'test6@email', '$2y$10$gaXQTzVtfPslbQvME0WhKO0PI1c.gkDnuqjLGisYr0BmfbQdFdov6', '', '61587076519.jpeg', 'id 6', '2020-04-14 14:24:38', '', 0),
-(7, '', '', 'test7@email', '$2y$10$whXh/QajiEb/GC77oi7yuObTSFRuAI/RVZfgWFpzMVqPZXaHDLI9K', '', '71587079423.jpeg', 'id 7', '2020-04-14 14:25:29', '', 0),
-(8, '', '', 'test8@email', '$2y$10$OUuOmjDjfPR5fsYmkzwp8eF6rPEl48HNZqfb1uzUWXq1U47Gi4.AS', '', '81587076598.jpeg', 'id 8', '2020-04-14 14:26:16', '', 0),
-(9, '', '', 'test9@email', '$2y$10$8/6qTE2F.WTSkJ//LYCQ1.NJpeLOtltH9xqNDdsWTrFm7kMXrsTMG', '', '91587076691.jpeg', 'id 9', '2020-04-14 14:27:00', '', 0),
-(10, '', '', 'test10@email', '$2y$10$lWEi5LL.q/Xf3YReqC./7elDO7gt9K9F5AMS9GfPPBTqRUuP4sQ/u', '', '101587076896.jpeg', 'id 10', '2020-04-14 14:27:54', '', 0);
+INSERT INTO `cooks` (`id`, `last_name`, `first_name`, `email`, `password`, `biography`, `profile_picture`, `identifiant`, `date`, `subscription`, `points`, `auth`) VALUES
+(1, '', '', 'test1@email', '$2y$10$ak5RqYXjSU13nJew0E.wxOr8VO6DaZITWJ2QgTYEbXfbpD2b.b.FS', '', '11587071098.jpeg', 'id 1', '2020-04-14 13:13:15', '', 15, 1),
+(2, '', '', 'test2@email', '$2y$10$jU95PE.NgNO6E6eiN3QI9eBotedqeC7Ms4Z/NKulotj8UNzHrmkqG', '', '21587079104.jpeg', 'id 2', '2020-04-14 14:20:38', '', 2, 0),
+(3, '', '', 'test3@email', '$2y$10$WBcxPj6kmZVy3PSHMIRJI.a2fUO89Gdxmy35lxp8DHL3Efdd5DIhW', '', '31587079145.jpeg', 'id 3', '2020-04-14 14:21:33', '', 2, 0),
+(4, '', '', 'test4@email', '$2y$10$hdZkUbCJjwYhv94lxtGVe.gugBgzKXntfm9hS9/uJPciIjFhsRepG', '', '41587079575.jpeg', 'id 4', '2020-04-14 14:22:35', '', 3, 0),
+(5, '', '', 'test5@email', '$2y$10$iiSTQXTpKK12lROu4bVJXuVG/BPnL6IFaLgN2SCxgP3wvA2/xkaWm', '', '51587079186.jpeg', 'id 5', '2020-04-14 14:23:40', '', 3, 0),
+(6, '', '', 'test6@email', '$2y$10$gaXQTzVtfPslbQvME0WhKO0PI1c.gkDnuqjLGisYr0BmfbQdFdov6', '', '61587076519.jpeg', 'id 6', '2020-04-14 14:24:38', '', 0, 0),
+(7, '', '', 'test7@email', '$2y$10$whXh/QajiEb/GC77oi7yuObTSFRuAI/RVZfgWFpzMVqPZXaHDLI9K', '', '71587079423.jpeg', 'id 7', '2020-04-14 14:25:29', '', 3, 0),
+(8, '', '', 'test8@email', '$2y$10$OUuOmjDjfPR5fsYmkzwp8eF6rPEl48HNZqfb1uzUWXq1U47Gi4.AS', '', '81587076598.jpeg', 'id 8', '2020-04-14 14:26:16', '', 0, 0),
+(9, '', '', 'test9@email', '$2y$10$8/6qTE2F.WTSkJ//LYCQ1.NJpeLOtltH9xqNDdsWTrFm7kMXrsTMG', '', '91587076691.jpeg', 'id 9', '2020-04-14 14:27:00', '', 9, 0),
+(10, '', '', 'test10@email', '$2y$10$lWEi5LL.q/Xf3YReqC./7elDO7gt9K9F5AMS9GfPPBTqRUuP4sQ/u', '', '101587076896.jpeg', 'id 10', '2020-04-14 14:27:54', '', 17, 0);
 
 -- --------------------------------------------------------
 
@@ -114,7 +128,8 @@ INSERT INTO `recipes` (`id`, `title`, `id_cook`, `recipe_picture`, `ingredients`
 (13, 'Lorem ipsum', 10, '101587078063.jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\r\n\r\n\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '2020-04-17 01:01:03'),
 (14, 'Lorem ipsum', 5, '51587079331.jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '2020-04-17 01:22:11'),
 (15, 'Lorem ipsum', 7, '71587079382.jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\r\n\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '2020-04-17 01:23:02'),
-(16, 'Lorem ipsum', 7, '71587079462.jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\r\n\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '2020-04-17 01:24:22');
+(16, 'Lorem ipsum', 7, '71587079462.jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\r\n\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '2020-04-17 01:24:22'),
+(17, 'test', 1, '11587161161.jpeg', 'test', 'test', 'test', '2020-04-18 00:06:01');
 
 -- --------------------------------------------------------
 
@@ -133,8 +148,38 @@ CREATE TABLE `votes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
+-- Dumping data for table `votes`
+--
+
+INSERT INTO `votes` (`id`, `id_recipe`, `id_cook`, `id_customer`, `note`, `date`, `coef`) VALUES
+(2, 1, 1, 10, 3, '2020-04-17 15:59:55', 0),
+(3, 3, 2, 10, 2, '2020-04-17 16:00:31', 0),
+(4, 5, 3, 10, 2, '2020-04-17 16:00:41', 0),
+(5, 7, 4, 10, 3, '2020-04-17 16:00:50', 0),
+(6, 12, 10, 1, 3, '2020-04-17 16:01:43', 3),
+(7, 12, 10, 1, 3, '2020-04-17 16:01:43', 3),
+(8, 12, 10, 1, 3, '2020-04-17 16:01:43', 3),
+(9, 12, 10, 1, 3, '2020-04-17 16:01:43', 3),
+(10, 11, 9, 1, 3, '2020-04-17 16:02:38', 1),
+(11, 11, 9, 1, 3, '2020-04-17 16:02:38', 1),
+(12, 2, 1, 9, 3, '2020-04-17 16:11:15', 2),
+(13, 2, 1, 9, 3, '2020-04-17 16:11:15', 2),
+(14, 2, 1, 9, 3, '2020-04-17 16:11:15', 2),
+(15, 1, 1, 9, 3, '2020-04-17 16:14:07', 0),
+(16, 13, 10, 9, 2, '2020-04-17 16:14:26', 0),
+(17, 12, 10, 9, 3, '2020-04-17 16:14:37', 0),
+(18, 11, 9, 8, 3, '2020-04-17 16:15:26', 0),
+(19, 15, 7, 8, 3, '2020-04-17 16:15:41', 0);
+
+--
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `candidatures`
+--
+ALTER TABLE `candidatures`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `cooks`
@@ -171,6 +216,12 @@ ALTER TABLE `votes`
 --
 
 --
+-- AUTO_INCREMENT for table `candidatures`
+--
+ALTER TABLE `candidatures`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `cooks`
 --
 ALTER TABLE `cooks`
@@ -192,10 +243,10 @@ ALTER TABLE `password`
 -- AUTO_INCREMENT for table `recipes`
 --
 ALTER TABLE `recipes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `votes`
 --
 ALTER TABLE `votes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
