@@ -32,7 +32,8 @@ body
 header
 {
   text-align: center;
-  background-color: black;
+  /* background-color: black; */
+  background-image: url("images/425px_header.jpg");
   color: white;
   padding: 10% 0px;
   margin-top: 70px;
@@ -268,10 +269,93 @@ nav ul
   outline: 1px solid #f39614;
 }
 
+@media screen and (min-width: 425px)
+{
+    .element
+    {
+      margin: 5px 5px!important;
+    }
+
+    header
+    {
+      text-align: center;
+      /* background-color: black; */
+      background-image: url("images/768px_header.jpg");
+      color: white;
+      padding: 10% 0px;
+      margin-top: 70px;
+    }
+}
+
 @media screen and (min-width: 768px)
 {
     .element
     {
       margin: 5px 5px!important;
+    }
+
+    header
+    {
+      text-align: center;
+      /* background-color: black; */
+      background-image: url("images/1024px_header.jpg");
+      color: white;
+      padding: 10% 0px;
+      margin-top: 70px;
+    }
+}
+
+@media screen and (min-width: 1024px)
+{
+    .element
+    {
+      margin: 5px 5px!important;
+    }
+
+    header
+    {
+      text-align: center;
+      /* background-color: black; */
+      background-image: url("images/1440px_header.jpg");
+      color: white;
+      padding: 10% 0px;
+      width: 100%;
+      margin-top: 70px;
+    }
+}
+@media screen and (min-width: 1440px)
+{
+    .element
+    {
+      margin: 5px 5px!important;
+    }
+
+    header
+    {
+      text-align: center;
+      /* background-color: black; */
+      background-image: url("images/2560px_header.jpg");
+      color: white;
+      padding: 10% 0px;
+      width: 100%;
+      margin-top: 70px;
+    }
+}
+@media screen and (min-width: 2560px)
+{
+    .element
+    {
+      margin: 5px 5px!important;
+    }
+
+    header
+    {
+      text-align: center;
+      background-color: black!important;
+      background-image: url("")!important;
+      color: white;
+      padding: 10% 0px;
+      width: 100%;
+      margin-top: 70px;
     }
 }
