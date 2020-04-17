@@ -76,7 +76,7 @@ function cookRegister()
   				}else {
   					$password_hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-  					$req = $bdd->prepare('INSERT INTO cooks (last_name, first_name, email, password, biography, profile_picture, identifiant, date, subscription, points) VALUES(:last_name, :first_name, :email, :password, :biography, :profile_picture, :identifiant, NOW(), :subscription, :points)');
+  					$req = $bdd->prepare('INSERT INTO cooks (last_name, first_name, email, password, biography, profile_picture, identifiant, date, subscription, points, auth) VALUES(:last_name, :first_name, :email, :password, :biography, :profile_picture, :identifiant, NOW(), :subscription, :points, :auth)');
   					$req->execute(array(
   						'last_name' => '',
   						'first_name' => '',
@@ -86,7 +86,8 @@ function cookRegister()
   						'profile_picture' => 'account.svg',
   						'identifiant' => $_POST['identifiant'],
   						'subscription' => '',
-              'points' => 0
+              'points' => 0,
+              'auth' => 0
   					)) or die('Une erreur s\'est produite');
 
   					$req = $bdd->prepare('SELECT id FROM cooks WHERE email = :email');
@@ -107,8 +108,7 @@ function cookRegister()
   	}else {
   		return 'Veuilliez saisir toutes les informations obligatoires.';
   	}
-  }
-  else {
+  } else {
   	return 'Veuillez cocher la case "I\'m not a bot"';
   }
 }
@@ -449,4 +449,20 @@ function following($idCook)
   }else {
     return '<a href="?action=account">Connectez-vous</a> pour vous abonner.';
   }
+}
+
+function candidature()
+{
+  require 'base.php';
+
+  $req = $bdd->prepare('INSERT INTO candidatures (cook_id, candidature, date) VALUES(:cook_id, :candidature, NOW())');
+  $req->execute(array(
+    'cook_id' => $_SESSION['id'],
+    'candidature' => $_POST['candidature']
+  )) or die('Une erreur s\'est produite');
+  $req->closeCursor();
+
+  return '<strong>Merci pour votre candidature.</strong><br>
+  Vous pourrez poster des recettes si elle est acceptée.';
+
 }

@@ -32,15 +32,15 @@
     </p>
 
     <p>
-      Tous ceux qui le souhaitent peuvent participer à la compétition en proposant leur recette.
+      Tous ceux qui le souhaitent peuvent candidater pour participer à la compétition.
     </p>
 
     <p>
-      Les recettes seront ensuite notées par ceux qui les cuisinent.
+      Les recettes des participants sont notées par ceux qui les cuisinent.
     </p>
 
     <p>
-      Ces notes permettent de faire monter ou descendre les participants dans <a href="?action=cookList">le classement des chefs.</a>
+      Ces notes font évoluer les participants dans <a href="?action=cookList">le classement des chefs.</a>
     </p>
   </section>
 
@@ -49,14 +49,13 @@
 
     <ol>
       <li><a href="?action=account">Créez un compte</a></li>
-      <li>Publiez votre recette</li>
+      <li>Candidatez depuis votre compte</li>
     </ol>
 
     <h2>Comment noter ?</h2>
 
     <ol>
-      <li><a href="?action=feed">Cusiniez une des recettes</a></li>
-      <li><a href="?action=account">Créez un compte</a></li>
+      <li><a href="?action=recipeList ">Cusiniez une des recettes</a></li>
       <li>Notez la recette</li>
     </ol>
 

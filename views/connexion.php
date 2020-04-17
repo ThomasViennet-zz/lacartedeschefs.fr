@@ -19,7 +19,7 @@
     <h1>Mon compte</h1>
     <p class="boldItalic">Marquez l'histoire de la gastronomie.</p>
   </header>
-
+  
   <p class="colorMain" style="text-align:center;"><?php echo $reponse;?></p>
   <section class="conteneur" style="justify-content:space-evenly;">
     <div class="element" style="width:300px;">

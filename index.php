@@ -6,6 +6,7 @@ session_start();
   switch ($action)
   {
       case 'lacartedeschefs':
+        require 'class/cook.php';
         include 'views/landingPage.php';
       break;
 
@@ -67,17 +68,21 @@ session_start();
           require 'class/cook.php';
           $cook = new Cook($_SESSION['id']);
 
-          if (isset($_GET['sent'])) {
-            require 'models/recipe.php';
-            $reponse = recipeAdd();
-            include 'views/recipeAdd.php';
+          if ($cook->auth() > 0) {
+            if (isset($_GET['sent'])) {
+              require 'models/recipe.php';
+              $reponse = recipeAdd();
+              include 'views/recipeAdd.php';
 
+            }else {
+              unset($_SESSION['post_recipe_title']);
+              unset($_SESSION['post_recipe_ingredients']);
+              unset($_SESSION['post_recipe_steps']);
+              unset($_SESSION['post_recipe_serve']);
+              include 'views/recipeAdd.php';
+            }
           }else {
-            unset($_SESSION['post_recipe_title']);
-            unset($_SESSION['post_recipe_ingredients']);
-            unset($_SESSION['post_recipe_steps']);
-            unset($_SESSION['post_recipe_serve']);
-            include 'views/recipeAdd.php';
+            include 'views/account.php';
           }
         }else {
           include 'views/connexion.php';
@@ -179,6 +184,20 @@ session_start();
           }
       break;
 
+      case 'candidature':
+          if (!empty($_SESSION['id'])) {
+            require 'models/cook.php';
+            $reponse = candidature();
+
+            require 'class/cook.php';
+            $cook = new Cook($_SESSION['id']);
+
+            include 'views/account.php';
+          }else {
+            include 'views/connexion.php';
+          }
+      break;
+
       case 'cook':
         if ($_GET['cook_id']) {
           require 'class/cook.php';
@@ -227,6 +246,7 @@ session_start();
       break;
 
       default:
+        require 'class/cook.php';
         include 'views/landingPage.php';
 
   }
