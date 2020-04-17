@@ -14,7 +14,7 @@
   <?php include 'includes/navTop.php';?>
   <?php include 'includes/navFooter.php';?>
 
-  <header>
+  <header id="headerLanding">
     <img src="images/logo_la_carte_des_chefs.svg" alt="Logo La carte des chefs" width="80px;"/><br>
     <h1>La carte des chefs</h1>
     <p class="boldItalic">Révélons les talents de la gastronomie.</p>

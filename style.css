@@ -32,6 +32,15 @@ body
 header
 {
   text-align: center;
+  background-color: black;
+  color: white;
+  padding: 10% 0px;
+  margin-top: 70px;
+}
+
+#headerLanding
+{
+  text-align: center;
   /* background-color: black; */
   background-image: url("images/425px_header.jpg");
   color: white;
@@ -276,11 +285,11 @@ nav ul
       margin: 5px 5px!important;
     }
 
-    header
+    #headerLanding
     {
       text-align: center;
       /* background-color: black; */
-      background-image: url("images/768px_header.jpg");
+      background-image: url("images/425px_header.jpg");
       color: white;
       padding: 10% 0px;
       margin-top: 70px;
@@ -294,11 +303,11 @@ nav ul
       margin: 5px 5px!important;
     }
 
-    header
+    #headerLanding
     {
       text-align: center;
       /* background-color: black; */
-      background-image: url("images/1024px_header.jpg");
+      background-image: url("images/425px_header.jpg");
       color: white;
       padding: 10% 0px;
       margin-top: 70px;
@@ -312,14 +321,13 @@ nav ul
       margin: 5px 5px!important;
     }
 
-    header
+    #headerLanding
     {
       text-align: center;
       /* background-color: black; */
-      background-image: url("images/1440px_header.jpg");
+      background-image: url("images/425px_header.jpg");
       color: white;
       padding: 10% 0px;
-      width: 100%;
       margin-top: 70px;
     }
 }
@@ -330,14 +338,13 @@ nav ul
       margin: 5px 5px!important;
     }
 
-    header
+    #headerLanding
     {
       text-align: center;
       /* background-color: black; */
-      background-image: url("images/2560px_header.jpg");
+      background-image: url("images/425px_header.jpg");
       color: white;
       padding: 10% 0px;
-      width: 100%;
       margin-top: 70px;
     }
 }
@@ -348,14 +355,13 @@ nav ul
       margin: 5px 5px!important;
     }
 
-    header
+    #headerLanding
     {
       text-align: center;
-      background-color: black!important;
-      background-image: url("")!important;
+      /* background-color: black; */
+      background-image: url("images/425px_header.jpg");
       color: white;
       padding: 10% 0px;
-      width: 100%;
       margin-top: 70px;
     }
 }
