@@ -19,9 +19,19 @@
     <p class="boldItalic">Retrouvez les recettes des chefs que vous suivez.</p>
   </header>
 
-  <section>
-    <h2>Abonnez-vous à des chefs et retrouvez leurs recettes ici.</h2>
-  </section>
+    <?php
+    if ($cookSession->nbrFollowing() < 10) {
+      $limit = 10-$cookSession->nbrFollowing();
+    ?>
+      <section>
+        <a href="?action=cookList"><h2>Abonnez-vous à des chefs et retrouvez leurs recettes ici.</h2></a>
+        <div class="conteneur">
+          <?php cookList(5);?>
+        </div>
+      </section>
+    <?php
+    }
+    ?>
   <section class="conteneur">
     <!-- <p><u>Début de la compétition le dimanche 26 avril 2020</u></p> -->
     <?php echo recipeFeed();?>

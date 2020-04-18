@@ -1,5 +1,5 @@
 <?php
-function cookList()
+function cookList($limit)
 {
   require 'base.php';
 
@@ -10,7 +10,8 @@ function cookList()
   $reponse = $bdd->query(
     'SELECT id
     FROM cooks
-    ORDER BY points DESC');
+    ORDER BY points DESC
+    LIMIT '.$limit);
 
     $position = 1;
 
@@ -24,6 +25,7 @@ function cookList()
         <a href="?action=cook&cook_id='.$cook->id().'"><img src="/uploads/avatars/80x80_'.$cook->picture().'"  width="80px" height="80px" class="profilPicture" /></a><br>
         <span class="colorMain">#'.$position.'</span> '.$cook->identifiant().'<br>
         '.$cook->etoile().'<br>
+        '.following($cook->id()).'
       </div>
       ';
 

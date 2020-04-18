@@ -8,6 +8,7 @@ class Cook
   private $_nbrNote;
   private $_email;
   private $_nbrFollower;
+  private $_nbrFollowing;
   private $_etoile;
   private $_nbrEtoile;
   private $_coef;
@@ -32,6 +33,16 @@ class Cook
     }
 
     $this->setNbrFollower($follower);
+
+    //Le nbr de personnes que je suis
+    $req = $bdd->prepare('SELECT COUNT(f.id) nbr_following
+      FROM followers f
+      WHERE f.id_follower = :id ');
+    $req->execute(array('id' => $id)) or die('erreur');
+    $resultat = $req->fetch();
+    $req->closeCursor();
+
+    $this->setNbrFollowing($resultat['nbr_following']);
 
     $req = $bdd->prepare(
       'SELECT c.profile_picture cook_picture, c.identifiant cook_identifiant, c.email cook_email, c.auth cook_auth,
@@ -167,6 +178,15 @@ class Cook
     }
   }
 
+  public function nbrFollowing()
+  {
+    return $this->_nbrFollowing;
+  }
+
+  public function setNbrFollowing($nbrFollowing)
+  {
+    $this->_nbrFollowing = $nbrFollowing;
+  }
 
   public function auth()
   {

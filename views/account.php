@@ -60,6 +60,7 @@
   }else {
     echo '
     <h2 style="text-align:center;">Candidater</h2>
+    <p style="text-align:center;"><i><u>Suscitez notre appétit</u></i></p>
 
     <p class="colorMain" style="text-align:center;">'.$reponse.'</p>
     <section>
@@ -69,8 +70,7 @@
       <label for="candidature">Motivations</label>
       <div id="indicCandidature">1 000 caractères disponibles</div>
 
-      <textarea onblur="calculeLongueur();" onfocus="calculeLongueur();" onkeydown="calculeLongueur();" onkeyup="calculeLongueur();" name="candidature" id="candidature" placeholder="
-      Partagez-nous de quoi susciter notre appétit..." rows="5">'.$_SESSION['post_recipe_serve'].'</textarea><br>
+      <textarea onblur="calculeLongueur();" onfocus="calculeLongueur();" onkeydown="calculeLongueur();" onkeyup="calculeLongueur();" name="candidature" id="candidature" placeholder="Partagez-nous de quoi susciter notre appétit..." rows="5"></textarea><br>
 
       <input type="submit" name="submit" value="Envoyer" class="button">
     </form>

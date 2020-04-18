@@ -18,6 +18,18 @@ session_start();
         include 'views/cook.php';
       break;
 
+      //Utiliser jquery
+      case 'followFeed':
+        require 'models/recipe.php';
+        require 'models/cook.php';
+        require 'class/recipe.php';
+        require 'class/cook.php';
+        $cookSession = new Cook($_SESSION['id']);
+        $reponse = follow($_GET['id_cook']);
+        $cook = new Cook($_GET['id_cook']);
+        include 'views/feed.php';
+      break;
+
       case 'unfollow':
         require 'models/cook.php';
         require 'class/cook.php';
@@ -31,6 +43,7 @@ session_start();
         require 'models/cook.php';
         require 'class/recipe.php';
         require 'class/cook.php';
+        $cookSession = new Cook($_SESSION['id']);
         include 'views/feed.php';
       break;
 

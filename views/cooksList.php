@@ -41,8 +41,7 @@
     <h2>Le classement des chefs</h2>
 
     <div class="conteneur">
-      <!-- <p><u>Début de la compétition le dimanche 26 avril 2020</u></p> -->
-      <?php cookList(); ?>
+      <?php cookList(100); ?>
     </div>
   </section>
 
