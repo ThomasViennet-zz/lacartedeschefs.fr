@@ -24,7 +24,7 @@
     <h2>Le concept</h2>
 
     <p>
-      Le monde regorge de talents de la gastronomie encore méconnus !
+      <u>Le monde regorge de talents de la gastronomie encore méconnus !</u>
     </p>
 
     <p>
@@ -32,11 +32,15 @@
     </p>
 
     <p>
-      Tous ceux qui le souhaitent peuvent candidater pour participer à la compétition.
+      Tous les amateurs de la gastronomie peuvent candidater pour participer à la compétition.
     </p>
 
     <p>
-      Les recettes des participants sont notées par ceux qui les cuisinent.
+      Nous acceptons uniquement les candidatures qui sauront susciter notre appétit !
+    </p>
+
+    <p>
+      Les recettes des participants sont ensuite notées par ceux qui les cuisinent.
     </p>
 
     <p>

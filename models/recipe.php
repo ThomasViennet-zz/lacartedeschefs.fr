@@ -124,6 +124,7 @@ function recipeList()
   require 'base.php';
 
   $req = $bdd->query('SELECT id FROM recipes ORDER BY date DESC');
+  //paginer les résultats
 
   while ($resultat = $req->fetch()) {
     $recipe = new Recipe($resultat['id']);
@@ -163,7 +164,8 @@ function recipeFeed()
     WHERE f.id_follower = :id_follower
     ORDER BY r.date DESC');
     $req->execute(array('id_follower' => $_SESSION['id'])) or die ('erreur');
-
+    //paginer les résultats
+    
   while ($resultat = $req->fetch()) {
     $recipe = new Recipe($resultat['id_recipe']);
     $cook = new Cook($recipe->idCook());
