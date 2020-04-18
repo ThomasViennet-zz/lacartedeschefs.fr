@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Apr 17, 2020 at 10:11 PM
+-- Generation Time: Apr 18, 2020 at 03:18 PM
 -- Server version: 5.7.26
 -- PHP Version: 7.4.2
 
@@ -23,6 +23,8 @@ SET time_zone = "+00:00";
 CREATE TABLE `candidatures` (
   `id` int(11) NOT NULL,
   `cook_id` int(11) NOT NULL,
+  `instagram` text NOT NULL,
+  `blog` text NOT NULL,
   `candidature` text NOT NULL,
   `date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -219,13 +221,13 @@ ALTER TABLE `votes`
 -- AUTO_INCREMENT for table `candidatures`
 --
 ALTER TABLE `candidatures`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `cooks`
 --
 ALTER TABLE `cooks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `followers`
@@ -249,4 +251,4 @@ ALTER TABLE `recipes`
 -- AUTO_INCREMENT for table `votes`
 --
 ALTER TABLE `votes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;

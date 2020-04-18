@@ -64,13 +64,13 @@
     <p class="colorMain" style="text-align:center;">'.$reponse.'</p>
     <section>
     <form method="post" action="?action=candidature&sent">
-
-      <label for="candidature"></label>
+      <label for="instagram">Instagram</label><input type="instagram" id="instagram" name="instagram" placeholder="Votre profil instagram. Exemple @la_carte_des_chefs"><br>
+      <label for="blog">Blog</label><input type="blog" id="blog" name="blog" placeholder="L\'adresse de votre blog"><br>
+      <label for="candidature">Motivations</label>
       <div id="indicCandidature">1 000 caractères disponibles</div>
 
       <textarea onblur="calculeLongueur();" onfocus="calculeLongueur();" onkeydown="calculeLongueur();" onkeyup="calculeLongueur();" name="candidature" id="candidature" placeholder="
-      Partagez-nous simplement de quoi susciter notre appétit.
-      Vous pouvez nous partagez vos réseaux sociaux, votre blog, une de vos recettes ..." rows="5">'.$_SESSION['post_recipe_serve'].'</textarea><br>
+      Partagez-nous de quoi susciter notre appétit..." rows="5">'.$_SESSION['post_recipe_serve'].'</textarea><br>
 
       <input type="submit" name="submit" value="Envoyer" class="button">
     </form>

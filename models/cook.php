@@ -455,11 +455,12 @@ function candidature()
 {
   require 'base.php';
 
-  $req = $bdd->prepare('INSERT INTO candidatures (cook_id, candidature, date) VALUES(:cook_id, :candidature, NOW())');
+  $req = $bdd->prepare('INSERT INTO candidatures (cook_id, instagram, blog, candidature, date) VALUES(:cook_id, :instagram, :blog, :candidature, NOW())');
   $req->execute(array(
     'cook_id' => $_SESSION['id'],
-    'candidature' => $_POST['candidature']
-  )) or die('Une erreur s\'est produite');
+    'candidature' => $_POST['candidature'],
+    'instagram' => $_POST['instagram'],
+    'blog' => $_POST['blog'])) or die('Une erreur s\'est produite');
   $req->closeCursor();
 
   return '<strong>Merci pour votre candidature.</strong><br>
