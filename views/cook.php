@@ -22,6 +22,9 @@
       <h1 style="color:black;"><?php echo $cook->identifiant();?></h1>
       <?php echo $cook->nbrFollower();?><br>
 
+      <!-- Follow -->
+    <p><?php echo $reponse;?></p>
+
       <p><?php echo $cook->bio();?></p>
       <a href="https://www.<?php echo $cook->url();?>" target="_blank" rel="ugc"><?php echo $cook->url();?></a><br>
   </div>
@@ -35,8 +38,5 @@
 
   <?php include 'includes/footer.php';?>
 
-  <!-- <script src="jquery-3.5.0.js"></script>
-  <script src="scripts.js"></script> -->
-  <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script> -->
 </body>
 </html>

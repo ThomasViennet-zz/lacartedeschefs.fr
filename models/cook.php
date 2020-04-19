@@ -423,10 +423,11 @@ function follow($idCook)
       $req = $bdd->prepare('INSERT INTO followers (id_follower, id_following, date) VALUES(:id_follower, :id_following, NOW())');
       $req->execute(array('id_follower' => $_SESSION['id'],'id_following' => $idCook)) or die('Une erreur s\'est produite');
 
-      return 'Vous êtes abonné !<br> Retrouvez les recettes de ce chef dans <a href="?action=feed">votre sélection</a>.<br>
+      return '<strong>Vous êtes abonné !</strong><br>
+      Retrouvez les recettes de ce chef dans <a href="?action=feed">votre sélection</a>.<br>
       <a href="?action=unfollow&id_cook='.$idCook.'">Se désabonner</a><br>';
     }else {
-      return 'Vous êtes déjà abonné.<br>
+      return '<strong>Vous êtes déjà abonné.</strong><br>
       <a href="?action=unfollow&id_cook='.$idCook.'">Se désabonner</a><br>';
     }
   }else {
@@ -448,10 +449,10 @@ function unfollow($idCook)
     if (!empty($resultat)) {
       $req = $bdd->prepare('DELETE FROM followers WHERE id_follower = :id_follower AND id_following = :id_following');
       $req->execute(array('id_follower' => $_SESSION['id'], 'id_following' => $idCook)) or die('Une erreur s\'est produite');
-      return 'Vous êtes désabonné !<br>
+      return '<strong>Vous êtes désabonné !</strong><br>
       <a href="?action=follow&id_cook='.$idCook.'">S\'abonner</a><br>';
     }else {
-      return 'Vous n\'êtes pas abonné.<br>
+      return '<strong>Vous n\'êtes pas abonné.</strong><br>
       <a href="?action=follow&id_cook='.$idCook.'">S\'abonner</a><br>';
     }
   }else {
