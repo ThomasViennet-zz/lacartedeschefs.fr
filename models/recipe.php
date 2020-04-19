@@ -165,7 +165,7 @@ function recipeFeed()
     ORDER BY r.date DESC');
     $req->execute(array('id_follower' => $_SESSION['id'])) or die ('erreur');
     //paginer les résultats
-    
+
   while ($resultat = $req->fetch()) {
     $recipe = new Recipe($resultat['id_recipe']);
     $cook = new Cook($recipe->idCook());
@@ -191,29 +191,38 @@ function recipeFeed()
 }
 
 function recipeUpdate($id_recipe) {
-  require 'base.php';
+  if (!empty($_POST['title']) AND !empty($_POST['ingredients']) AND !empty($_POST['steps']) AND !empty($_POST['serve'])) {
+    $_SESSION['post_recipe_title'] = $_POST['title'];
+    $_SESSION['post_recipe_ingredients'] = $_POST['ingredients'];
+    $_SESSION['post_recipe_steps'] = $_POST['steps'];
+    $_SESSION['post_recipe_serve'] = $_POST['serve'];
 
-  $req = $bdd->prepare(
-    'UPDATE recipes
-    SET title = :title,
-    ingredients = :ingredients,
-    steps = :steps,
-    serve = :serve
-    WHERE id = :id_recipe');
-  $req->execute(array(
-    'title' => $_POST['title'],
-    'ingredients' => $_POST['ingredients'],
-    'steps' => $_POST['steps'],
-    'serve' => $_POST['serve'],
-    'id_recipe' => $id_recipe))
-    or die('erreur');
+    require 'base.php';
 
-  $_SESSION['post_recipe_title'] = $_POST['title'];
-  $_SESSION['post_recipe_ingredients'] = $_POST['ingredients'];
-  $_SESSION['post_recipe_steps'] = $_POST['steps'];
-  $_SESSION['post_recipe_serve'] = $_POST['serve'];
+    $req = $bdd->prepare(
+      'UPDATE recipes
+      SET title = :title,
+      ingredients = :ingredients,
+      steps = :steps,
+      serve = :serve
+      WHERE id = :id_recipe');
+    $req->execute(array(
+      'title' => $_POST['title'],
+      'ingredients' => $_POST['ingredients'],
+      'steps' => $_POST['steps'],
+      'serve' => $_POST['serve'],
+      'id_recipe' => $id_recipe))
+      or die('erreur');
 
-  return 'La recette a été mise à jour';
+    return 'La recette a été mise à jour';
+  }else {
+    $_SESSION['post_recipe_title'] = $_POST['title'];
+    $_SESSION['post_recipe_ingredients'] = $_POST['ingredients'];
+    $_SESSION['post_recipe_steps'] = $_POST['steps'];
+    $_SESSION['post_recipe_serve'] = $_POST['serve'];
+
+    return 'Renseignez toutes les informations.';
+  }
 }
 
 function recipeUpdateImage($id_recipe) {
