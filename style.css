@@ -38,6 +38,16 @@ header
   margin-top: 70px;
 }
 
+#headerCook
+{
+  text-align: center;
+  background-color: white!important;
+  color: black;
+  width: 300px;
+  margin: auto;
+  margin-top: 100px;
+}
+
 #headerLanding
 {
   text-align: center;

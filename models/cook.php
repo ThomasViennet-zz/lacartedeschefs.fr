@@ -78,13 +78,14 @@ function cookRegister()
   				}else {
   					$password_hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-  					$req = $bdd->prepare('INSERT INTO cooks (last_name, first_name, email, password, biography, profile_picture, identifiant, date, subscription, points, auth) VALUES(:last_name, :first_name, :email, :password, :biography, :profile_picture, :identifiant, NOW(), :subscription, :points, :auth)');
+  					$req = $bdd->prepare('INSERT INTO cooks (last_name, first_name, email, password, biography, url, profile_picture, identifiant, date, subscription, points, auth) VALUES(:last_name, :first_name, :email, :password, :biography, :url, :profile_picture, :identifiant, NOW(), :subscription, :points, :auth)');
   					$req->execute(array(
   						'last_name' => '',
   						'first_name' => '',
   						'email' => $_POST['email'],
   						'password' => $password_hash,
   						'biography' => '',
+              'url' => '',
   						'profile_picture' => 'account.svg',
   						'identifiant' => $_POST['identifiant'],
   						'subscription' => '',
@@ -115,141 +116,170 @@ function cookRegister()
   }
 }
 
-function cookUpdate()
+function cookUpdate($cook_id)
 {
-  require 'base.php';
+  if (!empty($_POST['email']) AND !empty($_POST['identifiant'])) {
 
-  $req = $bdd->prepare('SELECT password FROM cooks WHERE id = :id');
-  $req->execute(array('id' => $_SESSION['id']));
-  $resultat = $req->fetch();
-  $req->closeCursor();
+    require 'base.php';
 
-  $isPasswordCorrect = password_verify($_POST['password'], $resultat['password']);
+    $req = $bdd->prepare('SELECT password FROM cooks WHERE id = :id');
+    $req->execute(array('id' => $_SESSION['id'])) or die('Une erreur s\'est produite');
+    $resultat = $req->fetch();
+    $req->closeCursor();
 
-  if ($isPasswordCorrect) {
+    $isPasswordCorrect = password_verify($_POST['password'], $resultat['password']);
 
-    //changer email
-    if (!empty($_POST['email'])) {
+    if ($isPasswordCorrect) {
 
-      $req = $bdd->prepare('SELECT email FROM cooks WHERE email = :email');
-      $req->execute(array('email' => $_POST['email']));
-      $resultat = $req->fetch();
+      $cook = new Cook($cook_id);
+      $reponse = '';
 
-      if(empty($resultat['email']))
-      {
-        $req = $bdd->prepare('UPDATE cooks SET email = :email WHERE id = :id');
-        $req->execute(array(
-          'email' => $_POST['email'],
-          'id' => $_SESSION['id'])) or die('Une erreur s\'est produite');
-      }else {
-        return 'Cette adresse email est déjà utilisée.';
-      }
-    }
+      // changer email
+      if ($_POST['email'] != $cook->email()) { // s'il change d'email
+        $req = $bdd->prepare('SELECT email FROM cooks WHERE email = :email');
+        $req->execute(array('email' => $_POST['email'])) or die('Une erreur s\'est produite');
+        $resultat = $req->fetch();
 
-    // Changer identifiant
-    if (!empty($_POST['identifiant'])) {
-      $req = $bdd->prepare('SELECT identifiant FROM cooks WHERE identifiant = :identifiant');
-      $req->execute(array('identifiant' => $_POST['identifiant']));
-      $resultat = $req->fetch();
-
-      if(!empty($resultat))
-      {
-        return 'Cet identifiant est déjà utilisé.';
-      }else {
-        $req = $bdd->prepare('UPDATE cooks SET identifiant = :identifiant WHERE id = :id');
-        $req->execute(array(
-          'identifiant' => $_POST['identifiant'],
-          'id' => $_SESSION['id']
-        )) or die('Une erreur s\'est produite');
-      }
-    }
-
-    //Changer photo
-    if (isset($_FILES['profile_picture']) AND $_FILES['profile_picture']['error'] == 0)
-    {
-      if ($_FILES['profile_picture']['size'] <= 7000000)
-      {
-        $infosfichier = pathinfo($_FILES['profile_picture']['name']);
-        $extension_upload = $infosfichier['extension'];
-        $extensions_autorisees = array('jpg', 'jpeg', 'png');
-        if (in_array($extension_upload, $extensions_autorisees))
+        if(empty($resultat['email']))
         {
-          $name_profile_picture = $_SESSION['id'].''.time().'.jpeg';
-
-          move_uploaded_file($_FILES['profile_picture']['tmp_name'], 'uploads/avatars/'.$name_profile_picture);
-
-          if($extension_upload == 'png')
-            $image = imagecreatefrompng("uploads/avatars/".$name_profile_picture."");
-          else {
-            $image = imagecreatefromjpeg("uploads/avatars/".$name_profile_picture."");
-          }
-
-          $filename = 'uploads/avatars/80x80_'.$name_profile_picture;
-
-          $thumb_width = 80;
-          $thumb_height = 80;
-
-          $width = imagesx($image);
-          $height = imagesy($image);
-
-          $original_aspect = $width / $height;
-          $thumb_aspect = $thumb_width / $thumb_height;
-
-          if ( $original_aspect >= $thumb_aspect )
-          {
-             // If image is wider than thumbnail (in aspect ratio sense)
-             $new_height = $thumb_height;
-             $new_width = $width / ($height / $thumb_height);
-          }
-          else
-          {
-             // If the thumbnail is wider than the image
-             $new_width = $thumb_width;
-             $new_height = $height / ($width / $thumb_width);
-          }
-
-          $thumb = imagecreatetruecolor( $thumb_width, $thumb_height );
-
-          // Resize and crop
-          imagecopyresampled($thumb,
-                             $image,
-                             0 - ($new_width - $thumb_width) / 2, // Center the image horizontally
-                             0 - ($new_height - $thumb_height) / 2, // Center the image vertically
-                             0, 0,
-                             $new_width, $new_height,
-                             $width, $height);
-          imagejpeg($thumb, $filename, 80);
-
-          //récupérer précédente adresse image pour la supprimer (ne pas écraser car besoin de vider cache)
-          $req = $bdd->prepare('SELECT profile_picture FROM cooks WHERE id = :id');
-          $req->execute(array('id' => $_SESSION['id'])) or die('Une erreur s\'est produite<br>');
-          $resultat = $req->fetch();
-
-          if ($resultat['profile_picture'] != 'account.svg') {
-            unlink('uploads/avatars/80x80_'.$resultat['profile_picture'].'');
-          }
-
-          $req = $bdd->prepare('UPDATE cooks SET profile_picture = :profile_picture WHERE id = :id');
+          $req = $bdd->prepare('UPDATE cooks SET email = :email WHERE id = :id');
           $req->execute(array(
-            'profile_picture' => $name_profile_picture,
-            'id' => $_SESSION['id']
-          )) or die('Une erreur s\'est produite<br>');
+            'email' => $_POST['email'],
+            'id' => $_SESSION['id'])) or die('Une erreur s\'est produite');
 
-          unlink('uploads/avatars/'.$name_profile_picture.'');
-
-          return 'Photo modifiée.';
-
+          $reponse .= 'Adresse email modiée.<br>';
         }else {
-          return 'Format de photo non autorisé.';
+          $reponse .= 'Cette adresse email est déjà utilisée.<br>';
         }
-      }else {
-        return 'La photo est trop lourde.';
       }
-    }
 
+      // Changer identifiant
+      if ($cook->identifiant() != $_POST['identifiant']) { // s'il change d'identifiant
+        $req = $bdd->prepare('SELECT identifiant FROM cooks WHERE identifiant = :identifiant');
+        $req->execute(array('identifiant' => $_POST['identifiant'])) or die('Une erreur s\'est produite');
+        $resultat = $req->fetch();
+
+        if(!empty($resultat))
+        {
+          $reponse .= 'Cet identifiant est déjà utilisé.<br>';
+        }else {
+          $req = $bdd->prepare('UPDATE cooks SET identifiant = :identifiant WHERE id = :id');
+          $req->execute(array(
+            'identifiant' => $_POST['identifiant'],
+            'id' => $_SESSION['id'])) or die('Une erreur s\'est produite');
+          $reponse .=  'Identifiant modifiée.<br>';
+        }
+      }
+
+      // Changer url
+      if ($_POST['url'] != $cook->url()) {
+          $req = $bdd->prepare('UPDATE cooks SET url = :url WHERE id = :id');
+          $req->execute(array(
+            'url' => $_POST['url'],
+            'id' => $_SESSION['id'])) or die('Une erreur s\'est produite');
+          $reponse .= 'Url modifiée.<br>';
+      }
+
+      // Changer bio
+      if ($_POST['bio'] != $cook->bio()) {
+          $req = $bdd->prepare('UPDATE cooks SET biography = :bio WHERE id = :id');
+          $req->execute(array(
+            'bio' => $_POST['bio'],
+            'id' => $_SESSION['id'])) or die('Une erreur s\'est produite');
+            $reponse .= 'Biographie modifiée.<br>';
+      }
+
+      //Changer photo
+      if (isset($_FILES['profile_picture']) AND $_FILES['profile_picture']['error'] == 0)
+      {
+        if ($_FILES['profile_picture']['size'] <= 7000000)
+        {
+          $infosfichier = pathinfo($_FILES['profile_picture']['name']);
+          $extension_upload = $infosfichier['extension'];
+          $extensions_autorisees = array('jpg', 'jpeg', 'png');
+          if (in_array($extension_upload, $extensions_autorisees))
+          {
+            $name_profile_picture = $_SESSION['id'].''.time().'.jpeg';
+
+            move_uploaded_file($_FILES['profile_picture']['tmp_name'], 'uploads/avatars/'.$name_profile_picture);
+
+            if($extension_upload == 'png')
+              $image = imagecreatefrompng("uploads/avatars/".$name_profile_picture."");
+            else {
+              $image = imagecreatefromjpeg("uploads/avatars/".$name_profile_picture."");
+            }
+
+            $filename = 'uploads/avatars/80x80_'.$name_profile_picture;
+
+            $thumb_width = 80;
+            $thumb_height = 80;
+
+            $width = imagesx($image);
+            $height = imagesy($image);
+
+            $original_aspect = $width / $height;
+            $thumb_aspect = $thumb_width / $thumb_height;
+
+            if ( $original_aspect >= $thumb_aspect )
+            {
+               // If image is wider than thumbnail (in aspect ratio sense)
+               $new_height = $thumb_height;
+               $new_width = $width / ($height / $thumb_height);
+            }
+            else
+            {
+               // If the thumbnail is wider than the image
+               $new_width = $thumb_width;
+               $new_height = $height / ($width / $thumb_width);
+            }
+
+            $thumb = imagecreatetruecolor( $thumb_width, $thumb_height );
+
+            // Resize and crop
+            imagecopyresampled($thumb,
+                               $image,
+                               0 - ($new_width - $thumb_width) / 2, // Center the image horizontally
+                               0 - ($new_height - $thumb_height) / 2, // Center the image vertically
+                               0, 0,
+                               $new_width, $new_height,
+                               $width, $height);
+            imagejpeg($thumb, $filename, 80);
+
+            //récupérer précédente adresse image pour la supprimer (ne pas écraser car besoin de vider cache)
+            $req = $bdd->prepare('SELECT profile_picture FROM cooks WHERE id = :id');
+            $req->execute(array('id' => $_SESSION['id'])) or die('Une erreur s\'est produite<br>');
+            $resultat = $req->fetch();
+
+            if ($resultat['profile_picture'] != 'account.svg') {
+              unlink('uploads/avatars/80x80_'.$resultat['profile_picture'].'');
+            }
+
+            $req = $bdd->prepare('UPDATE cooks SET profile_picture = :profile_picture WHERE id = :id');
+            $req->execute(array(
+              'profile_picture' => $name_profile_picture,
+              'id' => $_SESSION['id']
+            )) or die('Une erreur s\'est produite<br>');
+
+            unlink('uploads/avatars/'.$name_profile_picture.'');
+
+            $reponse .= 'Photo modifiée.<br>';
+
+          }else {
+            $reponse .= 'Format de photo non autorisé.<br>';
+          }
+        }else {
+          $reponse .= 'La photo est trop lourde.<br>';
+        }
+      }
+
+    }else {
+      $reponse .= 'Mauvais mot de passe !<br>';
+    }
   }else {
-    return 'Mauvais mot de passe !';
+    $reponse .= 'Veuillez indiquer votre adresse email et votre identifiant.<br>';
   }
+
+  return $reponse;
 }
 
 //Demande de changement de mot de passe

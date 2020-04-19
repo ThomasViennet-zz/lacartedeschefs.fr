@@ -14,19 +14,18 @@
   <?php include 'includes/navTop.php';?>
   <?php include 'includes/navFooter.php';?>
 
-  <header>
+  <div id="headerCook">
     <div id="cookPicture">
-    <?php echo '<img src="uploads/avatars/80x80_'.$cook->picture().'" width="80px" height="80px" class="profilPicture"/>';?>
+      <?php echo '<img src="uploads/avatars/80x80_'.$cook->picture().'" width="80px" height="80px" class="profilPicture"/>';?>
+    </div>
+      <?php echo $cook->etoile();?>
+      <h1 style="color:black;"><?php echo $cook->identifiant();?></h1>
+      <?php echo $cook->nbrFollower();?><br>
+
+      <p><?php echo $cook->bio();?></p>
+      <a href="https://www.<?php echo $cook->url();?>" target="_blank" rel="ugc"><?php echo $cook->url();?></a><br>
   </div>
-  <div id="cookInfo">
-      <h1><?php echo $cook->identifiant();?></h1>
-      <?php echo $cook->etoile();?><br>
 
-      <!-- reponse de l'abonnement -->
-      <p><?php echo $reponse;?></p>
-
-      <?php echo $cook->nbrFollower();?>
-  </header>
 
 <h2 style="text-align:center;">Recettes</h2>
 

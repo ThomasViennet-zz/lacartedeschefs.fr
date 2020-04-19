@@ -38,7 +38,7 @@
   </section>
 
   <section>
-    <h2>Le classement des chefs</h2>
+    <h2 id="lol">Le classement des chefs</h2>
 
     <div class="conteneur">
       <?php cookList(100); ?>

@@ -13,6 +13,8 @@ class Cook
   private $_nbrEtoile;
   private $_coef;
   private $_auth;
+  private $_bio;
+  private $_url;
 
   public function __construct($id)
   {
@@ -45,7 +47,7 @@ class Cook
     $this->setNbrFollowing($resultat['nbr_following']);
 
     $req = $bdd->prepare(
-      'SELECT c.profile_picture cook_picture, c.identifiant cook_identifiant, c.email cook_email, c.auth cook_auth,
+      'SELECT c.profile_picture cook_picture, c.identifiant cook_identifiant, c.email cook_email, c.auth cook_auth, c.url cook_url, c.biography cook_bio,
       SUM(v.note) note_total, COUNT(v.note) nbr_note
       FROM cooks c
       INNER JOIN votes v
@@ -62,6 +64,8 @@ class Cook
     $this->setTotal($resultat['note_total']);
     $this->setNbrNote($resultat['nbr_note']);
     $this->setAuth($resultat['cook_auth']);
+    $this->setBio($resultat['cook_bio']);
+    $this->setUrl($resultat['cook_url']);
 
     /*
     Est-ce que le cook est étoilé ?
@@ -176,6 +180,26 @@ class Cook
       </div>
       ';
     }
+  }
+
+  public function url()
+  {
+    return htmlspecialchars($this->_url);
+  }
+
+  public function setUrl($url)
+  {
+    $this->_url = $url;
+  }
+
+  public function bio()
+  {
+    return htmlspecialchars($this->_bio);
+  }
+
+  public function setBio($bio)
+  {
+    $this->_bio = $bio;
   }
 
   public function nbrFollowing()
