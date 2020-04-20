@@ -51,7 +51,7 @@ function cookRegister()
 
   $decode = json_decode(file_get_contents($api_url), true);
 
-  if ($decode['success'] == true) {
+  if ($decode['success'] == true OR $_SERVER['HTTP_HOST'] == 'localhost:8888') {
 
     if(!empty($_POST['identifiant']) AND !empty($_POST['email']) AND !empty($_POST['password']) AND !empty($_POST['passwordConfirm']))
   	{
@@ -102,7 +102,7 @@ function cookRegister()
   					$_SESSION['email'] = $_POST['email'];
   					$_SESSION['identifiant'] = $_POST['identifiant'];
 
-  					header('Location: ../?action=account');
+  					header('Location: ../?action=account&valide');
   				}
   			}
   		}else {

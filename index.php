@@ -162,14 +162,16 @@ session_start();
       break;
 
       case 'cookUpdate':
-        require 'class/cook.php';
-        require 'models/cook.php';
+        if (!empty($_SESSION['id'])) {
+          require 'class/cook.php';
+          require 'models/cook.php';
 
-        $cook = new Cook($_SESSION['id']);
-        $reponse = cookUpdate($cook->id());
-        $cook = new Cook($_SESSION['id']);
+          $cook = new Cook($_SESSION['id']);
+          $reponse = cookUpdate($cook->id());
+          $cook = new Cook($_SESSION['id']);
 
-        include 'views/accountEdit.php';
+          include 'views/accountEdit.php';
+        }
       break;
 
       case 'connexion':

@@ -44,18 +44,19 @@
     <p class="colorMain"><?php echo $reponse;?></p>
 
     <form method="post" action="?action=cookUpdate" enctype="multipart/form-data">
-      <label for="email">Email</label><input type="email" id="email" name="email" placeholder="Votre adresse email *" value="<?php echo $cook->email();?>"><br>
-      <label for="identifiant">Identifiant</label><input type="text" id="identifiant" name="identifiant" placeholder="Votre identifiant  *" value="<?php echo $cook->identifiant();?>"><br>
+      <label for="profile_picture">Photo</label><br>
+      <img src="uploads/avatars/80x80_<?php echo $cook->picture();?>" width="80px" class="profilPicture"/>
+      <input type="file" id="profile_picture" name="profile_picture" />
       <label for="url">Site</label><input type="text" id="url" name="url" placeholder="Votre site" value="<?php echo $cook->url();?>"><br>
 
       <label for="bio">Biographie</label>
       <div id="indicBio">200 caractères disponibles</div>
 
       <textarea onblur="calculeLongueur();" onfocus="calculeLongueur();" onkeydown="calculeLongueur();" onkeyup="calculeLongueur();" name="bio" id="bio" placeholder="Présentez-vous ..." rows="5"><?php echo $cook->bio();?></textarea><br>
+      <label for="email">Email</label><input type="email" id="email" name="email" placeholder="Votre adresse email *" value="<?php echo $cook->email();?>"><br>
+      <label for="identifiant">Identifiant</label><input type="text" id="identifiant" name="identifiant" placeholder="Votre identifiant  *" value="<?php echo $cook->identifiant();?>"><br>
 
-      <label for="profile_picture">Photo</label><br>
-      <img src="uploads/avatars/80x80_<?php echo $cook->picture();?>" width="80px" class="profilPicture"/>
-      <input type="file" id="profile_picture" name="profile_picture" />
+
     <h2>Sécurité</h2>
 
       <label for="password">Votre mot de passe</label><input type="password" id="password" name="password" placeholder="Saisissez votre mot de passe *"><br>

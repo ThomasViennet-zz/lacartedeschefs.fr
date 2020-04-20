@@ -24,7 +24,7 @@
     <h2>Le concept</h2>
 
     <p>
-      <u>Le monde regorge de talents de la gastronomie encore méconnus !</u>
+      La France regorge de talents de la gastronomie encore méconnus !
     </p>
 
     <p>
@@ -32,19 +32,15 @@
     </p>
 
     <p>
-      Tous les amateurs de la gastronomie peuvent candidater pour participer à la compétition.
+      Durant la compétition, les participants s'affrontent en publiant leurs plus délicieuses recettes.
     </p>
 
     <p>
-      Nous acceptons uniquement les candidatures qui sauront susciter notre appétit !
+      Les recettes sont ensuite notées par ceux qui les cuisinent.
     </p>
 
     <p>
-      Les recettes des participants sont ensuite notées par ceux qui les cuisinent.
-    </p>
-
-    <p>
-      Ces notes font évoluer les participants dans <a href="?action=cookList">le classement des chefs.</a>
+      Ces notes font évoluer les participants dans <a href="?action=cookList">le classement</a>.
     </p>
   </section>
 

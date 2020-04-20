@@ -15,7 +15,8 @@ function connexion()
 
   $decode = json_decode(file_get_contents($api_url), true);
 
-  if ($decode['success'] == true) {
+  if ($decode['success'] == true OR $_SERVER['HTTP_HOST'] == 'localhost:8888') {
+
 		if(isset($_POST['email']) && isset($_POST['password']))
 		{
 			require 'base.php';

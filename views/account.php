@@ -35,13 +35,12 @@
   <?php include 'includes/navFooter.php';?>
 
   <div id="headerCook">
-    <p><a href="?action=accountEdit">Modifier</a></p>
-    <p><a href="models/deconnexion.php">Ce n'est pas vous ?</a></p>
     <div id="cookPicture">
-      <?php echo '<img src="uploads/avatars/80x80_'.$cook->picture().'" width="80px" height="80px" class="profilPicture"/>';?>
+      <a href="?action=accountEdit"><?php echo '<img src="uploads/avatars/80x80_'.$cook->picture().'" width="80px" height="80px" class="profilPicture"/>';?></a>
     </div>
       <?php echo $cook->etoile();?>
-      <h1 style="color:black;"><?php echo $cook->identifiant();?></h1>
+      <a href="?action=accountEdit"><h1 style="color:black;"><?php echo $cook->identifiant();?></h1></a>
+      <p><a href="models/deconnexion.php">Ce n'est pas vous ?</a></p>
       <?php echo $cook->nbrFollower();?><br>
 
       <p><?php echo $cook->bio();?></p>
