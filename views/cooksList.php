@@ -48,7 +48,7 @@
       <p>Pour participer, <a href="?action=account">créez un compte</a> et candidatez depuis votre compte.</p>
     </section>
     <!-- <div class="conteneur">
-      <?php //cookList(100); ?>
+      <?php cookList(100); ?>
     </div> -->
   </section>
 

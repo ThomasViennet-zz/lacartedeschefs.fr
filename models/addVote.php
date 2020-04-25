@@ -23,82 +23,87 @@ function addVoteWeighted($id_recipe)
 
     if (empty($vote['id_vote'])) {
 
-      //Est-ce qu'il vote pour lui même ?
+
       $recipe = new Recipe($id_recipe);
+      //Est-ce que la recette est qualifiée ?
+      if ($recipe->auth() >= 1) {
+        //Est-ce qu'il vote pour lui même ?
+        if ($_SESSION['id'] != $recipe->idCook()) {
 
-      if ($_SESSION['id'] != $recipe->idCook()) {
+          $etoileCook = 0;
+          $etoileSession = 0;
 
-        $etoileCook = 0;
-        $etoileSession = 0;
+          //Combien de customers ont déjà voté
+          $req = $bdd->query('SELECT COUNT(DISTINCT id_customer) nbr_customer FROM votes');
+          $vote = $req->fetch();
 
-        //Combien de customers ont déjà voté
-        $req = $bdd->query('SELECT COUNT(DISTINCT id_customer) nbr_customer FROM votes');
-        $vote = $req->fetch();
+          $cookSession = new Cook($_SESSION['id']);
+          $cook = new Cook($recipe->idCook());
 
-        $cookSession = new Cook($_SESSION['id']);
-        $cook = new Cook($recipe->idCook());
+          //S'il est moins étoilé que le cook
+          if ($cookSession->nbrEtoile() > $cook->nbrEtoile() OR $cookSession->nbrEtoile() == 0) {
 
-        //S'il est moins étoilé que le cook
-        if ($cookSession->nbrEtoile() > $cook->nbrEtoile() OR $cookSession->nbrEtoile() == 0) {
+            // if($vote['nbr_customer'] >= 10000) {//nbr_customer avant de pondérer
+            //   /*
+            //   Vérifier pondération
+            //   */
+            //   $coef = $cookSession->coef()*$vote['nbr_customer'];
+            //   $note = $coef*$_POST['vote'];
+            //
+            //   //J'enregistre la note en base
+            //   $req = $bdd->prepare('INSERT INTO votes (id_recipe, id_cook, id_customer, note, date, coef) VALUES(:id_recipe, :id_cook, :id_customer, :note, NOW(), :coef)');
+            //   $req->execute(array(
+            //     'id_recipe' => $id_recipe,
+            //     'id_cook' => $recipe->idCook(),
+            //     'id_customer' => $_SESSION['id'],
+            //     'note' => $note,
+            //     'coef' => $coef)) or die('Une erreur s\'est produite');
+            //
+            //   $cook = new Cook($recipe->idCook());//màj de la note
+            //
+            //   $req = $bdd->prepare('UPDATE cooks SET points = :points WHERE id = :id');
+            //   $req->execute(array(
+            //     'points' => $cook->total(),
+            //     'id' => $cook->id())) or die('Une erreur s\'est produite');
+            //
+            //   return 'La vote a bien été ajouté !';
+            // }else { //Sinon il n'y a pas encore suffisamment de participants de vote.
 
-          // if($vote['nbr_customer'] >= 10000) {//nbr_customer avant de pondérer
-          //   /*
-          //   Vérifier pondération
-          //   */
-          //   $coef = $cookSession->coef()*$vote['nbr_customer'];
-          //   $note = $coef*$_POST['vote'];
-          //
-          //   //J'enregistre la note en base
-          //   $req = $bdd->prepare('INSERT INTO votes (id_recipe, id_cook, id_customer, note, date, coef) VALUES(:id_recipe, :id_cook, :id_customer, :note, NOW(), :coef)');
-          //   $req->execute(array(
-          //     'id_recipe' => $id_recipe,
-          //     'id_cook' => $recipe->idCook(),
-          //     'id_customer' => $_SESSION['id'],
-          //     'note' => $note,
-          //     'coef' => $coef)) or die('Une erreur s\'est produite');
-          //
-          //   $cook = new Cook($recipe->idCook());//màj de la note
-          //
-          //   $req = $bdd->prepare('UPDATE cooks SET points = :points WHERE id = :id');
-          //   $req->execute(array(
-          //     'points' => $cook->total(),
-          //     'id' => $cook->id())) or die('Une erreur s\'est produite');
-          //
-          //   return 'La vote a bien été ajouté !';
-          // }else { //Sinon il n'y a pas encore suffisamment de participants de vote.
-
-            $req = $bdd->prepare('INSERT INTO votes (id_recipe, id_cook, id_customer, note, date, coef) VALUES(:id_recipe, :id_cook, :id_customer, :note, NOW(), :coef)');
-            $req->execute(array(
-              'id_recipe' => $recipe->id(),
-              'id_cook' => $recipe->idCook(),
-              'id_customer' => $_SESSION['id'],
-              'note' => $_POST['vote'],
-              'coef' => $cookSession->nbrEtoile())) or die('Une erreur s\'est produite 1');
-
-            //Bonus des étoiles boucler l'ajout de note en fonction du nbr d'étoie du chef
-            for ($i=0; $i < $cookSession->nbrEtoile(); $i++) {
               $req = $bdd->prepare('INSERT INTO votes (id_recipe, id_cook, id_customer, note, date, coef) VALUES(:id_recipe, :id_cook, :id_customer, :note, NOW(), :coef)');
               $req->execute(array(
                 'id_recipe' => $recipe->id(),
                 'id_cook' => $recipe->idCook(),
                 'id_customer' => $_SESSION['id'],
                 'note' => $_POST['vote'],
-                'coef' => $cookSession->nbrEtoile())) or die('Une erreur s\'est produite 2 ');
-            }
-            $cook = new Cook($recipe->idCook());
+                'coef' => $cookSession->nbrEtoile())) or die('Une erreur s\'est produite 1');
 
-            $req = $bdd->prepare('UPDATE cooks SET points = :points WHERE id = :id');
-            $req->execute(array(
-              'points' => $cook->total(),
-              'id' => $recipe->idCook())) or die('Une erreur s\'est produite 3');
+              //Bonus des étoiles boucler l'ajout de note en fonction du nbr d'étoie du chef
+              for ($i=0; $i < $cookSession->nbrEtoile(); $i++) {
+                $req = $bdd->prepare('INSERT INTO votes (id_recipe, id_cook, id_customer, note, date, coef) VALUES(:id_recipe, :id_cook, :id_customer, :note, NOW(), :coef)');
+                $req->execute(array(
+                  'id_recipe' => $recipe->id(),
+                  'id_cook' => $recipe->idCook(),
+                  'id_customer' => $_SESSION['id'],
+                  'note' => $_POST['vote'],
+                  'coef' => $cookSession->nbrEtoile())) or die('Une erreur s\'est produite 2 ');
+              }
+              $cook = new Cook($recipe->idCook());
 
-            return 'La vote a bien été ajouté !';
-          // }
+              $req = $bdd->prepare('UPDATE cooks SET points = :points WHERE id = :id');
+              $req->execute(array(
+                'points' => $cook->total(),
+                'id' => $recipe->idCook())) or die('Une erreur s\'est produite 3');
+
+              return 'La vote a bien été ajouté !';
+            // }
+          }else {
+            return 'Vous pouvez noter uniquement des chefs moins étoilés que vous.';
+          }
         }else {
-          return 'Vous pouvez noter uniquement des chefs moins étoilés que vous.';
+          return 'Vous ne pouvez pas noter votre recette.';
         }
       }else {
-        return 'Vous ne pouvez pas noter votre recette.';
+        return 'Cette recette n\'est pas qualifiée.';
       }
     }else {
       return 'Vous avez déjà voté !';

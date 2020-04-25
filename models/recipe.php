@@ -16,15 +16,16 @@ function recipeAdd()
 
           require 'base.php';
 
-          $req = $bdd->prepare('INSERT INTO recipes (title, id_cook, recipe_picture, ingredients, steps, serve, date) VALUES(:title, :id_cook, :recipe_picture, :ingredients, :steps, :serve, NOW())');
+          $req = $bdd->prepare('INSERT INTO recipes (title, id_cook, recipe_picture, ingredients, steps, serve, date, auth) VALUES(:title, :id_cook, :recipe_picture, :ingredients, :steps, :serve, NOW(), :auth)');
           $req->execute(array(
             'title' => $_POST['title'],
             'id_cook' => $_SESSION['id'],
             'recipe_picture' => $name_recipe_picture,
             'ingredients' => $_POST['ingredients'],
             'steps' => $_POST['steps'],
-            'serve' => $_POST['serve']
-          )) or die('Une erreur s\'est produite');
+            'serve' => $_POST['serve'],
+            'auth' => 0))
+            or die('Une erreur s\'est produite');
           $req->closeCursor();
 
           move_uploaded_file($_FILES['recipe_picture']['tmp_name'], 'uploads/recipes/'.$name_recipe_picture);
@@ -123,7 +124,7 @@ function recipeList()
 {
   require 'base.php';
 
-  $req = $bdd->query('SELECT id FROM recipes ORDER BY date DESC');
+  $req = $bdd->query('SELECT id FROM recipes WHERE auth = 1 ORDER BY date DESC');
   //paginer les résultats
 
   while ($resultat = $req->fetch()) {
@@ -161,7 +162,7 @@ function recipeFeed()
     FROM recipes r
     INNER JOIN followers f
     ON r.id_cook = f.id_following
-    WHERE f.id_follower = :id_follower
+    WHERE f.id_follower = :id_follower AND r.auth = 1
     ORDER BY r.date DESC');
     $req->execute(array('id_follower' => $_SESSION['id'])) or die ('erreur');
     //paginer les résultats

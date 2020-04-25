@@ -45,7 +45,7 @@
   </section>
 
   <section id="recipe_serve">
-    <h2>Servir</h2>
+    <h2>Dressage</h2>
     <?php echo Nl2br($recipe->serve());?>
   </section>
 
@@ -56,7 +56,13 @@
       echo $reponse;
     }
     ?></p>
-    <?php include 'includes/addVote.php'; ?>
+<?php
+if ($recipe->auth() < 1) {
+  echo '<p style="text-align:center;"><strong>Cette recette n\'est pas encore qualifiée pour la compétition.</strong></p>';
+}else {
+  include 'includes/addVote.php';
+}
+?>
   </section>
 
   <?php include 'includes/footer.php';?>

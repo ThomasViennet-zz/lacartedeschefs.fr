@@ -10,13 +10,14 @@ class Recipe
   private $_serve;
   private $_moyenne;
   private $_nbrNote;
+  private $_auth;
 
   public function __construct($id)
   {
     require 'base.php';
 
     $reponse = $bdd->prepare(
-      'SELECT r.title recipe_title, r.recipe_picture recipe_picture, r.id_cook recipe_cook, r.steps recipe_steps, r.ingredients recipe_ingredients, r.serve recipe_serve,
+      'SELECT r.title recipe_title, r.recipe_picture recipe_picture, r.id_cook recipe_cook, r.steps recipe_steps, r.ingredients recipe_ingredients, r.serve recipe_serve, r.auth recipe_auth,
       AVG(v.note) note_moyenne, SUM(v.note) note_total, COUNT(v.id) nbr_note
       FROM recipes r
       INNER JOIN votes v
@@ -34,6 +35,7 @@ class Recipe
     $this->setSteps($resultat['recipe_steps']);
     $this->setTotal($resultat['note_total']);
     $this->setServe($resultat['recipe_serve']);
+    $this->setAuth($resultat['recipe_auth']);
 
     if ($resultat['nbr_note'] <= 1) {
       $nbrNote = $resultat['nbr_note'].' note';
@@ -76,6 +78,16 @@ class Recipe
     }
   }
 
+  public function auth()
+  {
+    return $this->_auth;
+  }
+
+  public function setAuth($auth)
+  {
+    $this->_auth = $auth;
+  }
+
   public function nbrNote()
   {
     return $this->_nbrNote;
@@ -85,6 +97,7 @@ class Recipe
   {
     $this->_nbrNote = $nbrNote;
   }
+
   public function serve()
   {
     return htmlspecialchars($this->_serve);

@@ -158,27 +158,51 @@ class Cook
     {
       $recipe = new Recipe($resultat['id']);
 
-      echo '
-      <div class="element" style="background-color:rgb(245,245,245);">
+      if ($recipe->auth() < 1) { // si la recette n'est pas qualifiée
+        echo '
+        <div class="element" style="background-color:rgb(245,245,245);">
 
-        <div style="padding:5px;">
-          <a href="?action=cook&cook_id='.$cook->id().'">
-          <img src="uploads/avatars/80x80_'.$cook->picture().'" width="30px" class="profilPicture">
-          '.$cook->identifiant().'
+          <div style="padding:5px;">
+            <a href="?action=cook&cook_id='.$cook->id().'">
+            <img src="uploads/avatars/80x80_'.$cook->picture().'" width="30px" class="profilPicture">
+            '.$cook->identifiant().'
+            </a>
+          </div>
+
+          <a href="?action=recipe&id_recipe='.$recipe->id().'">
+          <img src="uploads/recipes/400x400_'.$recipe->picture().'" width="100%"/>
           </a>
+
+          <div style="padding: 5px">
+            <i>Non qualifiée</i><br>
+            '.$recipe->title().'
+          </div>
+
         </div>
+        ';
+      }else { // la recette est qualifiée
+        echo '
+        <div class="element" style="background-color:rgb(245,245,245);">
 
-        <a href="?action=recipe&id_recipe='.$recipe->id().'">
-        <img src="uploads/recipes/400x400_'.$recipe->picture().'" width="100%"/>
-        </a>
+          <div style="padding:5px;">
+            <a href="?action=cook&cook_id='.$cook->id().'">
+            <img src="uploads/avatars/80x80_'.$cook->picture().'" width="30px" class="profilPicture">
+            '.$cook->identifiant().'
+            </a>
+          </div>
 
-        <div style="padding: 5px">
-          '.$recipe->moyenne().'('.$recipe->nbrNote().')<br>
-          '.$recipe->title().'
+          <a href="?action=recipe&id_recipe='.$recipe->id().'">
+          <img src="uploads/recipes/400x400_'.$recipe->picture().'" width="100%"/>
+          </a>
+
+          <div style="padding: 5px">
+            '.$recipe->moyenne().'('.$recipe->nbrNote().')<br>
+            '.$recipe->title().'
+          </div>
+
         </div>
-
-      </div>
-      ';
+        ';
+      }
     }
   }
 

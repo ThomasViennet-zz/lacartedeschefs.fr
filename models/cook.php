@@ -10,6 +10,7 @@ function cookList($limit)
   $reponse = $bdd->query(
     'SELECT id
     FROM cooks
+    WHERE auth = 1
     ORDER BY points DESC
     LIMIT '.$limit);
 
