@@ -21,7 +21,9 @@
     <a href="?action=cook&cook_id=<?php echo $cook->id();?>"><img src="/uploads/avatars/80x80_<?php echo $cook->picture();?>"  width="80px" height="80px" class="profilPicture" /></a>
   </div>
 
-  <section style="text-align:center;">
+  <div class="conteneur">
+
+  <section class="element" style="text-align:center;">
     <h1 style="color:black;"><u><?php echo $recipe->title();?></u></h1>
     <?php
     if ($_SESSION['id'] == $cook->id()) {
@@ -34,20 +36,19 @@
       pour <?php echo $recipe->portion();?> personne(s).</p>
   </section>
 
-  <div class="conteneur">
-    <div id="recipe_ingredients">
-      <h2>Ingrédients</h2>
-      <?php echo Nl2br($recipe->ingredients());?>
-    </div>
+
+  <div id="recipe_ingredients" class="element" >
+    <h2>Ingrédients</h2>
+    <?php echo Nl2br($recipe->ingredients());?>
   </div>
 
 
-  <section id="recipe_steps">
+  <section id="recipe_steps" class="element" >
     <h2>Préparation</h2>
     <?php echo Nl2br($recipe->steps());?>
   </section>
 
-  <section id="recipe_serve">
+  <section id="recipe_serve" class="element" >
     <h2>Dressage</h2>
     <?php echo Nl2br($recipe->serve());?>
   </section>
@@ -67,7 +68,8 @@ if ($recipe->auth() < 1) {
   include 'includes/addVote.php';
 }
 ?>
-  </section>
+</section>
+</div>
 
   <?php include 'includes/footer.php';?>
 </body>

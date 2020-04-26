@@ -263,6 +263,7 @@ nav ul
 .element
 {
   margin: 5px 0px;
+  max-width: 400px;
 }
 
 .colorMain
@@ -419,11 +420,6 @@ li {
       padding: 10% 0px;
       margin-top: 70px;
     }
-
-    section
-    {
-      padding: 0px 15%;
-    }
 }
 
 @media screen and (min-width: 1024px)
@@ -442,12 +438,6 @@ li {
       padding: 10% 0px;
       margin-top: 70px;
     }
-
-    section
-    {
-      padding: 0px 20%;
-    }
-
 }
 @media screen and (min-width: 1440px)
 {
@@ -465,11 +455,6 @@ li {
       padding: 10% 0px;
       margin-top: 70px;
     }
-
-    section
-    {
-      padding: 0px 35%;
-    }
 }
 @media screen and (min-width: 2560px)
 {
@@ -486,10 +471,5 @@ li {
       color: white;
       padding: 10% 0px;
       margin-top: 70px;
-    }
-
-    section
-    {
-      padding: 0px 30%;
     }
 }
