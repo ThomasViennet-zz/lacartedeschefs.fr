@@ -56,59 +56,64 @@ function cookRegister()
 
     if(!empty($_POST['identifiant']) AND !empty($_POST['email']) AND !empty($_POST['password']) AND !empty($_POST['passwordConfirm']))
   	{
-  		if($_POST['password'] == $_POST['passwordConfirm'])
-  		{
-  			require 'base.php';
+      if (isset($_POST['cgu'])) //accepter les cgu
+      {
+        if($_POST['password'] == $_POST['passwordConfirm'])
+    		{
+    			require 'base.php';
 
-  			$req = $bdd->prepare('SELECT email, identifiant FROM cooks WHERE email = :email');
-  			$req->execute(array('email' => $_POST['email']));
-  			$resultat = $req->fetch();
+    			$req = $bdd->prepare('SELECT email, identifiant FROM cooks WHERE email = :email');
+    			$req->execute(array('email' => $_POST['email']));
+    			$resultat = $req->fetch();
 
-  			if(!empty($resultat['identifiant']) AND !empty($resultat['email']))
-  			{
-  				return 'Vous avez déjà un compte.';
-  			}else {
+    			if(!empty($resultat['identifiant']) AND !empty($resultat['email']))
+    			{
+    				return 'Vous avez déjà un compte.';
+    			}else {
 
-  				$req = $bdd->prepare('SELECT identifiant FROM cooks WHERE identifiant = :identifiant');
-  				$req->execute(array('identifiant' => $_POST['identifiant']));
-  				$resultat = $req->fetch();
+    				$req = $bdd->prepare('SELECT identifiant FROM cooks WHERE identifiant = :identifiant');
+    				$req->execute(array('identifiant' => $_POST['identifiant']));
+    				$resultat = $req->fetch();
 
-  				if(!empty($resultat))
-  				{
-  					return 'Cet identifiant est déjà utilisé.';
-  				}else {
-  					$password_hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    				if(!empty($resultat))
+    				{
+    					return 'Cet identifiant est déjà utilisé.';
+    				}else {
+    					$password_hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-  					$req = $bdd->prepare('INSERT INTO cooks (last_name, first_name, email, password, biography, url, profile_picture, identifiant, date, subscription, points, auth) VALUES(:last_name, :first_name, :email, :password, :biography, :url, :profile_picture, :identifiant, NOW(), :subscription, :points, :auth)');
-  					$req->execute(array(
-  						'last_name' => '',
-  						'first_name' => '',
-  						'email' => $_POST['email'],
-  						'password' => $password_hash,
-  						'biography' => '',
-              'url' => '',
-  						'profile_picture' => 'account.svg',
-  						'identifiant' => $_POST['identifiant'],
-  						'subscription' => '',
-              'points' => 0,
-              'auth' => 0
-  					)) or die('Une erreur s\'est produite');
+    					$req = $bdd->prepare('INSERT INTO cooks (last_name, first_name, email, password, biography, url, profile_picture, identifiant, date, subscription, points, auth) VALUES(:last_name, :first_name, :email, :password, :biography, :url, :profile_picture, :identifiant, NOW(), :subscription, :points, :auth)');
+    					$req->execute(array(
+    						'last_name' => '',
+    						'first_name' => '',
+    						'email' => $_POST['email'],
+    						'password' => $password_hash,
+    						'biography' => '',
+                'url' => '',
+    						'profile_picture' => 'account.svg',
+    						'identifiant' => $_POST['identifiant'],
+    						'subscription' => '',
+                'points' => 0,
+                'auth' => 0
+    					)) or die('Une erreur s\'est produite');
 
-  					$req = $bdd->prepare('SELECT id FROM cooks WHERE email = :email');
-  					$req->execute(array('email' => $_POST['email']));
-  					$resultat = $req->fetch();
+    					$req = $bdd->prepare('SELECT id FROM cooks WHERE email = :email');
+    					$req->execute(array('email' => $_POST['email']));
+    					$resultat = $req->fetch();
 
-  					session_start();
-  					$_SESSION['id'] = $resultat['id'];
-  					$_SESSION['email'] = $_POST['email'];
-  					$_SESSION['identifiant'] = $_POST['identifiant'];
+    					session_start();
+    					$_SESSION['id'] = $resultat['id'];
+    					$_SESSION['email'] = $_POST['email'];
+    					$_SESSION['identifiant'] = $_POST['identifiant'];
 
-  					header('Location: ../?action=account&valide');
-  				}
-  			}
-  		}else {
-  			return 'Les mots de passe de correspondent pas.';
-  		}
+    					header('Location: ../?action=account&valide');
+    				}
+    			}
+    		}else {
+    			return 'Les mots de passe de correspondent pas.';
+    		}
+      }else {
+        return 'Veuillez accepter les CGU et la politique de confidentialité.';
+      }
   	}else {
   		return 'Veuilliez saisir toutes les informations obligatoires.';
   	}

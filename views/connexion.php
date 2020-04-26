@@ -45,7 +45,7 @@
         <label for="passwordConfirm">Confirmer mot de passe</label><input type="password" id="passwordConfirm" name="passwordConfirm" placeholder="Confirmer le mot de passe *"><br>
         <ul class="tg-list">
           <li class="tg-list-item">
-            <input class="tgl tgl-ios" id="cb2" type="checkbox"/>
+            <input class="tgl tgl-ios" id="cb2" name="cgu" type="checkbox"/>
             <label class="tgl-btn" for="cb2"></label>
           </li>
         </ul>
