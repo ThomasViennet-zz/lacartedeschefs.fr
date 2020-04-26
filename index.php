@@ -261,6 +261,21 @@ session_start();
         }
       break;
 
+      case 'privacy':
+        require 'class/cook.php';
+        include 'views/privacy.php';
+      break;
+
+      case 'cgu':
+        require 'class/cook.php';
+        include 'views/cgu.php';
+      break;
+
+      case 'mentions':
+        require 'class/cook.php';
+        include 'views/mentions.php';
+      break;
+
       default:
         require 'class/cook.php';
         include 'views/landingPage.php';

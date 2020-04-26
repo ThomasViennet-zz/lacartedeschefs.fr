@@ -24,7 +24,7 @@
     <h2>Le concept</h2>
 
     <p>
-      La France regorge de talents de la gastronomie encore méconnus !
+      Le monde regorge de talents de la gastronomie encore méconnus !
     </p>
 
     <p>
