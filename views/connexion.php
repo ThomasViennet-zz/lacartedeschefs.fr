@@ -19,7 +19,7 @@
     <h1>Mon compte</h1>
     <p class="boldItalic">Marquez l'histoire de la gastronomie.</p>
   </header>
-  
+
   <p class="colorMain" style="text-align:center;"><?php echo $reponse;?></p>
   <section class="conteneur" style="justify-content:space-evenly;">
     <div class="element" style="width:300px;">
@@ -28,9 +28,9 @@
         <label for="email">Email</label><input type="email" id="email" name="email" placeholder="Email *"><br>
         <label for="password">Mot de passe</label><input type="password" id="password" name="password" placeholder="Mot de passe *"><br>
         <a href="?action=forgetPwd">Mot de passe oublié</a>
-        <div class="g-recaptcha"
+        <!-- <div class="g-recaptcha"
         data-sitekey="6Ld31ukUAAAAABk5yCzRpNIFnzjXvWHhnVHaR8Ib">
-        </div>
+        </div> -->
         <input type="submit" name="submit" value="Valider" class="button">
       </form>
 
@@ -43,9 +43,17 @@
         <label for="identifiant">Identifiant</label><input type="text" id="identifiant" name="identifiant" placeholder="Choisissez un identifiant *"><br>
         <label for="password">Mot de passe</label><input type="password" id="password" name="password" placeholder="Votre mot de passe *"><br>
         <label for="passwordConfirm">Confirmer mot de passe</label><input type="password" id="passwordConfirm" name="passwordConfirm" placeholder="Confirmer le mot de passe *"><br>
-        <div class="g-recaptcha"
+        <ul class="tg-list">
+          <li class="tg-list-item">
+            <input class="tgl tgl-ios" id="cb2" type="checkbox"/>
+            <label class="tgl-btn" for="cb2"></label>
+          </li>
+        </ul>
+        Cochez la case pour accepter nos <a href="?action=cgu" target="_blank">CGU</a> et la <a href="?action=privacy" target="_blank">Politique de confidentialité</a>
+
+        <!-- <div class="g-recaptcha"
         data-sitekey="6Ld31ukUAAAAABk5yCzRpNIFnzjXvWHhnVHaR8Ib">
-        </div>
+        </div> -->
         <input type="submit" name="submit" value="Valider" class="button">
       </form>
     </div>

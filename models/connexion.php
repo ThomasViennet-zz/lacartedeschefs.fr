@@ -1,21 +1,21 @@
 <?php
 function connexion()
 {
-	// Ma clé privée
-  $secret = "6Ld31ukUAAAAAK2FNOGCcp0XHg4bPnpDV5jqdZAI";
-  // Paramètre renvoyé par le recaptcha
-  $response = $_POST['g-recaptcha-response'];
-  // On récupère l'IP de l'utilisateur
-  $remoteip = $_SERVER['REMOTE_ADDR'];
-
-  $api_url = "https://www.google.com/recaptcha/api/siteverify?secret="
-      . $secret
-      . "&response=" . $response
-      . "&remoteip=" . $remoteip ;
-
-  $decode = json_decode(file_get_contents($api_url), true);
-
-  if ($decode['success'] == true OR $_SERVER['HTTP_HOST'] == 'localhost:8888') {
+	// // Ma clé privée
+  // $secret = "6Ld31ukUAAAAAK2FNOGCcp0XHg4bPnpDV5jqdZAI";
+  // // Paramètre renvoyé par le recaptcha
+  // $response = $_POST['g-recaptcha-response'];
+  // // On récupère l'IP de l'utilisateur
+  // $remoteip = $_SERVER['REMOTE_ADDR'];
+  //
+  // $api_url = "https://www.google.com/recaptcha/api/siteverify?secret="
+  //     . $secret
+  //     . "&response=" . $response
+  //     . "&remoteip=" . $remoteip ;
+  //
+  // $decode = json_decode(file_get_contents($api_url), true);
+  //
+  // if ($decode['success'] == true OR $_SERVER['HTTP_HOST'] == 'localhost:8888') {
 
 		if(isset($_POST['email']) && isset($_POST['password']))
 		{
@@ -58,7 +58,7 @@ function connexion()
 		}else {
 			return 'Veuilliez saisir toutes les informations !';
 		}
-	}else {
-		return 'Veuillez cocher la case "I\'m not a bot"';
-	}
+	// }else {
+	// 	return 'Veuillez cocher la case "I\'m not a bot"';
+	// }
 }

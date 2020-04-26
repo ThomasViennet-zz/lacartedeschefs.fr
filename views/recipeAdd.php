@@ -97,6 +97,7 @@
       <textarea onblur="calculeLongueur();" onfocus="calculeLongueur();" onkeydown="calculeLongueur();" onkeyup="calculeLongueur();" name="serve" id="serve" placeholder="Vos suggestions de dressage ..." rows="5"><?php echo $_SESSION['post_recipe_serve'];?></textarea><br>
 
       Photo du plat * (400 pixels par 400 pixels) <input type="file" name="recipe_picture" /><br>
+
       <input type="submit" name="submit" value="Envoyer" class="button">
     </form>
   </section>
