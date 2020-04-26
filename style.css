@@ -447,6 +447,7 @@ li {
     {
       padding: 0px 20%;
     }
+
 }
 @media screen and (min-width: 1440px)
 {
@@ -467,7 +468,7 @@ li {
 
     section
     {
-      padding: 0px 25%;
+      padding: 0px 35%;
     }
 }
 @media screen and (min-width: 2560px)

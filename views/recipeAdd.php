@@ -86,7 +86,10 @@
 
       <label for="ingredients">Ingrédients</label>
       <p>Précisez la quantité, l'unité de mesure et l'ingrédient.<br>
-      <i>Exemple : 100 grammes de beurre</p>
+      <i>Exemple :<br>
+        - 100 grammes de beurre<br>
+        - 1 litre d'eau</p>
+
       <div id="indicIngredients">500 caractères disponibles</div>
       <textarea onblur="calculeLongueur();" onfocus="calculeLongueur();" onkeydown="calculeLongueur();" onkeyup="calculeLongueur();" name="ingredients" id="ingredients" placeholder="Listez les ingrédients de votre recette" rows="5"><?php echo $_SESSION['post_recipe_ingredients'];?></textarea><br>
 

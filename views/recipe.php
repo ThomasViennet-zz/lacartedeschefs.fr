@@ -30,14 +30,17 @@
     ?>
     <?php echo $recipe->moyenne();?><br>
     <?php echo $recipe->nbrNote();?></p>
-    <p>Par <a href="?action=cook&cook_id=<?php echo $cook->id();?>"><?php echo $cook->identifiant();?></a><br>
-      Pour <?php echo $recipe->portion();?> personne(s).</p>
+    <p>Par <a href="?action=cook&cook_id=<?php echo $cook->id();?>"><?php echo $cook->identifiant();?></a>,<br>
+      pour <?php echo $recipe->portion();?> personne(s).</p>
   </section>
 
-  <section id="recipe_ingredients">
-    <h2>Ingrédients</h2>
-    <?php echo Nl2br($recipe->ingredients());?>
-  </section>
+  <div class="conteneur">
+    <div id="recipe_ingredients">
+      <h2>Ingrédients</h2>
+      <?php echo Nl2br($recipe->ingredients());?>
+    </div>
+  </div>
+
 
   <section id="recipe_steps">
     <h2>Préparation</h2>
@@ -48,6 +51,7 @@
     <h2>Dressage</h2>
     <?php echo Nl2br($recipe->serve());?>
   </section>
+
 
   <section id="vote">
     <h2>Noter</h2>
