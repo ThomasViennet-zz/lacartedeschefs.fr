@@ -28,10 +28,7 @@
       Contact :support@ovh.com<br>
       <br>
       E​diteur, conception du site et réalisation :<br>
-      Thomas Viennet<br>
       Contact : bonjour@lacartedeschefs.fr<br>
-      <br>
-      Propriété intellectuelle, portée des contenus et responsabilités<br>
       <br>
       <strong>La reproduction de tout ou partie de ce site ou des ces applications mobiles sur un support papier ou électronique, en ligne ou hors ligne, ou l'utilisation de ses contenus à quelque titre que ce soit est interdit sauf autorisation expresse.</strong>
     </p>

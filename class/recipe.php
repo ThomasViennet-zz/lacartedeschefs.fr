@@ -5,6 +5,7 @@ class Recipe
   private $_idCook;
   private $_picture;
   private $_title;
+  private $_portion;
   private $_ingredients;
   private $_steps;
   private $_serve;
@@ -17,7 +18,7 @@ class Recipe
     require 'base.php';
 
     $reponse = $bdd->prepare(
-      'SELECT r.title recipe_title, r.recipe_picture recipe_picture, r.id_cook recipe_cook, r.steps recipe_steps, r.ingredients recipe_ingredients, r.serve recipe_serve, r.auth recipe_auth,
+      'SELECT r.title recipe_title, r.recipe_picture recipe_picture, r.id_cook recipe_cook, r.steps recipe_steps, r.ingredients recipe_ingredients, r.serve recipe_serve, r.auth recipe_auth, r.portion recipe_portion,
       AVG(v.note) note_moyenne, SUM(v.note) note_total, COUNT(v.id) nbr_note
       FROM recipes r
       INNER JOIN votes v
@@ -31,6 +32,7 @@ class Recipe
     $this->setTitle($resultat['recipe_title']);
     $this->setPicture($resultat['recipe_picture']);
     $this->setIdCook($resultat['recipe_cook']);
+    $this->setPortion($resultat['recipe_portion']);
     $this->setIngredients($resultat['recipe_ingredients']);
     $this->setSteps($resultat['recipe_steps']);
     $this->setTotal($resultat['note_total']);
@@ -76,6 +78,16 @@ class Recipe
         $this->setMoyenne($note);
       }
     }
+  }
+
+  public function portion()
+  {
+    return $this->_portion;
+  }
+
+  public function setPortion($portion)
+  {
+    $this->_portion = $portion;
   }
 
   public function auth()

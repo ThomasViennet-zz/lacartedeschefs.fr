@@ -16,11 +16,12 @@ function recipeAdd()
 
           require 'base.php';
 
-          $req = $bdd->prepare('INSERT INTO recipes (title, id_cook, recipe_picture, ingredients, steps, serve, date, auth) VALUES(:title, :id_cook, :recipe_picture, :ingredients, :steps, :serve, NOW(), :auth)');
+          $req = $bdd->prepare('INSERT INTO recipes (title, id_cook, recipe_picture, portion, ingredients, steps, serve, date, auth) VALUES(:title, :id_cook, :recipe_picture, :portion, :ingredients, :steps, :serve, NOW(), :auth)');
           $req->execute(array(
             'title' => $_POST['title'],
             'id_cook' => $_SESSION['id'],
             'recipe_picture' => $name_recipe_picture,
+            'portion' => $_POST['portion'],
             'ingredients' => $_POST['ingredients'],
             'steps' => $_POST['steps'],
             'serve' => $_POST['serve'],
@@ -78,6 +79,7 @@ function recipeAdd()
           $resultat = $req->fetch();
 
           unset($_SESSION['post_recipe_title']);
+          unset($_SESSION['post_recipe_portion']);
           unset($_SESSION['post_recipe_ingredients']);
           unset($_SESSION['post_recipe_steps']);
           unset($_SESSION['post_recipe_serve']);
@@ -88,6 +90,7 @@ function recipeAdd()
 
         }else {
           $_SESSION['post_recipe_title'] = $_POST['title'];
+          $_SESSION['post_recipe_portion'] = $_POST['portion'];
           $_SESSION['post_recipe_ingredients'] = $_POST['ingredients'];
           $_SESSION['post_recipe_steps'] = $_POST['steps'];
           $_SESSION['post_recipe_serve'] = $_POST['serve'];
@@ -96,6 +99,7 @@ function recipeAdd()
         }
       }else {
         $_SESSION['post_recipe_title'] = $_POST['title'];
+        $_SESSION['post_recipe_portion'] = $_POST['portion'];
         $_SESSION['post_recipe_ingredients'] = $_POST['ingredients'];
         $_SESSION['post_recipe_steps'] = $_POST['steps'];
         $_SESSION['post_recipe_serve'] = $_POST['serve'];
@@ -104,6 +108,7 @@ function recipeAdd()
       }
     }else {
       $_SESSION['post_recipe_title'] = $_POST['title'];
+      $_SESSION['post_recipe_portion'] = $_POST['portion'];
       $_SESSION['post_recipe_ingredients'] = $_POST['ingredients'];
       $_SESSION['post_recipe_steps'] = $_POST['steps'];
       $_SESSION['post_recipe_serve'] = $_POST['serve'];
@@ -112,6 +117,7 @@ function recipeAdd()
     }
   }else {
     $_SESSION['post_recipe_title'] = $_POST['title'];
+    $_SESSION['post_recipe_portion'] = $_POST['portion'];
     $_SESSION['post_recipe_ingredients'] = $_POST['ingredients'];
     $_SESSION['post_recipe_steps'] = $_POST['steps'];
     $_SESSION['post_recipe_serve'] = $_POST['serve'];
@@ -192,8 +198,9 @@ function recipeFeed()
 }
 
 function recipeUpdate($id_recipe) {
-  if (!empty($_POST['title']) AND !empty($_POST['ingredients']) AND !empty($_POST['steps']) AND !empty($_POST['serve'])) {
+  if (!empty($_POST['title']) AND !empty($_POST['portion']) AND !empty($_POST['ingredients']) AND !empty($_POST['steps']) AND !empty($_POST['serve'])) {
     $_SESSION['post_recipe_title'] = $_POST['title'];
+    $_SESSION['post_recipe_portion'] = $_POST['portion'];
     $_SESSION['post_recipe_ingredients'] = $_POST['ingredients'];
     $_SESSION['post_recipe_steps'] = $_POST['steps'];
     $_SESSION['post_recipe_serve'] = $_POST['serve'];
@@ -203,12 +210,14 @@ function recipeUpdate($id_recipe) {
     $req = $bdd->prepare(
       'UPDATE recipes
       SET title = :title,
+      portion = :portion,
       ingredients = :ingredients,
       steps = :steps,
       serve = :serve
       WHERE id = :id_recipe');
     $req->execute(array(
       'title' => $_POST['title'],
+      'portion' => $_POST['portion'],
       'ingredients' => $_POST['ingredients'],
       'steps' => $_POST['steps'],
       'serve' => $_POST['serve'],
@@ -218,6 +227,7 @@ function recipeUpdate($id_recipe) {
     return 'La recette a été mise à jour';
   }else {
     $_SESSION['post_recipe_title'] = $_POST['title'];
+    $_SESSION['post_recipe_portion'] = $_POST['portion'];
     $_SESSION['post_recipe_ingredients'] = $_POST['ingredients'];
     $_SESSION['post_recipe_steps'] = $_POST['steps'];
     $_SESSION['post_recipe_serve'] = $_POST['serve'];
@@ -307,6 +317,7 @@ function recipeUpdateImage($id_recipe) {
 
         }else {
           $_SESSION['post_recipe_title'] = $_POST['title'];
+          $_SESSION['post_recipe_portion'] = $_POST['portion'];
           $_SESSION['post_recipe_ingredients'] = $_POST['ingredients'];
           $_SESSION['post_recipe_steps'] = $_POST['steps'];
           $_SESSION['post_recipe_serve'] = $_POST['serve'];
@@ -315,6 +326,7 @@ function recipeUpdateImage($id_recipe) {
               }
         }else {
           $_SESSION['post_recipe_title'] = $_POST['title'];
+          $_SESSION['post_recipe_portion'] = $_POST['portion'];
           $_SESSION['post_recipe_ingredients'] = $_POST['ingredients'];
           $_SESSION['post_recipe_steps'] = $_POST['steps'];
           $_SESSION['post_recipe_serve'] = $_POST['serve'];
@@ -323,6 +335,7 @@ function recipeUpdateImage($id_recipe) {
         }
       }else {
         $_SESSION['post_recipe_title'] = $_POST['title'];
+        $_SESSION['post_recipe_portion'] = $_POST['portion'];
         $_SESSION['post_recipe_ingredients'] = $_POST['ingredients'];
         $_SESSION['post_recipe_steps'] = $_POST['steps'];
         $_SESSION['post_recipe_serve'] = $_POST['serve'];

@@ -82,7 +82,11 @@
     <form method="post" action="?action=recipeAdd&sent" enctype="multipart/form-data">
       <label for="title">Titre</label><input type="text" name="title" id="title" value="<?php echo $_SESSION['post_recipe_title'];?>" placeholder="Titre de votre recette *"/>
 
+      <label for="portion">Pour combien de personnes ?</label><input type="number" name="portion" id="portion" value="<?php echo $_SESSION['post_recipe_portion'];?>" placeholder="Pour combien de personnes ? *"/>
+
       <label for="ingredients">Ingrédients</label>
+      <p>Précisez la quantité, l'unité de mesure et l'ingrédient.<br>
+      <i>Exemple : 100 grammes de beurre</p>
       <div id="indicIngredients">500 caractères disponibles</div>
       <textarea onblur="calculeLongueur();" onfocus="calculeLongueur();" onkeydown="calculeLongueur();" onkeyup="calculeLongueur();" name="ingredients" id="ingredients" placeholder="Listez les ingrédients de votre recette" rows="5"><?php echo $_SESSION['post_recipe_ingredients'];?></textarea><br>
 

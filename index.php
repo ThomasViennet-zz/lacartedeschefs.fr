@@ -111,6 +111,7 @@ session_start();
           $cook = new Cook($recipe->idCook());
 
           $_SESSION['post_recipe_title'] = $recipe->title();
+          $_SESSION['post_recipe_portion'] = $recipe->portion();
           $_SESSION['post_recipe_ingredients'] = $recipe->ingredients();
           $_SESSION['post_recipe_steps'] = $recipe->steps();
           $_SESSION['post_recipe_serve'] = $recipe->serve();
