@@ -165,15 +165,14 @@ function cookUpdate($cook_id)
         $req->execute(array('identifiant' => $_POST['identifiant'])) or die('Une erreur s\'est produite');
         $resultat = $req->fetch();
 
-        if(!empty($resultat))
-        {
-          $reponse .= 'Cet identifiant est déjà utilisé.<br>';
+        if (strcasecmp($resultat, $_POST['identifiant']) == 0) {
+           $reponse .= 'Cet identifiant est déjà utilisé.<br>';
         }else {
           $req = $bdd->prepare('UPDATE cooks SET identifiant = :identifiant WHERE id = :id');
           $req->execute(array(
             'identifiant' => $_POST['identifiant'],
             'id' => $_SESSION['id'])) or die('Une erreur s\'est produite');
-          $reponse .=  'Identifiant modifiée.<br>';
+          $reponse .=  'Identifiant modifié.<br>';
         }
       }
 

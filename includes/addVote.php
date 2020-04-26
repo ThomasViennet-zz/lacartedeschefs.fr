@@ -33,5 +33,5 @@ if(isset($_SESSION['id']))
   </form>
   ';
 }else {
-  echo '<a href="?action=account">Créez un compte</a> pour noter la recette.';
+  echo '<p style="text-align:center;"><a href="?action=account">Créez un compte</a> pour noter la recette.</p>';
 }
