@@ -19,28 +19,28 @@
   </header>
   <div id="recipe_cook">
     <a href="?action=cook&cook_id=<?php echo $cook->id();?>"><img src="/uploads/avatars/80x80_<?php echo $cook->picture();?>"  width="80px" height="80px" class="profilPicture" /></a>
+    <p>Par <a href="?action=cook&cook_id=<?php echo $cook->id();?>"><?php echo $cook->identifiant();?></a></p>
+    <?php
+    if ($_SESSION['id'] == $cook->id()) {
+      echo '<p><a href="?action=recipeEdit&id_recipe='.$recipe->id().'">Modifier la recette</a></p>';
+    }
+    ?>
   </div>
 
   <div class="conteneur">
 
   <section class="element" style="text-align:center;">
     <h1 style="color:black;"><u><?php echo $recipe->title();?></u></h1>
-    <?php
-    if ($_SESSION['id'] == $cook->id()) {
-      echo '<p><a href="?action=recipeEdit&id_recipe='.$recipe->id().'">Modifier la recette</a></p>';
-    }
-    ?>
+    <p>Pour <?php echo $recipe->portion();?> personne(s)</p>
     <?php echo $recipe->moyenne();?><br>
     <?php echo $recipe->nbrNote();?></p>
-    <p>Par <a href="?action=cook&cook_id=<?php echo $cook->id();?>"><?php echo $cook->identifiant();?></a>,<br>
-      pour <?php echo $recipe->portion();?> personne(s).</p>
   </section>
 
 
-  <div id="recipe_ingredients" class="element" >
+  <section id="recipe_ingredients" class="element" >
     <h2>Ingrédients</h2>
     <?php echo Nl2br($recipe->ingredients());?>
-  </div>
+  </section>
 
 
   <section id="recipe_steps" class="element" >
@@ -54,22 +54,22 @@
   </section>
 
 
-  <section id="vote">
+  <section id="vote" class="element">
     <h2>Noter</h2>
     <p class="colorMain"><?php
     if ($_GET['action'] == 'addVote') {
       echo $reponse;
     }
     ?></p>
-<?php
-if ($recipe->auth() < 1) {
-  echo '<p style="text-align:center;"><strong>Cette recette n\'est pas encore qualifiée pour la compétition.</strong></p>';
-}else {
-  include 'includes/addVote.php';
-}
-?>
-</section>
-</div>
+    <?php
+    if ($recipe->auth() < 1) {
+      echo '<p style="text-align:center;"><strong>Cette recette n\'est pas encore qualifiée pour la compétition.</strong></p>';
+    }else {
+      include 'includes/addVote.php';
+    }
+    ?>
+  </section>
+  </div>
 
   <?php include 'includes/footer.php';?>
 </body>
