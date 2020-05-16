@@ -1,4 +1,4 @@
 # lacartedeschefs
 
 Projet perso pour comprendre le modèle MVC et la POO
-lacartedeschefs.fr
+https://lacartedeschefs.fr/
