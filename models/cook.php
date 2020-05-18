@@ -75,10 +75,9 @@ function cookRegister()
     				$req->execute(array('identifiant' => $_POST['identifiant']));
     				$resultat = $req->fetch();
 
-    				if(!empty($resultat))
-    				{
-    					return 'Cet identifiant est déjà utilisé.';
-    				}else {
+            if (strcasecmp($resultat, $_POST['identifiant']) == 0) {
+               return 'Cet identifiant est déjà utilisé.<br>';
+            }else {
     					$password_hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
     					$req = $bdd->prepare('INSERT INTO cooks (last_name, first_name, email, password, biography, url, profile_picture, identifiant, date, subscription, points, auth) VALUES(:last_name, :first_name, :email, :password, :biography, :url, :profile_picture, :identifiant, NOW(), :subscription, :points, :auth)');

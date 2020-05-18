@@ -2,3 +2,4 @@ uploads/avatars/*.jpeg
 uploads/avatars/*.png
 uploads/recipes/*.jpeg
 uploads/recipes/*.png
+tests/

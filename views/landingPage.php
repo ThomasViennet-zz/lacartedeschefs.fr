@@ -32,7 +32,7 @@
     </p>
 
     <p>
-      Durant la compétition, les participants s'affrontent en publiant leurs plus délicieuses recettes.
+      Les participants s'affrontent en publiant leurs plus délicieuses recettes.
     </p>
 
     <p>

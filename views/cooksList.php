@@ -20,7 +20,7 @@
   </header>
 
   <section style="text-align:center;">
-    <!-- <h2>Comment fonctionne le classement ?</h2>
+    <h2>Comment fonctionne le classement ?</h2>
 
     <p>
       Ceux qui cuisinent les recettes peuvent noter les recettes.
@@ -36,20 +36,20 @@
     <p>
       <strong>Vous êtes un chef "étoilé" ?</strong><br>
       Vos notes donnent ont plus de de points et vous pouvez uniquement noter des chefs qui ont moins d'étoiles que vous.
-    </p> -->
+    </p>
 
   </section>
 
   <section>
     <h2>Le classement des chefs</h2>
 
-    <section style="text-align:center;">
+    <!-- <section style="text-align:center;">
       <p>[ Phase de qualification ]</p>
       <p>Pour participer, <a href="?action=account">créez un compte</a> et candidatez depuis votre compte.</p>
-    </section>
-    <!-- <div class="conteneur">
+    </section> -->
+    <div class="conteneur">
       <?php cookList(100); ?>
-    </div> -->
+    </div>
   </section>
 
     <?php include 'includes/footer.php';?>
